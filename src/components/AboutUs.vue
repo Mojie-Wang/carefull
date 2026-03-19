@@ -101,9 +101,9 @@ import produce2 from '@/assets/aboutus/produce2.png';
 }
 
 div {
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-montserrat);
   line-height: 1.6;
-  color: #333;
+  color: #000;
   background-color: #fff;
 }
 
