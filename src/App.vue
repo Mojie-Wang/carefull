@@ -1,7 +1,7 @@
 <script setup>
 import { RouterView } from "vue-router";
 import SiteMenu from "@/components/SiteMenu.vue";
-import Header from "@/components/Header.vue";
+// import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 </script>
 
@@ -11,7 +11,7 @@ import Footer from "@/components/Footer.vue";
       <!-- <SiteMenu /> -->
     </div>
     <!-- <Header /> -->
-  
+
     <main class="content-frame">
       <RouterView />
     </main>
