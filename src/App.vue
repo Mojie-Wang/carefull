@@ -15,7 +15,7 @@ import '@/utils/rem'
       <RouterView />
     </main>
 
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 

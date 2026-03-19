@@ -589,6 +589,7 @@ $max-width: 14.31rem;
   }
   .cert-block {
     background-color: #f7f7f7;
+    padding-top:0.3rem;
     .title {
       font-size: 0.5rem;
       font-family:var(--font-montserrat) ;
