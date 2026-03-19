@@ -116,12 +116,12 @@ $bg-light: #f5f5f5;
 $border-color: #000;
 $transition: all 0.3s ease;
 
-//  设计稿 1920px，标题内容宽度 = 1920 - 684 - 684 = 552px
+// 1. 变量定义正确 ($ 开头)
 $title-content-width: 5.52rem;
-// 产品列表更宽
 $product-max-width: 14.31rem;
 
-.flex-center() {
+// 2. SCSS 的 mixin 定义方式：@mixin 名字 { ... }
+@mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,7 +133,8 @@ $product-max-width: 14.31rem;
   width: 100%;
 
   .title-content {
-    max-width: @title-content-width;
+    // 3. 引用变量改为 $
+    max-width: $title-content-width;
     margin: 0 auto;
     font-family: var(--font-montserrat);
     text-align: center;
@@ -144,7 +145,8 @@ $product-max-width: 14.31rem;
   padding: 0 0.2rem 0.6rem;
   
   .product-list-container {
-    max-width: @product-max-width;
+    // 3. 引用变量改为 $
+    max-width: $product-max-width;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -155,13 +157,12 @@ $product-max-width: 14.31rem;
     display: flex;
     align-items: stretch;
     background-color: $bg-light;
-    // border-radius: 0.04rem;
     transition: $transition;
     overflow: hidden;
     
     .product-image {
       flex: 1;
-      max-width: 6rem; // 限制最大宽度
+      max-width: 6rem;
       height: 100%;
       
       img {
@@ -179,7 +180,7 @@ $product-max-width: 14.31rem;
         font-size: 0.36rem;
         color: $text-color;
         margin-bottom: 0.18rem;
-        line-height:0.44rem;
+        line-height: 0.44rem;
       }
 
       .product-description {
@@ -190,6 +191,7 @@ $product-max-width: 14.31rem;
       }
 
       .learn-more-btn {
+        // 4. 调用 mixin 改为 @include
         @include flex-center;
         gap: 0.13rem;
         padding: 0.12rem 0.28rem;
@@ -198,7 +200,8 @@ $product-max-width: 14.31rem;
         font-size: 0.27rem;
         font-weight: 500;
         cursor: pointer;
-        transition: @transition;
+        // 5. 引用变量改为 $
+        transition: $transition;
         white-space: nowrap;
 
         span {
@@ -211,15 +214,16 @@ $product-max-width: 14.31rem;
           object-fit: contain;
           display: block;
           flex-shrink: 0;
-          transition: @transition;
+          transition: $transition;
         }
 
         &.primary {
-          background-color: @primary-color;
+          // 5. 引用变量改为 $
+          background-color: $primary-color;
           color: #fff;
 
           &:hover {
-            background-color: @primary-hover;
+            background-color: $primary-hover;
 
             .arrow {
               transform: translateX(5px);
@@ -233,9 +237,9 @@ $product-max-width: 14.31rem;
           border: 1px solid $border-color;
           
           &:hover {
-            background-color: @primary-color;
+            background-color: $primary-color;
             color: #fff;
-            border-color: @primary-color;
+            border-color: $primary-color;
 
             .arrow {
               transform: translateX(5px);
@@ -248,15 +252,14 @@ $product-max-width: 14.31rem;
 }
 
 // ============================================
-// 响应式设计
+// 响应式设计 (媒体查询中的数值保持 px 或 rem 均可，这里保持原样)
 // ============================================
 @media screen and (max-width: 1440px) {
   .section-title {
     .title-content {
-      // 1440 屏幕下，内容宽度适当放大
       max-width: 7.0rem;
       font-size: 0.6rem;
-       font-family: var(--font-montserrat);
+      font-family: var(--font-montserrat);
     }
   }
 }
@@ -335,8 +338,8 @@ $product-max-width: 14.31rem;
         .product-description {
           font-family: var(--font-montserrat);
           font-weight: 400;
-          color:#555;
-          line-height:0.32rem;
+          color: #555;
+          line-height: 0.32rem;
           font-size: 0.22rem;
         }
 
