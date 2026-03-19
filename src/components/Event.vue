@@ -117,10 +117,13 @@ $bg-light: #f9f9f9;
 .main-content {
   display: flex;
   margin-bottom: 0.88rem;
-  margin-left: 2.43rem;
+  margin-left: clamp(1rem, 5vw, 2.43rem);
+  margin-right: clamp(1rem, 5vw, 2.19rem);
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
 
@@ -131,11 +134,9 @@ $bg-light: #f9f9f9;
   justify-content: center;
   align-items: center;
   background: #fff;
-  width: 6.03rem;   
-  height: 6.73rem;   
-  margin-top: 1rem;
   img {
     width: 100%;
+    max-width: 6.03rem;
     height: auto;
     object-fit: contain;
   }
