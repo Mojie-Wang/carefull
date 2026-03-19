@@ -119,21 +119,21 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
-$primary-color: #0959af;
-$primary-hover: #0052a3;
-$text-color: #333;
-$text-light: #666;
-$bg-light: #f5f5f5;
-$border-color: #e4e7ed;
-$transition: all 0.3s ease;
+<style scoped lang="less">
+@primary-color: #0959af;
+@primary-hover: #0052a3;
+@text-color: #333;
+@text-light: #666;
+@bg-light: #f5f5f5;
+@border-color: #e4e7ed;
+@transition: all 0.3s ease;
 
 //  设计稿 1920px，标题内容宽度 = 1920 - 684 - 684 = 552px
-$title-content-width: 552px;
+@title-content-width: 552px;
 // 产品列表更宽
-$product-max-width: 1200px;
+@product-max-width: 1200px;
 
-@mixin flex-center {
+.flex-center() {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,16 +165,16 @@ $product-max-width: 1200px;
   padding-top: 50px;
   padding-bottom: 40px;
   width: 100%;
-  
+
   .title-content {
-    max-width: $title-content-width;
+    max-width: @title-content-width;
     margin: 0 auto;
     text-align: center;
-    
+
     .title {
       font-size: 36px;
       font-weight: 700;
-      color: $text-color;
+      color: @text-color;
       margin-bottom: 20px;
       text-transform: uppercase;
       letter-spacing: 2px;
@@ -184,9 +184,9 @@ $product-max-width: 1200px;
 
 .product-list {
   padding: 0 20px 60px;
-  
+
   .product-list-container {
-    max-width: $product-max-width;
+    max-width: @product-max-width;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -198,9 +198,9 @@ $product-max-width: 1200px;
     gap: 40px;
     align-items: center;
     padding: 30px;
-    background-color: $bg-light;
+    background-color: @bg-light;
     border-radius: 4px;
-    transition: $transition;
+    transition: @transition;
     
     .product-image {
       flex: 1;
@@ -212,7 +212,7 @@ $product-max-width: 1200px;
         width: 100%;
         height: 280px;
         object-fit: cover;
-        transition: $transition;
+        transition: @transition;
       }
     }
     
@@ -223,20 +223,20 @@ $product-max-width: 1200px;
       .product-title {
         font-size: 24px;
         font-weight: 600;
-        color: $text-color;
+        color: @text-color;
         margin-bottom: 16px;
         line-height: 1.4;
       }
-      
+
       .product-description {
         font-size: 15px;
-        color: $text-light;
+        color: @text-light;
         line-height: 1.8;
         margin-bottom: 24px;
       }
-      
+
       .learn-more-btn {
-        @include flex-center;
+        .flex-center();
         gap: 10px;
         padding: 12px 28px;
         border: none;
@@ -244,7 +244,7 @@ $product-max-width: 1200px;
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
-        transition: $transition;
+        transition: @transition;
         white-space: nowrap;
         
         span {
@@ -257,15 +257,15 @@ $product-max-width: 1200px;
           object-fit: contain;
           display: block;
           flex-shrink: 0;
-          transition: $transition;
+          transition: @transition;
         }
-        
+
         &.primary {
-          background-color: $primary-color;
+          background-color: @primary-color;
           color: #fff;
-          
+
           &:hover {
-            background-color: $primary-hover;
+            background-color: @primary-hover;
             
             .arrow {
               transform: translateX(5px);
@@ -275,13 +275,13 @@ $product-max-width: 1200px;
         
         &.outline {
           background-color: #fff;
-          color: $text-color;
-          border: 1px solid $border-color;
-          
+          color: @text-color;
+          border: 1px solid @border-color;
+
           &:hover {
-            background-color: $primary-color;
+            background-color: @primary-color;
             color: #fff;
-            border-color: $primary-color;
+            border-color: @primary-color;
             
             .arrow {
               transform: translateX(5px);
