@@ -119,39 +119,39 @@ const certs = ref([
 ])
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 // 变量定义
-$primary: #000;
-$primary-hover: #0052a3;
-$text-main: #000;
-$text-sub: #666;
-$bg-light: #f9f9f9;
-$gap: 0.4rem;
-$radius: 0.08rem;
-$border: #e4e7ed;
-$transition: all 0.3s ease;
-$max-width: 14.31rem;
+@primary: #000;
+@primary-hover: #0052a3;
+@text-main: #000;
+@text-sub: #666;
+@bg-light: #f9f9f9;
+@gap: 0.4rem;
+@radius: 0.08rem;
+@border: #e4e7ed;
+@transition: all 0.3s ease;
+@max-width: 14.31rem;
 
 .about-page {
   width: 100%;
-  color: $text-main;
+  color: @text-main;
   background: #fff;
 }
 
 .container {
   width: 100%;
-  max-width: $max-width;
+  max-width: @max-width;
   margin: 0 auto;
   padding-top: 0.59rem;
   display: flex;
   flex-direction: column;
-  gap: $gap;
+  gap: @gap;
 }
 .about-block{
   text-align: center;
   .title {
     font-size: 0.4rem;
-    color: $primary;
+    color: @primary;
     margin-bottom: 0.65rem;
     font-weight: 700;
     text-align: center;
@@ -164,7 +164,7 @@ $max-width: 14.31rem;
     .text {
       font-size: 0.34rem;
       line-height: 0.5rem;
-      color: $text-main;
+      color: @text-main;
       margin-bottom: 0.2rem;
       text-align: justify;
       
@@ -172,7 +172,7 @@ $max-width: 14.31rem;
         line-height:0.58rem;
         font-size: 0.48rem;
         font-weight: 600;
-        color: $text-main;
+        color: @text-main;
       }
       
       &.intro {
@@ -198,7 +198,7 @@ $max-width: 14.31rem;
   
   .title {
     font-size: 0.4rem;
-    color: $primary;
+    color: @primary;
     margin-bottom: 0.65rem;
     font-weight: 700;
     text-align: center;
@@ -244,7 +244,7 @@ $max-width: 14.31rem;
       margin: 0;
       font-size: 0.24rem;
       line-height: 0.52rem;
-      color: $text-main;
+      color: @text-main;
       text-align: justify;
       word-break: break-word;
       hyphens: auto;
@@ -268,7 +268,7 @@ $max-width: 14.31rem;
   font-size: 0.16rem;
   font-weight: 500;
   cursor: pointer;
-  transition: $transition;
+  transition: @transition;
   width: fit-content;
   background: #fff;
   
@@ -276,7 +276,7 @@ $max-width: 14.31rem;
     width: 0.56rem;
     height: 0.13rem;
     object-fit: contain;
-    transition: $transition;
+    transition: @transition;
   }
 
   &.primary {
@@ -284,19 +284,19 @@ $max-width: 14.31rem;
     color: #000;
     border: 1px solid #000;
     &:hover {
-      background: $primary-hover;
+      background: @primary-hover;
       .btn-arrow { transform: translateX(0.05rem); }
     }
   }
 
   &.outline {
     background: #fff;
-    color: $text-main;
-    border: 0.01rem solid $border;
+    color: @text-main;
+    border: 0.01rem solid @border;
     &:hover {
-      background: $primary;
+      background: @primary;
       color: #fff;
-      border-color: $primary;
+      border-color: @primary;
       .btn-arrow { transform: translateX(0.05rem); }
     }
   }
@@ -304,7 +304,7 @@ $max-width: 14.31rem;
 
 .feature-row {
   display: flex;
-  gap: $gap;
+  gap: @gap;
   align-items: flex-start;
   
   &.reverse {
@@ -321,9 +321,9 @@ $max-width: 14.31rem;
       width: 100%;
       height: auto;
       display: block;
-      border-radius: $radius;
+      border-radius: @radius;
       box-shadow: 0 0.04rem 0.1rem rgba(0,0,0,0.08);
-      background: $bg-light;
+      background: @bg-light;
       aspect-ratio: 867 / 370;
     }
   }
@@ -343,7 +343,7 @@ $max-width: 14.31rem;
     
     .text {
       font-size: 0.16rem;
-      color: $text-sub;
+      color: @text-sub;
       line-height: 1.6;
     }
   }
@@ -351,7 +351,7 @@ $max-width: 14.31rem;
 .company-info{
   font-weight: 400;
   font-size: 0.24rem;
-  color: $text-main;
+  color: @text-main;
   line-height: 0.52rem;
   text-align: justify;
 }
@@ -374,7 +374,7 @@ $max-width: 14.31rem;
       height: auto;
       display: block;
       object-fit: contain;
-      border-radius: $radius;
+      border-radius: @radius;
       box-shadow: 0 0.04rem 0.1rem rgba(0,0,0,0.05);
       background: #fff;
     }

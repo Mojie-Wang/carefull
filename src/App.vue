@@ -2,13 +2,13 @@
 import { RouterView } from "vue-router";
 import SiteMenu from "@/components/SiteMenu.vue";
 import Footer from "@/components/Footer.vue";
-import '@/utils/rem' 
+import "@/utils/rem";
 </script>
 
 <template>
   <div class="app-shell">
     <div class="app-shell__header">
-      <!-- <SiteMenu /> -->
+      <SiteMenu />
     </div>
 
     <main class="content-frame">

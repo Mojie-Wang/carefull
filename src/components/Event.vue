@@ -74,24 +74,24 @@ import classification2 from '@/assets/product/classification2.png';
 import arrowDown from '@/assets/productDetail/arrowDown.png'
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 // 变量定义
-$primary-blue: #0766cb;
-$text-dark: #000;
-$text-gray: #666;
-$border-color: #ddd;
-$bg-light: #f9f9f9;
+@primary-blue: #0766cb;
+@text-dark: #000;
+@text-gray: #666;
+@border-color: #ddd;
+@bg-light: #f9f9f9;
 
 .product-detail-page {
   font-family: 'Arial', sans-serif;
-  color: $text-dark;
+  color: @text-dark;
   margin: 0 auto;
 }
 .breadcrumb {
   font-family: var(--font-montserrat);
   font-size: 0.24rem;
   font-weight: 600;
-  color: $text-dark;
+  color: @text-dark;
   margin-bottom: 0.17rem;
   margin-left: 2.42rem;
   span {
@@ -129,7 +129,7 @@ $bg-light: #f9f9f9;
 
 .product-image-box {
   flex: 1;
-//   border: 1px dashed $border-color;
+//   border: 1px dashed @border-color;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -181,12 +181,12 @@ $bg-light: #f9f9f9;
         width: 100%;
         display: flex;
         flex-direction: column;
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid @border-color;
         cursor: pointer;
         transition: background 0.2s;
 
       &:hover {
-        background: $bg-light;
+        background: @bg-light;
       }
 
       .material-label {
@@ -234,7 +234,7 @@ $bg-light: #f9f9f9;
 .tabs-container {
   .tab-header {
     display: flex;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid @border-color;
     margin-left: 2.39rem;
     margin-right: 2.39rem;
     padding-bottom: 0.1rem;
@@ -253,12 +253,12 @@ $bg-light: #f9f9f9;
       text-align: left;
 
       &.active {
-        color: $primary-blue;
+        color: @primary-blue;
         margin-right: 1.04rem;
       }
 
       &:hover:not(.active) {
-        color: $text-dark;
+        color: @text-dark;
       }
 
       @media (max-width: 768px) {

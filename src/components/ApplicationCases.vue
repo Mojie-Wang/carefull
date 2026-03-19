@@ -150,18 +150,18 @@ const selectClassification = (index: number) => {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 // 基础变量定义
-$primary-color: #000;
-$secondary-color: #e4e7ed;
-$text-color: #000;
-$border-color: #ddd;
-$hover-color: #0959af;
+@primary-color: #000;
+@secondary-color: #e4e7ed;
+@text-color: #000;
+@border-color: #ddd;
+@hover-color: #0959af;
 
 .product-range {
   font-family: 'Arial', sans-serif;
   background-color: #fff;
-  color: $text-color;
+  color: @text-color;
 }
 
 // 导航栏样式
@@ -170,7 +170,7 @@ $hover-color: #0959af;
   justify-content: space-between;
   align-items: center;
   padding: 0.3rem 2.37rem;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid @border-color;
   background-color: #fff;
   
   .logo {
@@ -179,7 +179,7 @@ $hover-color: #0959af;
     font-style: italic;
     line-height: 0.61rem;
     font-weight: 900;
-    color: $primary-color;
+    color: @primary-color;
     margin: 0;
   }
   
@@ -193,7 +193,7 @@ $hover-color: #0959af;
     
     .nav-link {
       text-decoration: none;
-      color: $text-color;
+      color: @text-color;
       font-size: 0.22rem;
       font-weight: 400;
       display: flex;
@@ -204,11 +204,11 @@ $hover-color: #0959af;
       transition: all 0.3s ease;
 
       &:hover {
-        color: $primary-color;
+        color: @primary-color;
       }
 
       &.active {
-        color: $primary-color;
+        color: @primary-color;
         font-weight: bold;
 
         &::after {
@@ -219,7 +219,7 @@ $hover-color: #0959af;
           transform: translateX(-50%);
           width: 0.91rem;
           height: 0.1rem;
-          background: $hover-color; // 蓝色
+          background: @hover-color; // 蓝色
           border-radius: 0.05rem;
           box-shadow: 0 0 0 0.02rem rgba(0, 0, 0, 0.1); // 微弱阴影增强对比
         }
@@ -258,7 +258,7 @@ $hover-color: #0959af;
   padding: 3.46rem 0.48rem 1.48rem 2.39rem;
   .ballistic-vest {
     font-size: 0.5rem;
-    color: $text-color;
+    color: @text-color;
     font-family: var(--font-montserrat);
     font-weight: 600;
   }
@@ -267,14 +267,14 @@ $hover-color: #0959af;
     margin: 0.6rem auto 0.36rem;
     
     li {
-      color: $text-color;
+      color: @text-color;
       font-size: 0.22rem;
       position: relative;
       list-style: none;
       margin: 0.2rem auto;
       &::before {
         content: "•";
-        color: $hover-color;
+        color: @hover-color;
         position: absolute;
         left: -0.22rem;
         font-size: 0.3rem;
@@ -308,9 +308,9 @@ $hover-color: #0959af;
     .nav-btn {
       width: 0.3rem;
       height: 0.3rem;
-      border: 1px solid $border-color;
+      border: 1px solid @border-color;
       background-color: transparent;
-      color: $text-color;
+      color: @text-color;
       cursor: pointer;
       border-radius: 50%;
       font-size: 1rem;
@@ -320,7 +320,7 @@ $hover-color: #0959af;
       transition: all 0.3s ease;
       
       &:hover {
-        background-color: $primary-color;
+        background-color: @primary-color;
         color: white;
       }
     }
@@ -375,7 +375,7 @@ $hover-color: #0959af;
    margin-left: 2.36rem;
   .classification-title {
     font-family: var(--font-montserrat);
-    color: $text-color;
+    color: @text-color;
     font-weight: 600;
     font-size: 0.34rem;
     color: #000000;
@@ -408,7 +408,7 @@ $hover-color: #0959af;
     font-size: 0.24rem;
     color: #000000;
     line-height: 0.26rem;
-    color: $text-color;
+    color: @text-color;
     margin-left: 0.3rem;
   }
 
@@ -428,7 +428,7 @@ $hover-color: #0959af;
 
   &.active {
     font-weight: bold;
-    color: $primary-color;
+    color: @primary-color;
 
     &::before {
       background-color: #000; // 实心黑点
