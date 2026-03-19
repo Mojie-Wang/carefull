@@ -12,10 +12,6 @@
 <style scoped lang="scss">
 .banner {
   width: 100%;
-  height: 30vh; // 视口高度的30%，响应式更好
-  min-height: 2.5rem;
-  max-height: 4rem;
-  overflow: hidden;
   
   .banner-img {
     width: 100%;
