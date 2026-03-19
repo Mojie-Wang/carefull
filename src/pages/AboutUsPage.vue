@@ -1,8 +1,9 @@
 <template>
   <div class="pages"></div>
+  <AboutUs />
 </template>
 <script setup>
-// import { Panel } from '@/components/Panel.vue'
+ import AboutUs from '@/components/AboutUs.vue'
 </script>
 <style scoped lang="less">
 .title {

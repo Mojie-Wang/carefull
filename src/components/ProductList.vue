@@ -120,9 +120,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-// ============================================
-// 变量定义
-// ============================================
 $primary-color: #0959af;
 $primary-hover: #0052a3;
 $text-color: #333;
@@ -147,10 +144,6 @@ $product-max-width: 1200px;
   background-color: #fff;
   width: 100%;
 }
-
-// ============================================
-// Banner 区域
-// ============================================
 .banner {
   width: 100%;
   height: 400px;
@@ -168,17 +161,12 @@ $product-max-width: 1200px;
   }
 }
 
-// ============================================
-// 使用 max-width 控制内容宽度
-// ============================================
 .section-title {
-  // 上边距 50px，下边距 40px
   padding-top: 50px;
   padding-bottom: 40px;
   width: 100%;
   
   .title-content {
-    // 内容宽度 552px，居中显示（模拟左右 685px/683px 边距效果）
     max-width: $title-content-width;
     margin: 0 auto;
     text-align: center;
@@ -194,9 +182,6 @@ $product-max-width: 1200px;
   }
 }
 
-// ============================================
-// 产品列表
-// ============================================
 .product-list {
   padding: 0 20px 60px;
   
