@@ -1,9 +1,9 @@
 <template>
-  <div class="pages"></div>
+   <ProductList />
 </template>
-<script setup>
-// import { Panel } from '@/components/Panel.vue'
-</script>
+<script setup lang="ts">
+import ProductList from '@/components/ProductList.vue';
+ </script>
 <style scoped lang="less">
 .title {
   font-size: 24px;
