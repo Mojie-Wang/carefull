@@ -8,7 +8,7 @@ import Footer from "@/components/Footer.vue";
 <template>
   <div class="app-shell">
     <div class="app-shell__header">
-      <!-- <SiteMenu /> -->
+      <SiteMenu />
     </div>
     <!-- <Header /> -->
 
