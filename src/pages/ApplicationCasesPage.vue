@@ -1,16 +1,7 @@
 <template>
-  <!-- Banner 区域 -->
-  <!-- 使用内联样式设置背景图，确保路径正确 -->
   <div class="banner-content" :style="{ backgroundImage: `url(${banner})` }">
-    
-    <!-- 遮罩层 (可选)：如果图片太亮导致字看不清，可以开启这个遮罩 -->
-    <!-- <div class="banner-overlay"></div> -->
 
-    <!-- 内容容器：负责居中 -->
     <div class="banner-inner">
-      <!-- <h1 class="banner-title">Ballistic helmet</h1>
-      <p class="banner-subtitle">Lightweight and with stable ballistic safety performance</p> -->
-      
       <!-- 按钮容器 -->
       <div class="contact-btn-container">
         <button class="btn-learn primary" type="button">
@@ -26,14 +17,14 @@
 <script setup>
 import { ref } from 'vue';
 import ApplicationCases from '@/components/ApplicationCases.vue';
-import banner from '@/assets/product/banner.png'; // 确保路径正确
+import banner from '@/assets/product/banner.png';
 </script>
 
 <style scoped lang="less">
 // 变量定义
-@primary-color: #0959af; // 假设的品牌蓝
+@primary-color: #0959af;
 @text-white: #ffffff;
-@border-radius: 0.21rem;    // 按钮圆角
+@border-radius: 0.21rem;
 
 .banner-content {
   position: relative;
@@ -41,13 +32,13 @@ import banner from '@/assets/product/banner.png'; // 确保路径正确
   height: 6.15rem; 
   
   display: flex;
-  justify-content: center; // 水平居中
-  align-items: center;     // 垂直居中
+  justify-content: center;
+  align-items: center;
   
   // 背景图核心配置
-  background-image: url(''); // 由 :style 动态注入
-  background-size: cover;    // 覆盖整个区域
-  background-position: center center; // 居中显示
+  background-image: url('');
+  background-size: cover;
+  background-position: center center;
   background-repeat: no-repeat;
 }
 
@@ -56,7 +47,7 @@ import banner from '@/assets/product/banner.png'; // 确保路径正确
   z-index: 2;
   text-align: center;
   color: @text-white;
-  top: 2.45rem;
+  top: calc(2vh + 2.1rem);
 }
 
 .contact-btn-container {
@@ -92,11 +83,29 @@ import banner from '@/assets/product/banner.png'; // 确保路径正确
 }
 
 // 响应式适配
+@media (max-width: 1440px) {
+  .banner-inner {
+    top: 2.1rem; // 适配较小屏幕
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner-inner {
+    top: 1.9rem; // 适配中等屏幕
+  }
+}
 @media (max-width: 768px) {
   .banner-content {
     height: auto;
     min-height: 500px;
     padding: 4rem 1rem;
+    .banner-inner {
+      top: 1.5rem; // 适配平板
+      height: auto;
+      min-height: 500px;
+      padding: 4rem 1rem;
+    }
+
   }
   
   .banner-title {
@@ -110,6 +119,11 @@ import banner from '@/assets/product/banner.png'; // 确保路径正确
   .btn-learn {
     padding: 0.6rem 1.5rem;
     font-size: 0.9rem;
+  }
+}
+@media (max-width: 480px) {
+  .banner-inner {
+    top: 1.2rem; // 适配手机
   }
 }
 </style>

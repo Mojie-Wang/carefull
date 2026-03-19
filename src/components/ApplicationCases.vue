@@ -525,13 +525,13 @@ $hover-color: #0959af;
       
       .nav-link {
         padding: 0.3rem 0.5rem;
-        font-size: 0.75rem;
+        font-size: 0.22rem;
       }
     }
   }
   
   .main-content {
-    padding: 0.5rem;
+    padding: 0rem;
   }
   
   .product-header {

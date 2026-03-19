@@ -1,8 +1,9 @@
 <template>
   <div class="pages"></div>
+  <Event />
 </template>
 <script setup>
-// import { Panel } from '@/components/Panel.vue'
+import Event from '@/components/Event.vue';
 </script>
 <style scoped lang="less">
 .title {
