@@ -2,7 +2,6 @@
 import { RouterView } from "vue-router";
 import SiteMenu from "@/components/SiteMenu.vue";
 import Footer from "@/components/Footer.vue";
-import "@/utils/rem";
 </script>
 
 <template>
