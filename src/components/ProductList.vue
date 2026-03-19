@@ -3,9 +3,9 @@
     <!-- Banner 区域 -->
     <section class="banner">
       <div class="banner-content">
-        <img 
-          :src="productBanner" 
-          alt="Military Equipment" 
+        <img
+          :src="productBanner"
+          alt="Military Equipment"
           class="banner-image"
           @error="handleImageError"
         />
@@ -15,21 +15,21 @@
     <!-- 章节标题 -->
     <section class="section-title">
       <div class="title-content">
-        Application Cases
+        <h2 class="title">Application Cases</h2>
       </div>
     </section>
 
     <!-- 产品列表 -->
     <section class="product-list">
       <div class="product-list-container">
-        <div 
-          v-for="(product, index) in products" 
+        <div
+          v-for="(product, index) in products"
           :key="product.id"
           class="product-item"
         >
           <div class="product-image">
-            <img 
-              :src="product.image" 
+            <img
+              :src="product.image"
               :alt="product.title"
               @error="handleImageError"
             />
@@ -37,14 +37,14 @@
           <div class="product-info">
             <h3 class="product-title">{{ product.title }}</h3>
             <p class="product-description">{{ product.description }}</p>
-            <button 
+            <button
               :class="['learn-more-btn', index === 0 ? 'primary' : 'outline']"
               type="button"
             >
               <span>Learn More</span>
-              <img 
-                class="arrow" 
-                :src="index === 0 ? arrowRightWhite : arrowRightBlack" 
+              <img
+                class="arrow"
+                :src="index === 0 ? arrowRightWhite : arrowRightBlack"
                 alt="arrow"
               />
             </button>
@@ -56,67 +56,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
-import productList1 from '@/assets/product/productList1.png'
-import productBanner from '@/assets/product/productBanner.png'
-import arrowRightWhite from '@/assets/cases/arrowRightWhite.png'
-import arrowRightBlack from '@/assets/cases/arrowRightBlack.png'
+import { ref, onMounted, onUnmounted } from "vue";
+import productList1 from "@/assets/product/productList1.png";
+import productBanner from "@/assets/product/productBanner.png";
+import arrowRightWhite from "@/assets/cases/arrowRightWhite.png";
+import arrowRightBlack from "@/assets/cases/arrowRightBlack.png";
 
 interface Product {
-  id: number
-  title: string
-  description: string
-  image: string
+  id: number;
+  title: string;
+  description: string;
+  image: string;
 }
 
 const products = ref<Product[]>([
   {
     id: 1,
-    title: 'A 155-gun light protective turret',
+    title: "A 155-gun light protective turret",
     description:
-      'An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.',
+      "An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.",
     image: productList1,
   },
   {
     id: 2,
-    title: 'A certain 155 gun protective ammunition',
+    title: "A certain 155 gun protective ammunition",
     description:
-      'Adopting a steel framework and non-metallic protective material panels. It can withstand the 0° angle firing of Type 53 7.62mm ordinary steel-core bullets at a distance of 100 meters.',
+      "Adopting a steel framework and non-metallic protective material panels. It can withstand the 0° angle firing of Type 53 7.62mm ordinary steel-core bullets at a distance of 100 meters.",
     image: productList1,
   },
   {
     id: 3,
-    title: 'A 155-gun light protective turret',
+    title: "A 155-gun light protective turret",
     description:
-      'An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.',
+      "An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.",
     image: productList1,
   },
   {
     id: 4,
-    title: 'A 155-gun light protective turret',
+    title: "A 155-gun light protective turret",
     description:
-      'An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.',
+      "An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.",
     image: productList1,
   },
-])
+]);
 
 const handleImageError = (event: Event): void => {
-  const img = event.target as HTMLImageElement
-  img.src = productList1
-}
+  const img = event.target as HTMLImageElement;
+  img.src = productList1;
+};
 
-const handleResize = (): void => {}
-const handleScroll = (): void => {}
+const handleResize = (): void => {};
+const handleScroll = (): void => {};
 
 onMounted(() => {
-  window.addEventListener('resize', handleResize)
-  window.addEventListener('scroll', handleScroll)
-})
+  window.addEventListener("resize", handleResize);
+  window.addEventListener("scroll", handleScroll);
+});
 
 onUnmounted(() => {
-  window.removeEventListener('resize', handleResize)
-  window.removeEventListener('scroll', handleScroll)
-})
+  window.removeEventListener("resize", handleResize);
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style scoped lang="less">
@@ -148,12 +148,12 @@ onUnmounted(() => {
   width: 100%;
   height: 400px;
   overflow: hidden;
-  
+
   .banner-content {
     width: 100%;
     height: 100%;
   }
-  
+
   .banner-image {
     width: 100%;
     height: 100%;
@@ -170,14 +170,14 @@ onUnmounted(() => {
     max-width: @title-content-width;
     margin: 0 auto;
     text-align: center;
+    font-family: var(--font-montserrat);
 
     .title {
+      margin: 0;
       font-size: 36px;
-      font-weight: 700;
+      font-weight: 900;
       color: @text-color;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-style: italic;
     }
   }
 }
@@ -192,7 +192,7 @@ onUnmounted(() => {
     flex-direction: column;
     gap: 40px;
   }
-  
+
   .product-item {
     display: flex;
     gap: 40px;
@@ -201,13 +201,13 @@ onUnmounted(() => {
     background-color: @bg-light;
     border-radius: 4px;
     transition: @transition;
-    
+
     .product-image {
       flex: 1;
       max-width: 400px;
       border-radius: 8px;
       overflow: hidden;
-      
+
       img {
         width: 100%;
         height: 280px;
@@ -215,11 +215,11 @@ onUnmounted(() => {
         transition: @transition;
       }
     }
-    
+
     .product-info {
       flex: 1;
       padding: 20px;
-      
+
       .product-title {
         font-size: 24px;
         font-weight: 600;
@@ -246,11 +246,11 @@ onUnmounted(() => {
         cursor: pointer;
         transition: @transition;
         white-space: nowrap;
-        
+
         span {
           line-height: 1;
         }
-        
+
         .arrow {
           width: 24px;
           height: 6px;
@@ -266,13 +266,13 @@ onUnmounted(() => {
 
           &:hover {
             background-color: @primary-hover;
-            
+
             .arrow {
               transform: translateX(5px);
             }
           }
         }
-        
+
         &.outline {
           background-color: #fff;
           color: @text-color;
@@ -282,7 +282,7 @@ onUnmounted(() => {
             background-color: @primary-color;
             color: #fff;
             border-color: @primary-color;
-            
+
             .arrow {
               transform: translateX(5px);
             }
@@ -311,21 +311,21 @@ onUnmounted(() => {
     .title-content {
       max-width: 80%;
     }
-    
+
     .title {
       font-size: 28px;
     }
   }
-  
+
   .product-item {
     .product-image {
       max-width: 300px;
-      
+
       img {
         height: 220px;
       }
     }
-    
+
     .product-info {
       .product-title {
         font-size: 20px;
@@ -338,53 +338,53 @@ onUnmounted(() => {
   .banner {
     height: 250px;
   }
-  
+
   .section-title {
     padding-top: 40px;
     padding-bottom: 30px;
-    
+
     .title-content {
       max-width: 90%;
     }
-    
+
     .title {
       font-size: 24px;
     }
   }
-  
+
   .product-list {
     .product-list-container {
       gap: 30px;
     }
-    
+
     .product-item {
       flex-direction: column !important;
       padding: 20px;
-      
+
       .product-image {
         max-width: 100%;
         width: 100%;
-        
+
         img {
           height: 200px;
         }
       }
-      
+
       .product-info {
         padding: 15px 0 0;
-        
+
         .product-title {
           font-size: 18px;
         }
-        
+
         .product-description {
           font-size: 14px;
         }
-        
+
         .learn-more-btn {
           padding: 10px 24px;
           font-size: 13px;
-          
+
           .arrow {
             width: 20px;
             height: 5px;
@@ -399,47 +399,47 @@ onUnmounted(() => {
   .banner {
     height: 180px;
   }
-  
+
   .section-title {
     padding-top: 30px;
     padding-bottom: 20px;
-    
+
     .title-content {
       max-width: 95%;
     }
-    
+
     .title {
       font-size: 20px;
     }
-    
+
     .title-line {
       width: 60px;
     }
   }
-  
+
   .product-item {
     padding: 15px;
-    
+
     .product-image {
       img {
         height: 180px;
       }
     }
-    
+
     .product-info {
       .product-title {
         font-size: 16px;
       }
-      
+
       .product-description {
         font-size: 13px;
         line-height: 1.6;
       }
-      
+
       .learn-more-btn {
         padding: 8px 20px;
         font-size: 12px;
-        
+
         .arrow {
           width: 18px;
           height: 4px;
