@@ -8,7 +8,7 @@ import '@/utils/rem'
 <template>
   <div class="app-shell">
     <div class="app-shell__header">
-      <SiteMenu />
+      <!-- <SiteMenu /> -->
     </div>
 
     <main class="content-frame">

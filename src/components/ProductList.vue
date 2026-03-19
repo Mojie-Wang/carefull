@@ -1,250 +1,215 @@
 <template>
   <div class="application-cases">
-    <!-- 章节标题 -->
-    <section class="section-title">
-      <div class="title-content">
-        <h2 class="title">Application Cases</h2>
-      </div>
-    </section>
+    <!-- 标题区域 -->
+    <h2 class="page-title">Application Cases</h2>
 
-    <!-- 产品列表 -->
-    <section class="product-list">
-      <div class="product-list-container">
-        <div
-          v-for="(product, index) in products"
-          :key="product.id"
-          class="product-item"
-        >
-          <div class="product-image">
-            <img
-              :src="product.image"
-              :alt="product.title"
-              @error="handleImageError"
-            />
-          </div>
-          <div class="product-info">
-            <h3 class="product-title">{{ product.title }}</h3>
-            <p class="product-description">{{ product.description }}</p>
-            <button
-              :class="['learn-more-btn', index === 0 ? 'primary' : 'outline']"
-              type="button"
-            >
-              <span>Learn More</span>
-              <img
-                class="arrow"
-                :src="index === 0 ? arrowRightWhite : arrowRightBlack"
-                alt="arrow"
-              />
-            </button>
-          </div>
+    <!-- 列表区域 -->
+    <div class="product-grid">
+      <article 
+        v-for="(product, index) in products" 
+        :key="product.id"
+        class="product-card"
+      >
+        <div class="card-image">
+          <img 
+            :src="product.image" 
+            :alt="product.title"
+            @error="handleImageError"
+          />
         </div>
-      </div>
-    </section>
+        
+        <div class="card-content">
+          <h3 class="card-title">{{ product.title }}</h3>
+          <p class="card-desc">{{ product.description }}</p>
+          
+          <button 
+            :class="['btn-learn', index === 0 ? 'primary' : 'outline']"
+            type="button"
+          >
+            <span>Learn More</span>
+            <img 
+              class="btn-arrow" 
+              :src="index === 0 ? arrowRightWhite : arrowRightBlack" 
+              alt="arrow"
+            />
+          </button>
+        </div>
+      </article>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import productList1 from '@/assets/product/productList1.png'
-// import productBanner from '@/assets/product/productBanner.png'
 import arrowRightWhite from '@/assets/cases/arrowRightWhite.png'
 import arrowRightBlack from '@/assets/cases/arrowRightBlack.png'
 
 interface Product {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
+  id: number
+  title: string
+  description: string
+  image: string
 }
 
 const products = ref<Product[]>([
   {
     id: 1,
-    title: "A 155-gun light protective turret",
-    description:
-      "An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.",
+    title: 'A 155-gun light protective turret',
+    description: 'An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.',
     image: productList1,
   },
   {
     id: 2,
-    title: "A certain 155 gun protective ammunition",
-    description:
-      "Adopting a steel framework and non-metallic protective material panels. It can withstand the 0° angle firing of Type 53 7.62mm ordinary steel-core bullets at a distance of 100 meters.",
+    title: 'A certain 155 gun protective ammunition',
+    description: 'Adopting a steel framework and non-metallic protective material panels. It can withstand the 0° angle firing of Type 53 7.62mm ordinary steel-core bullets at a distance of 100 meters.',
     image: productList1,
   },
   {
     id: 3,
-    title: "A 155-gun light protective turret",
-    description:
-      "An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.",
+    title: 'A 155-gun light protective turret',
+    description: 'An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.',
     image: productList1,
   },
   {
     id: 4,
-    title: "A 155-gun light protective turret",
-    description:
-      "An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.",
+    title: 'A 155-gun light protective turret',
+    description: 'An integrated lightweight protective ammunition box is designed for a certain type of 155mm howitzer.',
     image: productList1,
   },
-]);
+])
 
 const handleImageError = (event: Event): void => {
-  const img = event.target as HTMLImageElement;
-  img.src = productList1;
-};
-
-const handleResize = (): void => {};
-const handleScroll = (): void => {};
-
-onMounted(() => {
-  window.addEventListener("resize", handleResize);
-  window.addEventListener("scroll", handleScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("resize", handleResize);
-  window.removeEventListener("scroll", handleScroll);
-});
+  const img = event.target as HTMLImageElement
+  img.src = productList1
+}
 </script>
 
 <style scoped lang="scss">
-$primary-color: #0959af;
+// 变量定义
+$primary: #0959af;
 $primary-hover: #0052a3;
-$text-color: #000;
-$text-light: #555;
-$bg-light: #f5f5f5;
-$border-color: #000;
+$text-main: #000;
+$text-sub: #555;
+$bg-card: #f5f5f5;
+$border: #e4e7ed;
 $transition: all 0.3s ease;
+$max-width: 14.31rem; 
 
-// 1. 变量定义正确 ($ 开头)
-$title-content-width: 5.52rem;
-$product-max-width: 14.31rem;
-
-// 2. SCSS 的 mixin 定义方式：@mixin 名字 { ... }
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.section-title {
-  padding-top: 0.5rem;
-  padding-bottom: 0.4rem;
+.application-cases {
   width: 100%;
-
-  .title-content {
-    // 3. 引用变量改为 $
-    max-width: $title-content-width;
-    margin: 0 auto;
-    font-family: var(--font-montserrat);
-    text-align: center;
-  }
+  padding: 0.5rem 0.2rem 1rem;
+  background: #fff;
 }
 
-.product-list {
-  padding: 0 0.2rem 0.6rem;
+// 标题
+.page-title {
+  font-family: var(--font-montserrat);
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 auto 0.8rem;
+  max-width: $max-width;
+  text-transform: uppercase;
+  letter-spacing: 0.02rem;
+}
+
+// 网格布局 (自动适应)
+.product-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+// 卡片
+.product-card {
+  display: flex;
+  background: $bg-card;
+  border-radius: 0.04rem;
+  overflow: hidden;
+  transition: $transition;
   
-  .product-list-container {
-    // 3. 引用变量改为 $
-    max-width: $product-max-width;
-    margin: 0 auto;
+  // 图片区
+  .card-image {
+    flex: 0 0 6rem;
+    height: 100%;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  // 内容区
+  .card-content {
+    flex: 1;
+    padding: 0.2rem 0.2rem 0.2rem 0.5rem;
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-  }
+    justify-content: center;
 
-  .product-item {
-    display: flex;
-    align-items: stretch;
-    background-color: $bg-light;
-    transition: $transition;
-    overflow: hidden;
-    
-    .product-image {
-      flex: 1;
-      max-width: 6rem;
-      height: 100%;
-      
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
+    .card-title {
+      font-size: 0.36rem;
+      color: $text-main;
+      margin: 0 0 0.18rem;
+      line-height: 1.4;
+      font-weight: 600;
     }
 
-    .product-info {
-      flex: 1;
-      padding-left: 0.5rem;
-      .product-title {
-        font-size: 0.36rem;
-        color: $text-color;
-        margin-bottom: 0.18rem;
-        line-height: 0.44rem;
-      }
+    .card-desc {
+      font-size: 0.22rem;
+      color: $text-sub;
+      line-height: 1.6;
+      margin: 0 0 0.3rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-      .product-description {
-        font-size: 0.22rem;
-        color: $text-light;
-        line-height: 1.8;
-        margin-bottom: 0.3rem;
-      }
-
-      .learn-more-btn {
-        // 4. 调用 mixin 改为 @include
-        @include flex-center;
-        gap: 0.13rem;
-        padding: 0.12rem 0.28rem;
-        border: none;
-        border-radius: 0.04rem;
-        font-size: 0.27rem;
-        font-weight: 500;
-        cursor: pointer;
-        // 5. 引用变量改为 $
+    // 按钮
+    .btn-learn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.13rem;
+      padding: 0.12rem 0.28rem;
+      border: none;
+      border-radius: 0.04rem;
+      font-size: 0.16rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: $transition;
+      width: fit-content;
+      
+      .btn-arrow {
+        width: 0.56rem;
+        height: 0.13rem;
+        object-fit: contain;
         transition: $transition;
-        white-space: nowrap;
+      }
 
-        span {
-          line-height: 1;
+      &.primary {
+        background: $primary;
+        color: #fff;
+        &:hover {
+          background: $primary-hover;
+          .btn-arrow { transform: translateX(0.05rem); }
         }
+      }
 
-        .arrow {
-          width: 0.56rem;
-          height: 0.13rem;
-          object-fit: contain;
-          display: block;
-          flex-shrink: 0;
-          transition: $transition;
-        }
-
-        &.primary {
-          // 5. 引用变量改为 $
-          background-color: $primary-color;
+      &.outline {
+        background: #fff;
+        color: $text-main;
+        border: 0.01rem solid $border;
+        &:hover {
+          background: $primary;
           color: #fff;
-
-          &:hover {
-            background-color: $primary-hover;
-
-            .arrow {
-              transform: translateX(5px);
-            }
-          }
-        }
-
-        &.outline {
-          background-color: #fff;
-          color: #232323;
-          border: 1px solid $border-color;
-          
-          &:hover {
-            background-color: $primary-color;
-            color: #fff;
-            border-color: $primary-color;
-
-            .arrow {
-              transform: translateX(5px);
-            }
-          }
+          border-color: $primary;
+          .btn-arrow { transform: translateX(0.05rem); }
         }
       }
     }
@@ -252,161 +217,86 @@ $product-max-width: 14.31rem;
 }
 
 // ============================================
-// 响应式设计 (媒体查询中的数值保持 px 或 rem 均可，这里保持原样)
+// 响应式适配
 // ============================================
-@media screen and (max-width: 1440px) {
-  .section-title {
-    .title-content {
-      max-width: 7.0rem;
-      font-size: 0.6rem;
-      font-family: var(--font-montserrat);
+
+// 平板及小屏 (小于 992px ~ 768px 区间)
+@media screen and (max-width: 900px) {
+  .page-title {
+    font-size: 0.4rem;
+  }
+  
+  .product-card {
+    .card-image {
+      flex: 0 0 4rem;
+    }
+    .card-content {
+      .card-title { font-size: 0.28rem; }
+      .card-desc { font-size: 0.18rem; }
     }
   }
 }
 
-@media screen and (max-width: 992px) {
-  .section-title {
-    .title-content {
-      max-width: 80%;
-    }
-
-    .title {
-      font-size: 0.28rem;
-    }
-  }
-
-  .product-item {
-    .product-image {
-      max-width: 5.93rem;
-      
-      img {
-        height: 2.2rem;
-      }
-    }
-
-    .product-info {
-      .product-title {
-        font-size: 0.2rem;
-      }
-    }
-  }
-}
-
+// 手机端 (小于 768px)
 @media screen and (max-width: 768px) {
-  .banner {
-    height: 2.5rem;
+  .page-title {
+    font-size: 0.3rem;
+    margin-bottom: 0.4rem;
   }
 
-  .section-title {
-    padding-top: 0.4rem;
-    padding-bottom: 0.3rem;
+  .product-card {
+    flex-direction: column;
     
-    .title-content {
-      max-width: 90%;
+    .card-image {
+      flex: none;
+      width: 100%;
+      height: 3rem; // 手机上图高度固定
     }
-
-    .title {
-      font-size: 0.24rem;
-    }
-  }
-
-  .product-list {
-    .product-list-container {
-      gap: 0.4rem;
-    }
-
-    .product-item {
-      flex-direction: column !important;
+    
+    .card-content {
       padding: 0.2rem;
       
-      .product-image {
-        max-width: 100%;
-        width: 100%;
-
-        img {
-          height: 2rem;
-        }
+      .card-title { 
+        font-size: 0.24rem; 
+        margin-bottom: 0.1rem;
       }
-
-      .product-info {
-        padding: 0.15rem 0 0;
+      
+      .card-desc { 
+        font-size: 0.16rem; 
+        margin-bottom: 0.2rem;
+        -webkit-line-clamp: 4; // 手机多显示一行
+      }
+      
+      .btn-learn {
+        font-size: 0.14rem;
+        padding: 0.1rem 0.2rem;
         
-        .product-title {
-          font-size: 0.36rem;
-        }
-
-        .product-description {
-          font-family: var(--font-montserrat);
-          font-weight: 400;
-          color: #555;
-          line-height: 0.32rem;
-          font-size: 0.22rem;
-        }
-
-        .learn-more-btn {
-          padding: 0.1rem 0.24rem;
-          font-size: 0.27rem;
-          line-height: 0.5rem;
-          .arrow {
-            width: 0.56rem;
-            height: 0.13rem;
-          }
+        .btn-arrow {
+          width: 0.4rem;
+          height: 0.1rem;
         }
       }
     }
   }
 }
 
+// 超小屏幕 (小于 480px)
 @media screen and (max-width: 480px) {
-  .banner {
-    height: 1.8rem;
+  .application-cases {
+    padding: 0.3rem 0.1rem 0.6rem;
+  }
+  
+  .page-title {
+    font-size: 0.24rem;
   }
 
-  .section-title {
-    padding-top: 0.3rem;
-    padding-bottom: 0.2rem;
-    
-    .title-content {
-      max-width: 95%;
+  .product-card {
+    .card-image {
+      height: 2.5rem;
     }
-
-    .title {
-      font-size: 0.2rem;
-    }
-
-    .title-line {
-      width: 0.6rem;
-    }
-  }
-
-  .product-item {
-    padding: 0.15rem;
-    
-    .product-image {
-      img {
-        height: 1.8rem;
-      }
-    }
-
-    .product-info {
-      .product-title {
-        font-size: 0.16rem;
-      }
-
-      .product-description {
-        font-size: 0.13rem;
-        line-height: 1.6;
-      }
-
-      .learn-more-btn {
-        padding: 0.08rem 0.2rem;
-        font-size: 0.12rem;
-        
-        .arrow {
-          width: 0.18rem;
-          height: 0.04rem;
-        }
-      }
+    .card-content {
+      .card-title { font-size: 0.2rem; }
+      .card-desc { font-size: 0.14rem; }
     }
   }
 }
