@@ -142,29 +142,29 @@ div {
 .content {
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  padding: 20px 0; 
+  gap: 0.4rem;
+  padding: 0.2rem 0; 
   width: 100%;
 }
 
 .about-section h2 {
   font-size: 2rem;
-  margin-bottom: 15px;
+  margin-bottom: 0.15rem;
   color: #007bff;
 }
 
 .company-intro {
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0.1rem;
 }
 
 .contact-btn {
-  margin-top: 15px;
-  padding: 10px 20px;
+  margin-top: 0.15rem;
+  padding: 0.1rem 0.2rem;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.04rem;
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s;
@@ -176,7 +176,7 @@ div {
 
 .image-text-row {
   display: flex;
-  gap: 30px;
+  gap: 0.3rem;
   align-items: flex-start;
 }
 
@@ -186,49 +186,49 @@ div {
 
 .image-block {
   flex: 1;
-  min-width: 300px;
+  min-width: 3rem;
 }
 
 .image-block img {
   width: 100%;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 0.08rem;
+  box-shadow: 0 0.04rem 0.08rem rgba(0,0,0,0.1);
   display: block;
 }
 
 .text-block {
   flex: 1;
-  min-width: 300px;
+  min-width: 3rem;
 }
 
 .text-block h3 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.1rem;
   color: #007bff;
 }
 
 .text-block p {
-  margin-bottom: 10px;
+  margin-bottom: 0.1rem;
   text-align: justify;
 }
 
 .certificate-section h2 {
   font-size: 2rem;
-  margin-bottom: 15px;
+  margin-bottom: 0.15rem;
   color: #007bff;
 }
 
 .cert-intro {
-  margin-bottom: 20px;
+  margin-bottom: 0.2rem;
   font-style: italic;
 }
 
 .cert-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  gap: 0.2rem;
+  margin-top: 0.2rem;
 }
 
 .cert-item {
@@ -239,31 +239,22 @@ div {
   width: 100%;
   height: auto;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
+  border-radius: 0.04rem;
+  padding: 0.05rem;
   background: #f9f9f9;
   display: block;
   margin: 0 auto;
 }
 
 .cert-item p {
-  margin-top: 8px;
+  margin-top: 0.08rem;
   font-weight: bold;
   color: #555;
 }
 
-.footer {
-  margin-top: 50px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-  text-align: center;
-  color: #777;
-  font-size: 0.9rem;
-}
-
 @media (max-width: 768px) {
   .banner {
-    height: 250px;
+    height: 2.5rem;
   }
 
   .image-text-row,

@@ -1,17 +1,5 @@
 <template>
   <div class="application-cases">
-    <!-- Banner 区域 -->
-    <section class="banner">
-      <div class="banner-content">
-        <img 
-          :src="productBanner" 
-          alt="Military Equipment" 
-          class="banner-image"
-          @error="handleImageError"
-        />
-      </div>
-    </section>
-
     <!-- 章节标题 -->
     <section class="section-title">
       <div class="title-content">
@@ -58,7 +46,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 import productList1 from '@/assets/product/productList1.png'
-import productBanner from '@/assets/product/productBanner.png'
+// import productBanner from '@/assets/product/productBanner.png'
 import arrowRightWhite from '@/assets/cases/arrowRightWhite.png'
 import arrowRightBlack from '@/assets/cases/arrowRightBlack.png'
 
@@ -122,16 +110,16 @@ onUnmounted(() => {
 <style scoped lang="scss">
 $primary-color: #0959af;
 $primary-hover: #0052a3;
-$text-color: #333;
-$text-light: #666;
+$text-color: #000;
+$text-light: #555;
 $bg-light: #f5f5f5;
-$border-color: #e4e7ed;
+$border-color: #000;
 $transition: all 0.3s ease;
 
 //  设计稿 1920px，标题内容宽度 = 1920 - 684 - 684 = 552px
-$title-content-width: 552px;
+$title-content-width: 5.52rem;
 // 产品列表更宽
-$product-max-width: 1200px;
+$product-max-width: 14.31rem;
 
 @mixin flex-center {
   display: flex;
@@ -139,109 +127,75 @@ $product-max-width: 1200px;
   justify-content: center;
 }
 
-.application-cases {
-  min-height: 100vh;
-  background-color: #fff;
-  width: 100%;
-}
-.banner {
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  
-  .banner-content {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
 .section-title {
-  padding-top: 50px;
-  padding-bottom: 40px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.4rem;
   width: 100%;
   
   .title-content {
     max-width: $title-content-width;
     margin: 0 auto;
+    font-family: var(--font-montserrat);
     text-align: center;
-    
-    .title {
-      font-size: 36px;
-      font-weight: 700;
-      color: $text-color;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
   }
 }
 
 .product-list {
-  padding: 0 20px 60px;
+  padding: 0 0.2rem 0.6rem;
   
   .product-list-container {
     max-width: $product-max-width;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 0.4rem;
   }
   
   .product-item {
     display: flex;
-    gap: 40px;
-    align-items: center;
-    padding: 30px;
+    align-items: stretch;
     background-color: $bg-light;
-    border-radius: 4px;
+    // border-radius: 0.04rem;
     transition: $transition;
+    overflow: hidden;
     
     .product-image {
       flex: 1;
-      max-width: 400px;
-      border-radius: 8px;
-      overflow: hidden;
+      max-width: 6rem; // 限制最大宽度
+      height: 100%;
       
       img {
         width: 100%;
-        height: 280px;
+        height: 100%;
         object-fit: cover;
-        transition: $transition;
+        display: block;
       }
     }
     
     .product-info {
       flex: 1;
-      padding: 20px;
-      
+      padding-left: 0.5rem;
       .product-title {
-        font-size: 24px;
-        font-weight: 600;
+        font-size: 0.36rem;
         color: $text-color;
-        margin-bottom: 16px;
-        line-height: 1.4;
+        margin-bottom: 0.18rem;
+        line-height:0.44rem;
       }
       
       .product-description {
-        font-size: 15px;
+        font-size: 0.22rem;
         color: $text-light;
         line-height: 1.8;
-        margin-bottom: 24px;
+        margin-bottom: 0.3rem;
       }
       
       .learn-more-btn {
         @include flex-center;
-        gap: 10px;
-        padding: 12px 28px;
+        gap: 0.13rem;
+        padding: 0.12rem 0.28rem;
         border: none;
-        border-radius: 4px;
-        font-size: 14px;
+        border-radius: 0.04rem;
+        font-size: 0.27rem;
         font-weight: 500;
         cursor: pointer;
         transition: $transition;
@@ -252,8 +206,8 @@ $product-max-width: 1200px;
         }
         
         .arrow {
-          width: 24px;
-          height: 6px;
+          width: 0.56rem;
+          height: 0.13rem;
           object-fit: contain;
           display: block;
           flex-shrink: 0;
@@ -275,7 +229,7 @@ $product-max-width: 1200px;
         
         &.outline {
           background-color: #fff;
-          color: $text-color;
+          color: #232323;
           border: 1px solid $border-color;
           
           &:hover {
@@ -300,8 +254,9 @@ $product-max-width: 1200px;
   .section-title {
     .title-content {
       // 1440 屏幕下，内容宽度适当放大
-      max-width: 700px;
-      font-size: 30px;
+      max-width: 7.0rem;
+      font-size: 0.6rem;
+       font-family: var(--font-montserrat);
     }
   }
 }
@@ -313,22 +268,22 @@ $product-max-width: 1200px;
     }
     
     .title {
-      font-size: 28px;
+      font-size: 0.28rem;
     }
   }
   
   .product-item {
     .product-image {
-      max-width: 300px;
+      max-width: 5.93rem;
       
       img {
-        height: 220px;
+        height: 2.2rem;
       }
     }
     
     .product-info {
       .product-title {
-        font-size: 20px;
+        font-size: 0.2rem;
       }
     }
   }
@@ -336,58 +291,62 @@ $product-max-width: 1200px;
 
 @media screen and (max-width: 768px) {
   .banner {
-    height: 250px;
+    height: 2.5rem;
   }
   
   .section-title {
-    padding-top: 40px;
-    padding-bottom: 30px;
+    padding-top: 0.4rem;
+    padding-bottom: 0.3rem;
     
     .title-content {
       max-width: 90%;
     }
     
     .title {
-      font-size: 24px;
+      font-size: 0.24rem;
     }
   }
   
   .product-list {
     .product-list-container {
-      gap: 30px;
+      gap: 0.4rem;
     }
     
     .product-item {
       flex-direction: column !important;
-      padding: 20px;
+      padding: 0.2rem;
       
       .product-image {
         max-width: 100%;
         width: 100%;
         
         img {
-          height: 200px;
+          height: 2rem;
         }
       }
       
       .product-info {
-        padding: 15px 0 0;
+        padding: 0.15rem 0 0;
         
         .product-title {
-          font-size: 18px;
+          font-size: 0.36rem;
         }
         
         .product-description {
-          font-size: 14px;
+          font-family: var(--font-montserrat);
+          font-weight: 400;
+          color:#555;
+          line-height:0.32rem;
+          font-size: 0.22rem;
         }
         
         .learn-more-btn {
-          padding: 10px 24px;
-          font-size: 13px;
-          
+          padding: 0.1rem 0.24rem;
+          font-size: 0.27rem;
+          line-height: 0.5rem;
           .arrow {
-            width: 20px;
-            height: 5px;
+            width: 0.56rem;
+            height: 0.13rem;
           }
         }
       }
@@ -397,52 +356,52 @@ $product-max-width: 1200px;
 
 @media screen and (max-width: 480px) {
   .banner {
-    height: 180px;
+    height: 1.8rem;
   }
   
   .section-title {
-    padding-top: 30px;
-    padding-bottom: 20px;
+    padding-top: 0.3rem;
+    padding-bottom: 0.2rem;
     
     .title-content {
       max-width: 95%;
     }
     
     .title {
-      font-size: 20px;
+      font-size: 0.2rem;
     }
     
     .title-line {
-      width: 60px;
+      width: 0.6rem;
     }
   }
   
   .product-item {
-    padding: 15px;
+    padding: 0.15rem;
     
     .product-image {
       img {
-        height: 180px;
+        height: 1.8rem;
       }
     }
     
     .product-info {
       .product-title {
-        font-size: 16px;
+        font-size: 0.16rem;
       }
       
       .product-description {
-        font-size: 13px;
+        font-size: 0.13rem;
         line-height: 1.6;
       }
       
       .learn-more-btn {
-        padding: 8px 20px;
-        font-size: 12px;
+        padding: 0.08rem 0.2rem;
+        font-size: 0.12rem;
         
         .arrow {
-          width: 18px;
-          height: 4px;
+          width: 0.18rem;
+          height: 0.04rem;
         }
       }
     }
