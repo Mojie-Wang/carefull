@@ -2,133 +2,129 @@
   <div class="product-center-page">
     <section class="hero">
       <div class="hero-content">
-        <!-- <h1>Ballistic helmet</h1>
-        <p>Lightweight and with stable ballistic safety performance</p> -->
+        <h1>Ballistic helmet</h1>
+        <p>Lightweight and with stable ballistic safety performance</p>
         <button class="btn-learn">Learn More</button>
       </div>
-      <img src="@/assets/product/banner.png" alt="Ballistic helmet banner" />
     </section>
 
     <section class="product-range">
       <h2>Product Range</h2>
       <div class="range-tabs">
-        <button
+        <div
+          class="tab"
           v-for="category in categories"
           :key="category"
           :class="{ active: category === selectedCategory }"
           @click="selectedCategory = category"
-          type="button"
         >
-          {{ category }}
-        </button>
+          <div class="text">
+            {{ category }}
+          </div>
+          <img
+            v-show="category === selectedCategory"
+            src="@/assets/product/highlightLine.png"
+            alt="highlightLine"
+          />
+        </div>
       </div>
     </section>
 
-    <section class="product-list-area">
-      <aside class="classification-panel">
-        <h3>CLASSIFICATION</h3>
-        <div class="classification-items">
-          <label v-for="level in classification" :key="level.value" :class="{ selected: selectedLevel === level.value }">
-            <input
-              type="radio"
-              name="classification"
-              :value="level.value"
-              v-model="selectedLevel"
-            />
-            {{ level.label }}
-          </label>
-        </div>
-      </aside>
-
-      <div class="products-grid">
-        <div
-          v-for="product in filteredProducts"
-          :key="product.id"
-          class="product-card"
-        >
-          <img :src="product.image" :alt="product.title" />
-          <div class="content">
-            <h4>{{ product.title }}</h4>
-            <p>{{ product.subtitle }}</p>
-            <span class="price">{{ product.price }}</span>
+    <section class="product-showcase">
+      <img class="showcase-background" src="@/assets/product/productBg.png" />
+      <div class="showcase-cover"></div>
+      <div class="showcase-box">
+        <div class="showcase-left">
+          <h2>{{ showcaseProduct.title }}</h2>
+          <ul>
+            <li v-for="(feature, index) in showcaseProduct.features" :key="index">
+              {{ feature }}
+            </li>
+          </ul>
+          <div class="showcase-nav">
+            <img @click="prevShowcase" src="@/assets/product/arrowLeft.png" alt="Previous" />
+            <img @click="nextShowcase" src="@/assets/product/arrowRight.png" alt="Next" />
           </div>
         </div>
-
-        <div v-if="filteredProducts.length === 0" class="empty-state">
-          暂无符合条件的产品，请更换分类或防护级别。
+        <div class="showcase-right">
+          <img :src="showcaseProduct.image" :alt="showcaseProduct.title" />
         </div>
-      </div>
-    </section>
-
-    <section class="cta-box">
-      <div>
-        <h3>Lighter · Thinner · Softer</h3>
-        <p>To get the latest news about Carefull Technology, leave your email for subscription — we'll send updates straight to your inbox.</p>
-      </div>
-      <div class="subscribe">
-        <input type="email" placeholder="Your email address" v-model="subscribeEmail" />
-        <button type="button" @click="handleSubscribe">SUBMIT</button>
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import ProductListImage1 from '@/assets/product/productList1.png';
-import ProductListImage2 from '@/assets/product/classification1.png';
-import ProductListImage3 from '@/assets/product/classification2.png';
-import ProductListImage4 from '@/assets/product/classification3.png';
-import ProductListImage5 from '@/assets/product/classification4.png';
+import { ref, computed } from "vue";
+import ProductListImage1 from "@/assets/product/productList1.png";
+import ProductListImage2 from "@/assets/product/classification1.png";
+import ProductListImage3 from "@/assets/product/classification2.png";
 
-const categories = ref(['FIBER', 'ARMOR PLATE', 'BODY ARMOR', 'BALLISTIC HELMET', 'BALLISTIC SHIELD', 'ARMOUR', 'OTHER']);
-const selectedCategory = ref('BODY ARMOR');
-const classification = ref([
-  { label: 'NIJ HG I', value: 'HG1' },
-  { label: 'NIJ HG II', value: 'HG2' },
-  { label: 'NIJ RF I', value: 'RF1' },
-  { label: 'NIJ RF II', value: 'RF2' },
-  { label: 'NIJ RF III', value: 'RF3' },
-  { label: 'NIJ 0115 I', value: '0115I' },
-  { label: 'NIJ 0115 II', value: '0115II' },
+const categories = ref([
+  "FIBER",
+  "ARMOR PLATE",
+  "BODY ARMOR",
+  "BALLISTIC HELMET",
+  "BALLISTIC SHIELD",
+  "ARMOUR",
+  "OTHER",
 ]);
-const selectedLevel = ref('HG1');
-const subscribeEmail = ref('');
+const selectedCategory = ref("BODY ARMOR");
 
-const products = ref([
-  { id: 1, title: 'Police Ballistic Vest', subtitle: 'Police Ballistic Vest Police Ballistic Vest', price: '$210.00 - $450', category: 'BODY ARMOR', level: 'HG1', image: ProductListImage1 },
-  { id: 2, title: 'Police body armor', subtitle: 'Professional body armor', price: '$210.00 - $450', category: 'BODY ARMOR', level: 'HG2', image: ProductListImage2 },
-  { id: 3, title: 'Bulletproof vest', subtitle: 'Protective bulletproof vest', price: '$210.00 - $450', category: 'BODY ARMOR', level: 'RF1', image: ProductListImage3 },
-  { id: 4, title: 'Kevlar vest', subtitle: 'Lightweight kevlar armor', price: '$220.00 - $490', category: 'BODY ARMOR', level: 'RF2', image: ProductListImage4 },
-  { id: 5, title: 'Tactical vest', subtitle: 'High-end tactical vest', price: '$230.00 - $520', category: 'BODY ARMOR', level: 'RF3', image: ProductListImage5 },
+const showcaseProducts = ref([
+  {
+    title: "Ballistic Vest",
+    description: "Top-tier protection with lightweight comfort and modular design.",
+    features: [
+      "Lightweight design",
+      "Waterproof fabric",
+      "Adjustable fit",
+      "Modular pouches",
+    ],
+    image: ProductListImage1,
+  },
+  {
+    title: "Tactical Helmet",
+    description: "Rigorous impact test, multiple mounting options, 360° defense.",
+    features: [
+      "Impact-resistant",
+      "Ventilation system",
+      "Integrated NVG mount",
+      "Comfort padding",
+    ],
+    image: ProductListImage2,
+  },
+  {
+    title: "Ballistic Shield",
+    description: "Superior stopping power with ergonomic handle and shooting window.",
+    features: [
+      "Bulletproof glass window",
+      "Lightweight frame",
+      "Camo pattern",
+      "Quick deploy",
+    ],
+    image: ProductListImage3,
+  },
 ]);
 
-const filteredProducts = computed(() => {
-  return products.value.filter((item) => {
-    if (selectedCategory.value && item.category !== selectedCategory.value) {
-      return false;
-    }
-    if (selectedLevel.value && item.level !== selectedLevel.value) {
-      return false;
-    }
-    return true;
-  });
-});
+const showcaseIndex = ref(0);
+const showcaseProduct = computed(() => showcaseProducts.value[showcaseIndex.value]);
 
-const handleSubscribe = () => {
-  if (!subscribeEmail.value) {
-    window.alert('请输入邮箱地址');
-    return;
-  }
-  window.alert(`已订阅: ${subscribeEmail.value}`);
-  subscribeEmail.value = '';
+const prevShowcase = () => {
+  showcaseIndex.value =
+    (showcaseIndex.value - 1 + showcaseProducts.value.length) %
+    showcaseProducts.value.length;
 };
+
+const nextShowcase = () => {
+  showcaseIndex.value = (showcaseIndex.value + 1) % showcaseProducts.value.length;
+};
+
+
 </script>
 
 <style scoped lang="less">
 .product-center-page {
-  font-family: Montserrat-Black;
-  
   .hero {
     position: relative;
     min-height: 420px;
@@ -137,7 +133,9 @@ const handleSubscribe = () => {
     justify-content: center;
     text-align: center;
     color: #fff;
-    margin-bottom: 24px;
+    background-image: url("@/assets/product/banner.png");
+    background-size: cover;
+    background-position: bottom;
 
     img {
       position: absolute;
@@ -150,30 +148,35 @@ const handleSubscribe = () => {
     .hero-content {
       position: absolute;
       z-index: 2;
-      bottom: 75px;
+      bottom: 50px;
 
       h1 {
-        font-size: 48px;
-        line-height: 1.1;
-        margin-bottom: 16px;
+        font-size: 60px;
+        line-height: 1;
+        margin: 0;
       }
       p {
-        font-size: 20px;
-        margin-bottom: 20px;
+        font-size: 30px;
+        margin: 0;
       }
       .btn-learn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
         border: 1px solid #fff;
-        border-radius: 15px;
-        background: rgba(255, 255, 255, 0.08);
+        border-radius: 10px;
         color: #fff;
-        padding: 10px 30px;
-        font-size: 16px;
+        font-size: 24px;
         cursor: pointer;
+        width: 200px;
+        height: 40px;
+        margin-top: 10px;
       }
     }
 
     &:before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       z-index: 1;
@@ -182,13 +185,17 @@ const handleSubscribe = () => {
 
   .product-range {
     display: flex;
+    justify-content: center;
     width: var(--container);
     margin: 0 auto 20px;
 
     h2 {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: bold;
-      margin-bottom: 16px;
+      font-style: oblique;
+      margin-top: 17px;
+      margin-bottom: 5px;
+      margin-right: 40px;
       text-align: center;
     }
 
@@ -196,20 +203,118 @@ const handleSubscribe = () => {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 30px;
 
-      button {
-        border: none;
-        border-bottom: 1px solid #ccc;
-        background: #fff;
-        padding: 8px 14px;
-        font-weight: 500;
+      .tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 70px;
         cursor: pointer;
 
         &.active {
           color: #0072ff;
           border-color: #0072ff;
-          background: #f2f8ff;
+        }
+
+        .text {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 500;
+          font-size: 15px;
+          line-height: 16px;
+        }
+
+        img {
+          width: 60px;
+          height: 12px;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+
+  .product-showcase {
+    position: relative;
+    // width: var(--container);
+    // margin: 0 auto;
+    padding: 24px 0;
+    gap: 24px;
+    .showcase-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      border-radius: 8px;
+    }
+    .showcase-cover {
+      height: 563px;
+    }
+    .showcase-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      .showcase-left {
+        width: 270px;
+        margin-right: 10px;
+
+        h2 {
+          font-size: 36px;
+          margin-bottom: 12px;
+        }
+
+        p {
+          font-size: 16px;
+          color: #555;
+          margin-bottom: 16px;
+        }
+
+        ul {
+          margin: 0;
+          padding-left: 18px;
+
+          li {
+            margin-bottom: 8px;
+            color: #000;
+            font-size: 14px;
+
+            &::marker {
+              color: #0959AF;
+              font-size: 12px;
+            }
+          }
+        }
+
+        .showcase-nav {
+          display: flex;
+          margin-top: 22px;
+
+          img {
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .showcase-right {
+        img {
+          width: 616px;
+          height: 422px;
+          object-fit: cover;
         }
       }
     }
@@ -362,7 +467,19 @@ const handleSubscribe = () => {
     }
   }
 
+  .product-range,
+  .product-list-area,
+  .cta-box {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
   @media (max-width: 1024px) {
+    .product-range,
+    .product-list-area,
+    .cta-box {
+      width: 768px;
+      margin: 0 auto;
+    }
     .product-list-area {
       grid-template-columns: 1fr;
     }
@@ -373,6 +490,12 @@ const handleSubscribe = () => {
   }
 
   @media (max-width: 768px) {
+    .product-range,
+    .product-list-area,
+    .cta-box {
+      width: 420px;
+      margin: 0 auto;
+    }
     .hero .hero-content h1 {
       font-size: 32px;
     }
