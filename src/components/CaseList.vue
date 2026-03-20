@@ -97,7 +97,9 @@ const caseList = ref([
         display: flex;
         flex-direction: column;
         // justify-content: center;
-
+        &:hover {
+          background-color: #f0f7ff;
+        }
         .title {
           margin-bottom: 18px;
           font-size: 36px;
