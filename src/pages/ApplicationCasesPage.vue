@@ -1,8 +1,10 @@
 <template>
-  <div class="pages"></div>
+  <div class="pages">
+    <CaseList />
+  </div>
 </template>
 <script setup>
-// import { Panel } from '@/components/Panel.vue'
+import CaseList from "@/components/CaseList.vue";
 </script>
 <style scoped lang="less">
 .title {
