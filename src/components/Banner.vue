@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
-import banner1 from "@/assets/index/banner1.png";
+import bannerImage from "@/assets/index/banner.png";
 import arrowLeft from "@/assets/index/bArrowLeftIcon.png";
 import arrowRight from "@/assets/index/bArrowRightIcon.png";
 
@@ -17,15 +17,15 @@ const props = defineProps({
 
 const bannerList = [
   {
-    img: banner1,
+    img: bannerImage,
     title: "Careful Technology",
   },
   {
-    img: banner1,
+    img: bannerImage,
     title: "Careful Technology",
   },
   {
-    img: banner1,
+    img: bannerImage,
     title: "Careful Technology",
   },
 ];
