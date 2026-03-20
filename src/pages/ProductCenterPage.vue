@@ -1,8 +1,8 @@
 <template>
-  <!-- <ProductList /> -->
+  <ProductList />
 </template>
 <script setup>
-// import ProductList from '@/components/ProductList.vue';
+import ProductList from "@/components/ProductList.vue";
 </script>
 <style scoped lang="less">
 .title {

@@ -2,19 +2,24 @@
   <div class="pages">
     <List />
     <Banner />
-    <h6 class="applyCardTitle">
+    <h6 class="title">
       — Engineered for Advanced Protection and Customization —
     </h6>
     <ApplyCard />
+    <h6 class="title">Our Products</h6>
+    <ProductList />
+    <IntroList />
   </div>
 </template>
 <script setup>
 import ApplyCard from "@/components/ApplyCard.vue";
 import Banner from "@/components/Banner.vue";
 import List from "@/components/List.vue";
+import ProductList from "@/components/ProductList.vue";
+import IntroList from "@/components/IntroList.vue";
 </script>
 <style scoped lang="less">
-.applyCardTitle {
+.title {
   // font-size: 24px;
   font-weight: 600;
   font-family: var(--font-montserrat);
