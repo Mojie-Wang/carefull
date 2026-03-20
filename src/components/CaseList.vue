@@ -6,7 +6,12 @@
         <div class="content">
           <div class="title">{{ item.title }}</div>
           <div class="desc">{{ item.desc }}</div>
-          <button class="btn" type="button">
+          <button
+            class="btn"
+            :class="{ 'is-active': activeIndex === index }"
+            type="button"
+            @click="activeIndex = index"
+          >
             <span>Learn More</span>
             <img class="arrow arrow--default" :src="arrowRightBlack" alt="" />
             <img class="arrow arrow--active" :src="arrowRightWhite" alt="" />
@@ -25,6 +30,7 @@ import case3 from "@/assets/cases/case3.png";
 import case4 from "@/assets/cases/case4.png";
 import arrowRightBlack from "@/assets/cases/arrowRightBlack.png";
 import arrowRightWhite from "@/assets/cases/arrowRightWhite.png";
+const activeIndex = ref(-1);
 const caseList = ref([
   {
     img: case1,
@@ -117,7 +123,6 @@ const caseList = ref([
           border-radius: 8px 8px 8px 8px;
           border: 1px solid #000000;
           background: transparent;
-          font-weight: 400;
           font-size: 27px;
           color: #232323;
           line-height: 50px;
@@ -125,6 +130,8 @@ const caseList = ref([
           font-style: normal;
           cursor: pointer;
           font-family: var(--font-montserrat);
+          font-weight: 400;
+
           transition: background 0.22s ease, border-color 0.22s ease,
             color 0.22s ease, transform 0.18s ease;
 
@@ -135,7 +142,7 @@ const caseList = ref([
             color: #ffffff;
             background: #0766cb;
             border-color: #0766cb;
-
+            font-weight: 600;
             .arrow--default {
               display: none;
             }
@@ -145,7 +152,12 @@ const caseList = ref([
             }
           }
 
+          &.is-active {
+            font-weight: 600;
+          }
+
           &:active {
+            font-weight: 600;
             transform: scale(0.98);
           }
 
