@@ -1,103 +1,176 @@
 <script setup>
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import banner1 from "@/assets/index/banner1.png";
 import arrowLeft from "@/assets/index/bArrowLeftIcon.png";
 import arrowRight from "@/assets/index/bArrowRightIcon.png";
 
-const modules = [Autoplay, Navigation, Pagination];
+const props = defineProps({
+  autoplay: {
+    type: Boolean,
+    default: false,
+  },
+  autoplayDelay: {
+    type: Number,
+    default: 4500,
+  },
+});
 
 const bannerList = [
   {
     img: banner1,
-    eyebrow: "Careful Technology",
-    title: "Advanced Composite Protection Systems",
-    desc: "High-performance fibers, armor plates, and tactical protection products engineered for demanding environments.",
-    cta: "Explore Materials",
+    title: "Careful Technology",
   },
   {
     img: banner1,
-    eyebrow: "Ballistic Solutions",
-    title: "Lightweight Defense With Structural Strength",
-    desc: "A modern manufacturing chain covering PE ballistic materials, integrated panels, and large-size armor applications.",
-    cta: "View Capabilities",
+    title: "Careful Technology",
   },
   {
     img: banner1,
-    eyebrow: "Industrial Capacity",
-    title: "From Fiber To Finished Protection Equipment",
-    desc: "R&D, design, production, and delivery aligned to complex protection requirements across land, marine, and tactical use cases.",
-    cta: "See Product Range",
+    title: "Careful Technology",
   },
 ];
+
+const currentIndex = ref(0);
+const touchStartX = ref(0);
+const touchStartY = ref(0);
+
+let autoplayTimer;
+
+const goToSlide = (index) => {
+  const total = bannerList.length;
+  currentIndex.value = (index + total) % total;
+};
+
+const nextSlide = () => {
+  goToSlide(currentIndex.value + 1);
+};
+
+const prevSlide = () => {
+  goToSlide(currentIndex.value - 1);
+};
+
+const stopAutoplay = () => {
+  window.clearInterval(autoplayTimer);
+};
+
+const startAutoplay = () => {
+  if (!props.autoplay) {
+    stopAutoplay();
+    return;
+  }
+
+  stopAutoplay();
+  autoplayTimer = window.setInterval(() => {
+    nextSlide();
+  }, props.autoplayDelay);
+};
+
+const handleTouchStart = (event) => {
+  const touch = event.touches[0];
+  touchStartX.value = touch.clientX;
+  touchStartY.value = touch.clientY;
+  stopAutoplay();
+};
+
+const handleTouchEnd = (event) => {
+  const touch = event.changedTouches[0];
+
+  if (!touch) {
+    startAutoplay();
+    return;
+  }
+
+  const deltaX = touch.clientX - touchStartX.value;
+  const deltaY = touch.clientY - touchStartY.value;
+  const swipeThreshold = 40;
+
+  if (
+    Math.abs(deltaX) > swipeThreshold &&
+    Math.abs(deltaX) > Math.abs(deltaY)
+  ) {
+    if (deltaX < 0) {
+      nextSlide();
+    } else {
+      prevSlide();
+    }
+  }
+
+  startAutoplay();
+};
+
+onMounted(() => {
+  startAutoplay();
+});
+
+watch(
+  () => [props.autoplay, props.autoplayDelay],
+  () => {
+    startAutoplay();
+  }
+);
+
+onBeforeUnmount(() => {
+  stopAutoplay();
+});
 </script>
 
 <template>
-  <section class="banner">
-    <Swiper
-      class="banner__swiper"
-      :modules="modules"
-      :slides-per-view="1"
-      :loop="true"
-      :speed="900"
-      :autoplay="{
-        delay: 4500,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      }"
-      :pagination="{
-        el: '.banner__pagination',
-        clickable: true,
-      }"
-      :navigation="{
-        prevEl: '.banner__nav--prev',
-        nextEl: '.banner__nav--next',
-      }"
+  <section
+    class="banner"
+    @mouseenter="stopAutoplay"
+    @mouseleave="startAutoplay"
+    @touchstart.passive="handleTouchStart"
+    @touchend.passive="handleTouchEnd"
+  >
+    <div
+      class="banner__track"
+      :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
     >
-      <SwiperSlide
+      <article
         v-for="item in bannerList"
         :key="item.title"
         class="banner__slide"
       >
-        <article class="banner__panel">
-          <div
-            class="banner__image"
-            :style="{ backgroundImage: `url(${item.img})` }"
-          />
-          <div class="banner__overlay" />
+        <img class="banner__image" :src="item.img" :alt="item.title" />
+        <div class="banner__title">{{ item.title }}</div>
+        <div class="banner__btn">
+          <button class="banner__btn">Learn More</button>
+        </div>
+      </article>
+    </div>
 
-          <div class="banner__content-wrap">
-            <div class="banner__content">
-              <p class="banner__eyebrow">{{ item.eyebrow }}</p>
-              <h2 class="banner__title">{{ item.title }}</h2>
-              <p class="banner__desc">{{ item.desc }}</p>
-              <button class="banner__cta" type="button">{{ item.cta }}</button>
-            </div>
-          </div>
-        </article>
-      </SwiperSlide>
-    </Swiper>
+    <div class="banner__shade" />
 
-    <div class="banner__chrome">
+    <div class="bannerCtrBtn">
       <button
         class="banner__nav banner__nav--prev"
         type="button"
         aria-label="Previous slide"
+        @click="prevSlide"
       >
         <img :src="arrowLeft" alt="" />
       </button>
+
       <button
         class="banner__nav banner__nav--next"
         type="button"
         aria-label="Next slide"
+        @click="nextSlide"
       >
         <img :src="arrowRight" alt="" />
       </button>
 
-      <div class="banner__pagination" />
+      <div class="banner__pagination">
+        <button
+          v-for="(item, index) in bannerList"
+          :key="item.title + index"
+          class="banner__dot"
+          :class="{ 'is-active': currentIndex === index }"
+          type="button"
+          :aria-label="`Go to slide ${index + 1}`"
+          @click="goToSlide(index)"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -105,256 +178,136 @@ const bannerList = [
 <style scoped lang="less">
 .banner {
   position: relative;
-  height: 900px;
+  width: 100%;
+  height: clamp(240px, 28vw, 450px);
   overflow: hidden;
   background: #151a1f;
+  touch-action: pan-y;
 }
 
-.banner__swiper {
-  width: 100%;
+.banner__track {
+  display: flex;
   height: 100%;
+  transition: transform 0.55s ease;
+  will-change: transform;
 }
 
-.banner__slide,
-.banner__panel {
+.banner__slide {
+  flex: 0 0 100%;
   height: 100%;
-}
-
-.banner__panel {
-  position: relative;
 }
 
 .banner__image {
-  position: absolute;
-  inset: 0;
-  background-position: center center;
-  background-repeat: repeat-x;
-  background-size: auto 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 100%;
+  display: block;
 }
 
-.banner__overlay {
+.banner__shade {
   position: absolute;
   inset: 0;
   background: linear-gradient(
       90deg,
-      rgba(11, 16, 22, 0.84) 0%,
-      rgba(11, 16, 22, 0.6) 34%,
-      rgba(11, 16, 22, 0.16) 68%,
-      rgba(11, 16, 22, 0.04) 100%
+      rgba(13, 17, 23, 0.28) 0%,
+      rgba(13, 17, 23, 0.08) 40%,
+      rgba(13, 17, 23, 0.28) 100%
     ),
     linear-gradient(
       180deg,
-      rgba(7, 102, 203, 0.14) 0%,
+      rgba(7, 102, 203, 0.12) 0%,
       rgba(7, 102, 203, 0) 48%
     );
+  pointer-events: none;
 }
 
-.banner__content-wrap {
+.bannerCtrBtn {
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
   z-index: 2;
-  width: var(--container);
-  max-width: var(--container);
-  margin: 0 auto;
+  width: min(var(--container), calc(100% - 32px));
+  max-width: 100%;
+  box-sizing: border-box;
   display: flex;
-  align-items: flex-end;
-}
-
-.banner__content {
-  max-width: min(560px, calc(100% - 120px));
-  padding-bottom: 112px;
-  color: #fff;
-}
-
-.banner__eyebrow {
-  display: inline-flex;
-  align-items: center;
-  margin: 0 0 16px;
-  padding: 9px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(10px);
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.banner__title {
-  margin: 0 0 16px;
-  font-family: var(--font-montserrat);
-  font-size: clamp(2rem, 5vw, 4.2rem);
-  line-height: 0.98;
-  font-weight: 900;
-  font-style: italic;
-  text-wrap: balance;
-}
-
-.banner__desc {
-  margin: 0 0 28px;
-  max-width: 52ch;
-  font-size: clamp(1rem, 1.3vw, 1.12rem);
-  line-height: 1.7;
-  color: rgba(255, 255, 255, 0.84);
-}
-
-.banner__cta {
-  min-height: 48px;
-  padding: 0 22px;
-  border: 0;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #0f75e6, #0766cb);
-  color: #fff;
-  font-size: 0.98rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 18px 32px rgba(7, 102, 203, 0.28);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 20px 36px rgba(7, 102, 203, 0.34);
-  }
-}
-
-.banner__chrome {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  width: var(--container);
-  max-width: var(--container);
-  margin: 0 auto;
+  // align-items: center;
+  justify-content: space-between;
+  transform: translateX(-50%);
   pointer-events: none;
 }
 
 .banner__nav {
-  position: absolute;
-  top: 50%;
-  z-index: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: rgba(16, 23, 31, 0.62);
-  backdrop-filter: blur(12px);
+  background: transparent;
   cursor: pointer;
-  transform: translateY(-50%);
-  transition: transform 0.22s ease, background 0.22s ease;
   pointer-events: auto;
-
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  margin-top: 28px;
   &:hover {
-    background: rgba(7, 102, 203, 0.86);
+    transform: scale(1.04);
+    opacity: 0.86;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 
   img {
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
   }
-}
-
-.banner__nav--prev {
-  left: 0;
-}
-
-.banner__nav--next {
-  right: 0;
 }
 
 .banner__pagination {
   position: absolute;
-  right: 0;
-  bottom: 56px;
-  z-index: 1;
+  left: 0;
+  bottom: 41px;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   pointer-events: auto;
 }
 
-:deep(.banner__pagination .swiper-pagination-bullet) {
+.banner__dot {
   width: 10px;
   height: 10px;
-  margin: 0;
+  padding: 0;
+  border: 0;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.42);
-  opacity: 1;
+  cursor: pointer;
   transition: width 0.22s ease, background 0.22s ease;
+
+  &.is-active {
+    background: #fff;
+  }
 }
 
-:deep(.banner__pagination .swiper-pagination-bullet-active) {
-  width: 28px;
-  background: #fff;
-}
-
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .banner {
-    height: 720px;
+    height: 260px;
   }
 
-  .banner__content-wrap,
-  .banner__chrome {
-    width: calc(100% - 40px);
-    max-width: none;
-  }
-
-  .banner__content {
-    max-width: min(520px, calc(100% - 96px));
-    padding-bottom: 88px;
+  .bannerCtrBtn {
+    width: calc(100% - 28px);
   }
 
   .banner__nav {
-    width: 48px;
-    height: 48px;
-  }
-}
-
-@media (max-width: 640px) {
-  .banner {
-    height: 560px;
-  }
-
-  .banner__content-wrap,
-  .banner__chrome {
-    width: calc(100% - 32px);
-  }
-
-  .banner__content {
-    max-width: min(100%, 360px);
-    padding-bottom: 72px;
-  }
-
-  .banner__eyebrow {
-    margin-bottom: 14px;
-    font-size: 0.74rem;
-  }
-
-  .banner__title {
-    margin-bottom: 12px;
-    font-size: clamp(1.6rem, 9vw, 2.4rem);
-  }
-
-  .banner__desc {
-    margin-bottom: 20px;
-    font-size: 0.94rem;
-    line-height: 1.6;
-  }
-
-  .banner__cta {
-    min-height: 44px;
-    padding: 0 18px;
-    font-size: 0.92rem;
-  }
-
-  .banner__nav {
-    display: none;
+    width: 34px;
+    height: 34px;
   }
 
   .banner__pagination {
-    right: 0;
-    bottom: 24px;
+    bottom: 14px;
   }
 }
 </style>
