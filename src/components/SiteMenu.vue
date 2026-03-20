@@ -170,13 +170,13 @@ watch(
       @keydown.enter.prevent="goToPath('/')"
       @keydown.space.prevent="goToPath('/')"
     >
-      <img
+      <!-- <img
         class="logo"
         :class="{ 'is-compact': useCompactLogo }"
         :src="useCompactLogo ? compactLogo : logo"
         alt="Careful"
         @load="syncLogoMode"
-      />
+      /> -->
     </span>
 
     <nav

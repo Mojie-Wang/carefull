@@ -1,9 +1,9 @@
 <template>
   <div class="pages"></div>
-  <AboutUs />
+  <!-- <AboutUs /> -->
 </template>
 <script setup>
- import AboutUs from '@/components/AboutUs.vue'
+//  import AboutUs from '@/components/AboutUs.vue'
 </script>
 <style scoped lang="less">
 .title {
