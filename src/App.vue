@@ -16,7 +16,7 @@ import Footer from "@/components/Footer.vue";
       <RouterView />
     </main>
 
-    <Footer />
+    <Footer type="index" title="SUBSCRIPTION INFORMATION" />
   </div>
 </template>
 
@@ -27,8 +27,7 @@ import Footer from "@/components/Footer.vue";
 }
 
 .app-shell__header {
-  width: var(--container);
-  margin: 0 auto;
+  width: 100%;
 }
 
 .content-frame {

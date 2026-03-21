@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref, watch } from "vue";
-import banner1 from "@/assets/index/banner1.png";
+import bannerImage from "@/assets/index/banner.png";
 import arrowLeft from "@/assets/index/bArrowLeftIcon.png";
 import arrowRight from "@/assets/index/bArrowRightIcon.png";
 
@@ -17,16 +17,22 @@ const props = defineProps({
 
 const bannerList = [
   {
-    img: banner1,
-    title: "Careful Technology",
+    img: bannerImage,
+    title: "Ballistic helmet",
+    desc: "Lightweight and with stable ballistic safety performance",
+    buttonText: "Learn More",
   },
   {
-    img: banner1,
-    title: "Careful Technology",
+    img: bannerImage,
+    title: "Ballistic helmet",
+    desc: "Lightweight and with stable ballistic safety performance",
+    buttonText: "Learn More",
   },
   {
-    img: banner1,
-    title: "Careful Technology",
+    img: bannerImage,
+    title: "Ballistic helmet",
+    desc: "Lightweight and with stable ballistic safety performance",
+    buttonText: "Learn More",
   },
 ];
 
@@ -127,14 +133,19 @@ onBeforeUnmount(() => {
       :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
     >
       <article
-        v-for="item in bannerList"
-        :key="item.title"
+        v-for="(item, index) in bannerList"
+        :key="item.title + index"
         class="banner__slide"
       >
         <img class="banner__image" :src="item.img" :alt="item.title" />
-        <div class="banner__title">{{ item.title }}</div>
-        <div class="banner__btn">
-          <button class="banner__btn">Learn More</button>
+        <div class="banner__content-wrap">
+          <div class="banner__content">
+            <h2 class="banner__title">{{ item.title }}</h2>
+            <p class="banner__desc">{{ item.desc }}</p>
+            <button class="banner__cta" type="button">
+              {{ item.buttonText }}
+            </button>
+          </div>
         </div>
       </article>
     </div>
@@ -193,6 +204,7 @@ onBeforeUnmount(() => {
 }
 
 .banner__slide {
+  position: relative;
   flex: 0 0 100%;
   height: 100%;
 }
@@ -205,9 +217,79 @@ onBeforeUnmount(() => {
   display: block;
 }
 
+.banner__content-wrap {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  bottom: 72px;
+  z-index: 2;
+  width: min(var(--container), calc(100% - 32px));
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.banner__content {
+  width: min(1080px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  color: #fff;
+  pointer-events: auto;
+}
+
+.banner__title {
+  margin: 0;
+  font-family: var(--font-din-alternate);
+  font-size: clamp(56px, 6.4vw, 104px);
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.banner__desc {
+  margin: 0;
+  font-family: var(--font-alibaba-puhuiti);
+  font-size: clamp(28px, 2.6vw, 40px);
+  line-height: 1.5;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.banner__cta {
+  width: clamp(160px, 21vw, 302px);
+  min-height: clamp(42px, 4.2vw, 60px);
+  padding: clamp(8px, 0.9vw, 12px) clamp(18px, 1.8vw, 28px);
+  border-radius: 21px 21px 21px 21px;
+  border: 2px solid #ffffff;
+  // border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 21px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: clamp(16px, 2.4vw, 36px);
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  font-family: var(--font-montserrat);
+  transition: background 0.22s ease, border-color 0.22s ease,
+    transform 0.22s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
 .banner__shade {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: linear-gradient(
       90deg,
       rgba(13, 17, 23, 0.28) 0%,
@@ -297,6 +379,31 @@ onBeforeUnmount(() => {
     height: 260px;
   }
 
+  .banner__content-wrap {
+    bottom: 44px;
+    width: calc(100% - 28px);
+  }
+
+  .banner__content {
+    gap: 10px;
+  }
+
+  .banner__title {
+    font-size: 24px;
+  }
+
+  .banner__desc {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .banner__cta {
+    width: clamp(132px, 42vw, 180px);
+    min-height: 42px;
+    padding: 10px 18px;
+    font-size: clamp(14px, 4vw, 18px);
+  }
+
   .bannerCtrBtn {
     width: calc(100% - 28px);
   }
@@ -308,6 +415,26 @@ onBeforeUnmount(() => {
 
   .banner__pagination {
     bottom: 14px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 769px) {
+  .banner__content-wrap {
+    bottom: 56px;
+  }
+
+  .banner__content {
+    width: min(820px, 100%);
+    gap: 14px;
+  }
+
+  .banner__title {
+    font-size: clamp(44px, 5.4vw, 80px);
+  }
+
+  .banner__desc {
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.45;
   }
 }
 </style>

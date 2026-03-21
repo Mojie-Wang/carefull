@@ -1,26 +1,34 @@
-import AboutUsPage from '@/pages/AboutUsPage.vue'
-import ApplicationCasesPage from '@/pages/ApplicationCasesPage.vue'
-import ContactUsPage from '@/pages/ContactUsPage.vue'
-import EventPage from '@/pages/EventPage.vue'
-import HomePage from '@/pages/HomePage.vue'
-import ProductCenterPage from '@/pages/ProductCenterPage.vue'
+import AboutUsPage from "@/pages/AboutUsPage.vue";
+import ApplicationCasesPage from "@/pages/ApplicationCasesPage.vue";
+import ContactUsPage from "@/pages/ContactUsPage.vue";
+import EventPage from "@/pages/EventPage.vue";
+import HomePage from "@/pages/HomePage.vue";
+import ProductCenterPage from "@/pages/ProductCenterPage.vue";
 import ProductDetailPage from '@/pages/ProductDetailPage.vue'
 
 export const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: HomePage,
     meta: {
-      label: 'Home',
+      label: "Home",
+      footer: {
+        type: "index",
+        title: "SUBSCRIPTION INFORMATION",
+      },
     },
   },
   {
-    path: '/product-center',
-    name: 'product-center',
+    path: "/product-center",
+    name: "product-center",
     component: ProductCenterPage,
     meta: {
-      label: 'Product Center',
+      label: "Product Center",
+      footer: {
+        type: "page",
+        title: "LIGHTER THINNER SOFTER",
+      },
     },
   },
   {
@@ -32,42 +40,58 @@ export const routes = [
     },
   },
   {
-    path: '/application-cases',
-    name: 'application-cases',
+    path: "/application-cases",
+    name: "application-cases",
     component: ApplicationCasesPage,
     meta: {
-      label: 'Application Cases',
+      label: "Application Cases",
+      footer: {
+        type: "page",
+        title: "LIGHTER THINNER SOFTER",
+      },
     },
   },
   {
-    path: '/event',
-    name: 'event',
+    path: "/event",
+    name: "event",
     component: EventPage,
     meta: {
-      label: 'Event',
+      label: "Event",
+      footer: {
+        type: "page",
+        title: "LIGHTER THINNER SOFTER",
+      },
     },
   },
   {
-    path: '/about-us',
-    name: 'about-us',
+    path: "/about-us",
+    name: "about-us",
     component: AboutUsPage,
     meta: {
-      label: 'About Us',
+      label: "About Us",
+      footer: {
+        type: "page",
+        title: "LIGHTER THINNER SOFTER",
+      },
     },
   },
   {
-    path: '/contact-us',
-    name: 'contact-us',
+    path: "/contact-us",
+    name: "contact-us",
     component: ContactUsPage,
     meta: {
-      label: 'Contact Us',
+      label: "Contact Us",
+      footer: {
+        type: "page",
+        title: "LIGHTER THINNER SOFTER",
+      },
     },
   },
   {
-    path: '/:pathMatch(.*)*',
-    redirect: '/',
+    path: "/:pathMatch(.*)*",
+    redirect: "/",
   },
-]
+];
 
 export const navigationItems = routes
   .filter((route) => route.meta?.label)
@@ -75,4 +99,4 @@ export const navigationItems = routes
     name: route.name,
     path: route.path,
     label: route.meta.label,
-  }))
+  }));

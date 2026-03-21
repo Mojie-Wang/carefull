@@ -52,7 +52,9 @@ const handleClick = (title) => {
         @keydown.enter.prevent="handleClick(item.title)"
         @keydown.space.prevent="handleClick(item.title)"
       >
-        <h6 class="title">{{ item.title }}</h6>
+        <h6 class="title">
+          <span>{{ item.title }}</span>
+        </h6>
         <img class="img" :src="item.img" :alt="item.title" />
       </div>
     </div>
@@ -76,23 +78,19 @@ const handleClick = (title) => {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    // gap: 12px;
-    // padding: 18px 16px 20px;
-    // border: 1px solid transparent;
-    // border-radius: 20px;
-    // background: rgba(255, 255, 255, 0.58);
+
     cursor: pointer;
     transition: transform 0.22s ease, box-shadow 0.22s ease,
       border-color 0.22s ease, background 0.22s ease;
 
     &:hover {
       transform: translateY(-2px);
-      // border-color: rgba(7, 102, 203, 0.16);
-      // background: rgba(255, 255, 255, 0.92);
-      // box-shadow: 0 14px 28px rgba(7, 102, 203, 0.08);
 
       .title {
-        color: #0766cb;
+        span {
+          color: #0766cb;
+          border-bottom: 2px solid #0766cb;
+        }
       }
 
       .img {
@@ -111,18 +109,23 @@ const handleClick = (title) => {
       // box-shadow: 0 16px 34px rgba(7, 102, 203, 0.12);
 
       .title {
-        color: #0766cb;
-        font-weight: 600;
+        span {
+          color: #0766cb;
+          border-bottom: 2px solid #0766cb;
+          font-weight: 600;
+        }
       }
     }
 
     .title {
+      display: inline-block;
       font-size: 24px;
       color: #17212c;
       text-align: center;
       margin: 0;
       padding: 0;
       margin-bottom: 14px;
+      line-height: 1;
       transition: color 0.22s ease, font-weight 0.22s ease;
     }
 
