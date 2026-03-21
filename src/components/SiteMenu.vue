@@ -11,6 +11,7 @@ const router = useRouter();
 
 const topbarRef = ref(null);
 const navRef = ref(null);
+const navListRef = ref(null);
 const actionsRef = ref(null);
 const isMenuOpen = ref(false);
 const useCompactLogo = ref(false);
@@ -18,6 +19,8 @@ const useCompactLogo = ref(false);
 const MENU_BREAKPOINT = 980;
 const LARGE_LOGO_WIDTH = 338;
 const COMPACT_LOGO_WIDTH = 92;
+const LOGO_TO_NAV_GAP = 55;
+const NAV_TO_ACTIONS_GAP = 22;
 const RESTORE_BUFFER = 24;
 
 let resizeObserver;
@@ -43,8 +46,8 @@ const goToPath = (path) => {
 const isActive = (path) => route.path === path;
 
 const getNavItems = () => {
-  return navRef.value
-    ? [...navRef.value.querySelectorAll(".topbar__link")]
+  return navListRef.value
+    ? [...navListRef.value.querySelectorAll(".topbar__link")]
     : [];
 };
 
@@ -60,14 +63,14 @@ const hasWrappedMenuItems = () => {
 };
 
 const getRequiredNavWidth = () => {
-  const navElement = navRef.value;
+  const navListElement = navListRef.value;
   const items = getNavItems();
 
-  if (!navElement || !items.length) {
+  if (!navListElement || !items.length) {
     return 0;
   }
 
-  const navStyles = window.getComputedStyle(navElement);
+  const navStyles = window.getComputedStyle(navListElement);
   const gap = parseFloat(navStyles.columnGap || navStyles.gap || "0");
 
   return (
@@ -93,15 +96,21 @@ const syncLogoMode = () => {
     return;
   }
 
-  const topbarStyles = window.getComputedStyle(topbarElement);
-  const gap = parseFloat(topbarStyles.columnGap || topbarStyles.gap || "0");
   const topbarWidth = topbarElement.clientWidth;
   const navRequiredWidth = getRequiredNavWidth();
   const actionsWidth = getActionsWidth();
   const largeLayoutWidth =
-    LARGE_LOGO_WIDTH + navRequiredWidth + actionsWidth + gap * 2;
+    LARGE_LOGO_WIDTH +
+    LOGO_TO_NAV_GAP +
+    navRequiredWidth +
+    NAV_TO_ACTIONS_GAP +
+    actionsWidth;
   const compactLayoutWidth =
-    COMPACT_LOGO_WIDTH + navRequiredWidth + actionsWidth + gap * 2;
+    COMPACT_LOGO_WIDTH +
+    LOGO_TO_NAV_GAP +
+    navRequiredWidth +
+    NAV_TO_ACTIONS_GAP +
+    actionsWidth;
 
   if (!useCompactLogo.value) {
     useCompactLogo.value =
@@ -186,19 +195,21 @@ watch(
       :class="{ 'is-open': isMenuOpen }"
       aria-label="Primary"
     >
-      <span
-        v-for="item in navigationItems"
-        :key="item.name"
-        class="topbar__link"
-        :class="{ 'is-active': isActive(item.path) }"
-        role="link"
-        tabindex="0"
-        @click="goToPath(item.path)"
-        @keydown.enter.prevent="goToPath(item.path)"
-        @keydown.space.prevent="goToPath(item.path)"
-      >
-        {{ item.label }}
-      </span>
+      <div ref="navListRef" class="topbar__nav-list">
+        <span
+          v-for="item in navigationItems"
+          :key="item.name"
+          class="topbar__link"
+          :class="{ 'is-active': isActive(item.path) }"
+          role="link"
+          tabindex="0"
+          @click="goToPath(item.path)"
+          @keydown.enter.prevent="goToPath(item.path)"
+          @keydown.space.prevent="goToPath(item.path)"
+        >
+          {{ item.label }}
+        </span>
+      </div>
 
       <div class="topbar__nav-tools">
         <!-- <span class="topbar__locale">EN/中</span> -->
@@ -236,17 +247,15 @@ watch(
   width: var(--container);
   margin: 0 auto;
   position: relative;
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  display: flex;
   align-items: stretch;
-  column-gap: clamp(26px, 1.8vw, 55px);
   min-height: 96px;
   padding: 0;
-  // border-bottom: 2px solid #2a82e8;
-  transition: column-gap 0.24s ease;
 
   &.is-compact {
-    column-gap: clamp(14px, 1.3vw, 22px);
+    .brand {
+      margin-right: 55px;
+    }
   }
 }
 
@@ -254,6 +263,8 @@ watch(
   display: inline-flex;
   align-items: center;
   align-self: center;
+  flex: 0 0 auto;
+  margin-right: 55px;
   cursor: pointer;
   user-select: none;
 
@@ -272,13 +283,21 @@ watch(
 
 .topbar__nav {
   display: flex;
-  align-items: center;
-  // justify-content: flex-end;
+  align-items: stretch;
   align-self: stretch;
-  gap: clamp(16px, 1.4vw, 34px);
-  flex-wrap: nowrap;
+  flex: 1 1 auto;
   min-width: 0;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.topbar__nav-list {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  gap: 18px;
 }
 
 .topbar__link {
@@ -287,12 +306,13 @@ watch(
   justify-content: center;
   position: relative;
   align-self: stretch;
+  flex: 0 0 auto;
   min-height: 100%;
-  // padding: 0 0 22px;
+  padding: 0;
   color: #151b24;
   cursor: pointer;
   white-space: nowrap;
-  font-size: clamp(16px, 1.1vw, 18px);
+  font-size: 17px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
@@ -302,8 +322,8 @@ watch(
     content: "";
     position: absolute;
     left: 50%;
-    bottom: -2px;
-    width: 100%;
+    bottom: 0;
+    width: calc(100% + 6px);
     height: 4px;
     border-radius: 0;
     background: #1e73d8;
@@ -338,7 +358,13 @@ watch(
   display: flex;
   align-items: center;
   align-self: center;
+  flex: 0 0 auto;
   gap: 16px;
+}
+
+.topbar__actions {
+  margin-left: 22px;
+  justify-content: flex-end;
 }
 
 .topbar__nav-tools {
@@ -357,8 +383,8 @@ watch(
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
 
   img {
@@ -423,6 +449,7 @@ watch(
 
 @media (max-width: 980px) {
   .topbar {
+    display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: 16px;
     padding: 10px 0 18px;
@@ -432,6 +459,7 @@ watch(
 
   .brand {
     min-width: 0;
+    margin-right: 0;
 
     img.logo,
     img.logo.is-compact {
@@ -458,7 +486,7 @@ watch(
     left: 0;
     right: 0;
     z-index: 10;
-    gap: 10px;
+    row-gap: 10px;
     padding: 14px;
     border: 1px solid rgba(23, 33, 44, 0.08);
     border-radius: 20px;
@@ -473,6 +501,16 @@ watch(
     transition: opacity 0.24s ease, transform 0.24s ease,
       visibility 0s linear 0.24s;
     overflow: visible;
+    min-width: 0;
+  }
+
+  .topbar__nav-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+    flex: none;
+    height: auto;
+    gap: 10px;
   }
 
   .topbar__nav.is-open {
@@ -516,6 +554,10 @@ watch(
     justify-content: space-between;
     padding-top: 12px;
     border-top: 1px solid rgba(23, 33, 44, 0.08);
+  }
+
+  .topbar__actions {
+    margin-left: 0;
   }
 }
 
