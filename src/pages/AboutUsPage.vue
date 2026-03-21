@@ -567,12 +567,12 @@ import patent4 from "@/assets/aboutUs/patent4.png";
         }
 
         .btn {
-          width: 100%;
-          min-height: 56px;
+          width: 50%;
+          min-height: 50px;
           padding: 0 24px;
           gap: 10px;
           font-size: 18px;
-
+          margin: 0 auto;
           .arrowRight {
             width: 44px;
             height: auto;

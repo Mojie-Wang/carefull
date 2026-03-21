@@ -240,7 +240,18 @@ const caseList = ref([
       }
 
       .btn {
-        font-size: 16px;
+        width: min(100%, 240px);
+        max-width: 100%;
+        height: clamp(44px, 12vw, 52px);
+        padding: 0 14px;
+        gap: 10px;
+        font-size: clamp(15px, 4vw, 17px);
+        line-height: 1.2;
+
+        .arrow {
+          width: clamp(34px, 10vw, 42px);
+          height: auto;
+        }
       }
     }
   }

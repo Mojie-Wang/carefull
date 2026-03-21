@@ -37,7 +37,10 @@
         <div class="showcase-left">
           <h2>{{ showcaseProduct.title }}</h2>
           <ul>
-            <li v-for="(feature, index) in showcaseProduct.features" :key="index">
+            <li
+              v-for="(feature, index) in showcaseProduct.features"
+              :key="index"
+            >
               {{ feature }}
             </li>
           </ul>
@@ -47,7 +50,11 @@
               src="@/assets/product/arrowLeft.png"
               alt="Previous"
             />
-            <img @click="nextShowcase" src="@/assets/product/arrowRight.png" alt="Next" />
+            <img
+              @click="nextShowcase"
+              src="@/assets/product/arrowRight.png"
+              alt="Next"
+            />
           </div>
         </div>
         <div class="showcase-right">
@@ -77,11 +84,7 @@
       </div>
 
       <div class="products-grid">
-        <div
-          class="product-card"
-          v-for="product in products"
-          :key="product.id"
-        >
+        <div class="product-card" v-for="product in products" :key="product.id">
           <img :src="product.image" :alt="product.title" />
           <div class="content">
             <h4>{{ product.title }}</h4>
@@ -181,7 +184,8 @@ const filteredProducts = computed(() => {
 const showcaseProducts = ref([
   {
     title: "Ballistic Vest",
-    description: "Top-tier protection with lightweight comfort and modular design.",
+    description:
+      "Top-tier protection with lightweight comfort and modular design.",
     features: [
       "Lightweight design",
       "Waterproof fabric",
@@ -192,7 +196,8 @@ const showcaseProducts = ref([
   },
   {
     title: "Tactical Helmet",
-    description: "Rigorous impact test, multiple mounting options, 360° defense.",
+    description:
+      "Rigorous impact test, multiple mounting options, 360° defense.",
     features: [
       "Impact-resistant",
       "Ventilation system",
@@ -203,7 +208,8 @@ const showcaseProducts = ref([
   },
   {
     title: "Ballistic Shield",
-    description: "Superior stopping power with ergonomic handle and shooting window.",
+    description:
+      "Superior stopping power with ergonomic handle and shooting window.",
     features: [
       "Bulletproof glass window",
       "Lightweight frame",
@@ -215,7 +221,9 @@ const showcaseProducts = ref([
 ]);
 
 const showcaseIndex = ref(0);
-const showcaseProduct = computed(() => showcaseProducts.value[showcaseIndex.value]);
+const showcaseProduct = computed(
+  () => showcaseProducts.value[showcaseIndex.value]
+);
 
 const prevShowcase = () => {
   showcaseIndex.value =
@@ -224,7 +232,8 @@ const prevShowcase = () => {
 };
 
 const nextShowcase = () => {
-  showcaseIndex.value = (showcaseIndex.value + 1) % showcaseProducts.value.length;
+  showcaseIndex.value =
+    (showcaseIndex.value + 1) % showcaseProducts.value.length;
 };
 </script>
 
@@ -487,7 +496,7 @@ const nextShowcase = () => {
 
         .content {
           padding: 14px;
-          background-color: #F9F9F9;
+          background-color: #f9f9f9;
 
           h4 {
             margin: 0 0 6px;
@@ -569,22 +578,276 @@ const nextShowcase = () => {
   }
 
   @media (max-width: 1024px) {
-    .product-list-area {
-      grid-template-columns: 1fr;
+    .product-range {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 16px;
+      margin: 20px auto 28px;
+
+      h2 {
+        margin: 0;
+        text-align: center;
+      }
+
+      .range-tabs {
+        gap: 20px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        .tab {
+          width: auto;
+          min-width: 74px;
+        }
+      }
     }
 
-    .products-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .product-showcase {
+      padding: 0;
+
+      .showcase-cover {
+        height: clamp(620px, 120vw, 760px);
+      }
+
+      .showcase-box {
+        left: 50%;
+        transform: translateX(-50%);
+        width: var(--container);
+        padding: 28px 0;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 28px;
+
+        .showcase-left {
+          width: 100%;
+          margin-right: 0;
+
+          h2 {
+            margin: 0 0 12px;
+          }
+        }
+
+        .showcase-right {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+
+          img {
+            width: 100%;
+            aspect-ratio: 986 / 675;
+            max-height: 260px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .product-list-area {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+
+      .classification-panel {
+        width: 100%;
+        margin-right: 0;
+        padding: 0;
+
+        h3 {
+          margin: 0 0 14px;
+          padding-right: 0;
+        }
+
+        .classification-items {
+          flex-direction: row;
+          flex-wrap: nowrap;
+          gap: 12px;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding-bottom: 8px;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+
+          label {
+            flex: 0 0 auto;
+            white-space: nowrap;
+            border: 1px solid #d8dde6;
+            padding: 8px 14px;
+
+            input {
+              display: none;
+            }
+
+            &.selected {
+              color: #1070fc;
+              border-color: #1070fc;
+              background: #eef5ff;
+            }
+          }
+        }
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+
+        .product-card {
+          width: 100%;
+          height: auto;
+          min-width: 0;
+
+          img {
+            height: clamp(180px, 26vw, 240px);
+          }
+        }
+      }
     }
   }
 
   @media (max-width: 768px) {
-    .hero .hero-content h1 {
-      font-size: 32px;
+    .hero {
+      min-height: 320px;
+
+      .hero-content {
+        bottom: 28px;
+
+        h1 {
+          font-size: 32px;
+        }
+
+        p {
+          font-size: 18px;
+        }
+
+        .btn-learn {
+          width: 160px;
+          height: 38px;
+          font-size: 18px;
+        }
+      }
     }
 
-    .products-grid {
-      grid-template-columns: 1fr;
+    .product-range {
+      margin: 24px auto;
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .range-tabs {
+        gap: 16px;
+
+        .tab .text {
+          font-size: 14px;
+          line-height: 1.15;
+        }
+      }
+    }
+
+    .product-showcase {
+      padding: 0;
+
+      .showcase-cover {
+        display: none;
+      }
+
+      .showcase-box {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        height: auto;
+        width: var(--container);
+        margin: 0 auto;
+        padding: 16px 0 8px;
+        gap: 16px;
+
+        .showcase-left {
+          text-align: center;
+          h2 {
+            font-size: 28px;
+          }
+
+          ul li {
+            font-size: 13px;
+            list-style: none;
+          }
+
+          .showcase-nav {
+            margin-top: 18px;
+            justify-content: center;
+            img {
+              width: 42px;
+              height: 42px;
+            }
+          }
+        }
+
+        .showcase-right {
+          width: 100%;
+
+          img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: none;
+            max-height: none;
+            aspect-ratio: auto;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+
+    .product-list-area {
+      margin: 28px auto;
+
+      .classification-panel {
+        h3 {
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+
+        .classification-items label {
+          padding: 8px 12px;
+        }
+      }
+
+      .products-grid {
+        gap: 14px;
+
+        .product-card {
+          border-radius: 8px;
+
+          img {
+            height: clamp(150px, 34vw, 210px);
+          }
+
+          .content {
+            padding: 12px;
+
+            h4 {
+              font-size: 14px;
+              line-height: 1.25;
+            }
+
+            p {
+              font-size: 12px;
+            }
+          }
+        }
+      }
     }
 
     .cta-box {

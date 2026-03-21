@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 const props = defineProps({
   type: {
@@ -15,6 +15,40 @@ const props = defineProps({
 const titleWords = computed(() =>
   props.title.trim().split(/\s+/).filter(Boolean)
 );
+
+const footerFormRef = ref(null);
+const inputRef = ref(null);
+
+let focusScrollTimer = 0;
+
+const scrollFormIntoView = (behavior = "smooth") => {
+  window.clearTimeout(focusScrollTimer);
+  focusScrollTimer = window.setTimeout(() => {
+    footerFormRef.value?.scrollIntoView({
+      behavior,
+      block: window.innerWidth <= 760 ? "center" : "nearest",
+    });
+  }, 260);
+};
+
+const handleInputFocus = () => {
+  scrollFormIntoView();
+};
+
+const handleViewportResize = () => {
+  if (document.activeElement === inputRef.value) {
+    scrollFormIntoView("auto");
+  }
+};
+
+onMounted(() => {
+  window.visualViewport?.addEventListener("resize", handleViewportResize);
+});
+
+onBeforeUnmount(() => {
+  window.clearTimeout(focusScrollTimer);
+  window.visualViewport?.removeEventListener("resize", handleViewportResize);
+});
 </script>
 
 <template>
@@ -32,8 +66,13 @@ const titleWords = computed(() =>
             To get the latest news about Careful Technology, leave your email
             for subscription—we’ll send updates straight to your inbox.
           </div>
-          <div class="footerForm">
-            <input class="inputEl" type="text" />
+          <div ref="footerFormRef" class="footerForm">
+            <input
+              ref="inputRef"
+              class="inputEl"
+              type="text"
+              @focus="handleInputFocus"
+            />
             <span class="submitBtn" type="submit">SUBMIT</span>
           </div>
         </div>
@@ -554,6 +593,8 @@ const titleWords = computed(() =>
             margin: 20px auto 0;
             box-sizing: border-box;
             overflow: hidden;
+            scroll-margin-top: 24px;
+            scroll-margin-bottom: 220px;
 
             .inputEl {
               flex: 1;
@@ -563,7 +604,12 @@ const titleWords = computed(() =>
             }
 
             .submitBtn {
+              flex: 0 0 clamp(102px, 24vw, 124px);
+              width: clamp(102px, 24vw, 124px);
+              min-width: clamp(102px, 24vw, 124px);
               padding: 0 10px;
+              font-size: clamp(15px, 3.8vw, 18px);
+              line-height: 1;
             }
           }
         }
@@ -625,6 +671,14 @@ const titleWords = computed(() =>
         .right {
           .footerForm {
             width: 100%;
+
+            .submitBtn {
+              flex-basis: 96px;
+              width: 96px;
+              min-width: 96px;
+              padding: 0 8px;
+              font-size: 14px;
+            }
           }
         }
       }
