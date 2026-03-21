@@ -191,7 +191,7 @@ onBeforeUnmount(() => {
 
   .item {
     min-height: 132px;
-    padding: 14px 5px;
+    padding: 14px 0;
     border-radius: 10px;
   }
 
