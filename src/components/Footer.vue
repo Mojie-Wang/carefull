@@ -63,16 +63,16 @@
   .footerTop {
     border-bottom: 1px solid #494d51;
     padding: 54px 0 47px;
-      .topBar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: var(--container);
-        margin: 0 auto;
-        box-sizing: border-box;
-        .left {
-          width: 382px;
-          height: 112px;
+    .topBar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: var(--container);
+      margin: 0 auto;
+      box-sizing: border-box;
+      .left {
+        width: 382px;
+        height: 112px;
         font-family: var(--font-montserrat);
         font-weight: 900;
         font-size: 46px;
@@ -151,35 +151,35 @@
     padding: 28px 0 30px;
     width: var(--container);
     margin: 0 auto;
-      .left {
-        font-family: var(--font-montserrat);
-        .contactInfo {
+    .left {
+      font-family: var(--font-montserrat);
+      .contactInfo {
         font-size: 24px;
         color: #ffffff;
         line-height: 29px;
         text-align: left;
         font-style: normal;
       }
-        .phone {
-          font-size: 24px;
-          color: #ffffff;
-          text-align: left;
-          font-style: normal;
-          margin: 19px 0;
-          flex-wrap: wrap;
-          .phoneTitle {
-            font-family: var(--font-montserrat);
-          }
-          .phoneNum {
-            font-size: 45px;
-            line-height: 45px;
-            margin-top: 10px;
-            font-weight: 400;
-            font-family: D-DIN-PRO, D-DIN-PRO;
-            overflow-wrap: anywhere;
-            word-break: break-word;
-          }
+      .phone {
+        font-size: 24px;
+        color: #ffffff;
+        text-align: left;
+        font-style: normal;
+        margin: 19px 0;
+        flex-wrap: wrap;
+        .phoneTitle {
+          font-family: var(--font-montserrat);
         }
+        .phoneNum {
+          font-size: 45px;
+          line-height: 45px;
+          margin-top: 10px;
+          font-weight: 400;
+          font-family: D-DIN-PRO, D-DIN-PRO;
+          overflow-wrap: anywhere;
+          word-break: break-word;
+        }
+      }
       .email {
         color: #ffffff;
         text-align: left;

@@ -159,40 +159,41 @@ import patent4 from "@/assets/aboutUs/patent4.png";
     display: block;
   }
   .topContent {
-    width: var(--container);
+    width: min(1120px, var(--container));
     margin: 0 auto;
-    padding-top: clamp(24px, 4vw, 59px);
+    padding-top: clamp(40px, 4vw, 56px);
 
     .aboutUs {
-      margin: 0 0 28px;
+      margin: 0 0 34px;
       text-align: center;
       font-family: var(--font-montserrat);
       font-size: 50px;
-      line-height: 1.1;
+      line-height: 1.04;
       font-style: italic;
       font-weight: 900;
     }
     .companyName {
-      margin: 0 auto 24px;
+      margin: 0 0 18px;
       font-family: var(--font-montserrat);
       font-size: 48px;
-      line-height: 1.2;
+      line-height: 1.16;
       font-style: italic;
       font-weight: 400;
     }
     .desc {
-      margin: 0 auto 48px;
+      max-width: 980px;
+      margin: 0 0 40px;
       text-align: left;
       font-family: var(--font-montserrat);
       font-size: 34px;
-      line-height: 1.4;
+      line-height: 1.48;
       font-weight: 500;
     }
     .part {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: start;
-      gap: clamp(50px, 4vw, 104px);
+      gap: clamp(32px, 3.4vw, 56px);
 
       > .left,
       > .right {
@@ -200,7 +201,7 @@ import patent4 from "@/assets/aboutUs/patent4.png";
         text-align: left;
         font-family: var(--font-montserrat);
         font-size: 24px;
-        line-height: 52px;
+        line-height: 1.9;
         font-weight: 400;
       }
 
@@ -214,44 +215,44 @@ import patent4 from "@/assets/aboutUs/patent4.png";
         > .left {
           display: flex;
           flex-direction: column;
-          gap: clamp(24px, 3vw, 40px);
+          gap: 32px;
         }
       }
 
       .btn {
-        width: min(100%, 449px);
-        min-height: 89px;
-        padding: 0 40px;
+        width: min(100%, 330px);
+        min-height: 60px;
+        padding: 0 28px;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         align-self: flex-start;
-        gap: 14px;
-        border: 2px solid #111;
-        border-radius: 8px;
-        background: linear-gradient(135deg, #ffffff 0%, #f4f5f7 100%);
-        box-shadow: 0 14px 34px rgba(23, 33, 44, 0.12);
+        gap: 15px;
+        border: 1px solid #111;
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: none;
         color: #101010;
         cursor: pointer;
         appearance: none;
-        transition: transform 0.22s ease, box-shadow 0.22s ease,
-          background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+        transition: transform 0.18s ease, background 0.18s ease,
+          border-color 0.18s ease, color 0.18s ease;
         font-family: var(--font-montserrat);
-        font-size: 32px;
-        font-style: italic;
-        font-weight: 600;
+        font-size: 27px;
+        line-height: 1;
+        font-style: normal;
+        font-weight: 500;
         white-space: nowrap;
 
         &:hover,
         &:focus-visible {
-          // color: #fff;
-          // border-color: #0766cb;
-          // background: linear-gradient(135deg, #0766cb 0%, #05478f 100%);
-          // box-shadow: 0 20px 38px rgba(7, 102, 203, 0.24);
-          transform: translateY(-2px);
+          color: #fff;
+          border-color: #111;
+          background: #111;
+          transform: translateY(-1px);
 
           .arrowRight--default {
-            // display: none;
+            display: none;
           }
 
           .arrowRight--active {
@@ -261,7 +262,6 @@ import patent4 from "@/assets/aboutUs/patent4.png";
 
         &:active {
           transform: translateY(0);
-          // box-shadow: 0 12px 24px rgba(7, 102, 203, 0.18);
         }
 
         &:focus-visible {
@@ -269,19 +269,19 @@ import patent4 from "@/assets/aboutUs/patent4.png";
         }
 
         .arrowRight {
-          width: 71px;
-          height: 16px;
+          width: 56px;
+          height: 13px;
           flex-shrink: 0;
         }
 
         .arrowRight--active {
-          // display: none;
+          display: none;
         }
       }
 
       &.capacity {
         align-items: center;
-        gap: clamp(32px, 3vw, 44px);
+        gap: clamp(28px, 2.8vw, 40px);
 
         > .left {
           .capacityImg {
@@ -289,16 +289,21 @@ import patent4 from "@/assets/aboutUs/patent4.png";
             aspect-ratio: 700 / 759;
             object-fit: cover;
             display: block;
-            border-radius: 16px;
+            border-radius: 4px;
           }
         }
 
         > .right {
           .title {
-            margin-bottom: 16px;
-            font-size: 32px;
+            margin-bottom: 14px;
+            font-size: 24px;
             line-height: 1.25;
             font-weight: 600;
+          }
+
+          .text {
+            font-size: 20px;
+            line-height: 1.72;
           }
         }
       }
@@ -308,21 +313,21 @@ import patent4 from "@/assets/aboutUs/patent4.png";
       width: 100%;
       aspect-ratio: 144 / 37;
       object-fit: cover;
-      margin: clamp(48px, 5vw, 68px) auto clamp(28px, 3vw, 35px);
-      border-radius: 16px;
+      margin: 44px auto 18px;
+      border-radius: 4px;
     }
     .produceDesc,
     .introText {
       text-align: left;
       font-family: var(--font-montserrat);
       font-size: 24px;
-      line-height: 52px;
+      line-height: 1.9;
       font-weight: 400;
     }
     .produceDesc {
-      margin-bottom: clamp(30px, 4vw, 80px);
+      margin-bottom: 58px;
       p {
-        margin: 0 0 18px;
+        margin: 0 0 8px;
       }
 
       p:last-child {
@@ -330,25 +335,26 @@ import patent4 from "@/assets/aboutUs/patent4.png";
       }
     }
     .introText {
-      margin-top: clamp(40px, 4vw, 56px);
+      margin-top: 52px;
 
       .title {
-        margin: 0 0 12px;
-        font-size: 32px;
+        margin: 0 0 8px;
+        font-size: 28px;
         line-height: 1.3;
         font-weight: 600;
         text-align: left;
       }
 
       .text {
-        margin: 0 0 20px;
+        margin: 0 0 12px;
       }
 
       .wrap {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 44px;
-        font-size: 26px;
+        gap: 28px;
+        font-size: 24px;
+        line-height: 1.9;
         font-family: var(--font-montserrat);
         font-weight: 400;
 
@@ -365,26 +371,26 @@ import patent4 from "@/assets/aboutUs/patent4.png";
   }
   .wrapCertificate {
     --patent-stagger: clamp(36px, 6vw, 98px);
-    margin: clamp(56px, 5vw, 68px) auto 0;
+    margin: 58px auto 0;
     background: #f7f7f7;
-    padding: 40px 0 121px;
+    padding: 48px 0 92px;
 
     .content {
-      width: var(--container);
+      width: min(1120px, var(--container));
       margin: 0 auto;
 
       .title {
-        margin: 0 auto 24px;
+        margin: 0 auto 30px;
         text-align: center;
         font-size: 50px;
-        line-height: 1.1;
+        line-height: 1.04;
         font-family: var(--font-montserrat);
         font-style: italic;
         font-weight: 900;
       }
 
       > h2.text {
-        margin: 0 auto 18px;
+        margin: 0 0 12px;
         text-align: left;
         font-family: var(--font-montserrat);
         font-size: 34px;
@@ -393,30 +399,29 @@ import patent4 from "@/assets/aboutUs/patent4.png";
       }
 
       > p.text {
-        // max-width: 980px;
-        margin: 0 auto;
+        max-width: 980px;
+        margin: 0 0 var(--patent-stagger);
         text-align: left;
         font-family: var(--font-montserrat);
         font-size: 24px;
-        line-height: 1.6;
+        line-height: 1.65;
         color: #000;
-        margin-bottom: var(--patent-stagger);
       }
 
       .patentList {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         align-items: start;
-        gap: 24px;
+        gap: 18px;
         padding-top: var(--patent-stagger);
 
         .patent {
           width: 100%;
           aspect-ratio: 333 / 443;
           object-fit: cover;
-          border-radius: 16px;
+          border-radius: 0;
           background: #fff;
-          box-shadow: 0 18px 40px rgba(23, 33, 44, 0.08);
+          box-shadow: none;
           transition: transform 0.22s ease, box-shadow 0.22s ease;
 
           &:hover {
@@ -433,7 +438,7 @@ import patent4 from "@/assets/aboutUs/patent4.png";
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .pages {
     .topContent {
       .aboutUs {
@@ -466,8 +471,15 @@ import patent4 from "@/assets/aboutUs/patent4.png";
           font-size: 26px;
         }
 
-        &.capacity > .right .title {
-          font-size: 28px;
+        &.capacity > .right {
+          .title {
+            font-size: 24px;
+          }
+
+          .text {
+            font-size: 19px;
+            line-height: 1.75;
+          }
         }
       }
 
@@ -567,9 +579,16 @@ import patent4 from "@/assets/aboutUs/patent4.png";
           }
         }
 
-        &.capacity > .right .title {
-          margin-bottom: 12px;
-          font-size: 22px;
+        &.capacity > .right {
+          .title {
+            margin-bottom: 10px;
+            font-size: 20px;
+          }
+
+          .text {
+            font-size: 16px;
+            line-height: 1.7;
+          }
         }
       }
 
