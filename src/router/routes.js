@@ -4,6 +4,7 @@ import ContactUsPage from '@/pages/ContactUsPage.vue'
 import EventPage from '@/pages/EventPage.vue'
 import HomePage from '@/pages/HomePage.vue'
 import ProductCenterPage from '@/pages/ProductCenterPage.vue'
+import ProductDetailPage from '@/pages/ProductDetailPage.vue'
 
 export const routes = [
   {
@@ -20,6 +21,14 @@ export const routes = [
     component: ProductCenterPage,
     meta: {
       label: 'Product Center',
+    },
+  },
+  {
+    path: '/product-detail',
+    name: 'product-detail',
+    component: ProductDetailPage,
+    meta: {
+      label: 'Product Detail',
     },
   },
   {
