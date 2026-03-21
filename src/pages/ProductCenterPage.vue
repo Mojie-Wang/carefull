@@ -42,12 +42,51 @@
             </li>
           </ul>
           <div class="showcase-nav">
-            <img @click="prevShowcase" src="@/assets/product/arrowLeft.png" alt="Previous" />
+            <img
+              @click="prevShowcase"
+              src="@/assets/product/arrowLeft.png"
+              alt="Previous"
+            />
             <img @click="nextShowcase" src="@/assets/product/arrowRight.png" alt="Next" />
           </div>
         </div>
         <div class="showcase-right">
           <img :src="showcaseProduct.image" :alt="showcaseProduct.title" />
+        </div>
+      </div>
+    </section>
+
+    <section class="product-list-area">
+      <div class="classification-panel">
+        <h3>CLASSIFICATION:</h3>
+        <div class="classification-items">
+          <label
+            v-for="(classification, index) in classifications"
+            :key="classification"
+            :class="{ selected: classification === selectedClassification }"
+          >
+            <input
+              type="radio"
+              name="classification"
+              :value="classification"
+              v-model="selectedClassification"
+            />
+            <span>{{ classification }}</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="products-grid">
+        <div
+          class="product-card"
+          v-for="product in products"
+          :key="product.id"
+        >
+          <img :src="product.image" :alt="product.title" />
+          <div class="content">
+            <h4>{{ product.title }}</h4>
+            <p class="price">{{ product.price }}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -70,6 +109,74 @@ const categories = ref([
   "OTHER",
 ]);
 const selectedCategory = ref("BODY ARMOR");
+
+const classifications = ref([
+  "NIJ HG I",
+  "NIJ HG II",
+  "NIJ RF I",
+  "NIJ RF II",
+  "NIJ RF III",
+  "NIJ 0115 I",
+  "NIJ 0115 II",
+]);
+const selectedClassification = ref("NIJ HG I");
+
+const products = ref([
+  {
+    id: 1,
+    title: "Police Ballistic Vest Po-lice Ballistic Vest",
+    description: "Up to NIJ HG I resistance with breathable comfort.",
+    price: "$210.00 - $450",
+    classification: "NIJ HG I",
+    image: ProductListImage1,
+  },
+  {
+    id: 2,
+    title: "Police body armor",
+    description: "Modular design for NIJ HG II and RF I missions.",
+    price: "$210.00 - $450",
+    classification: "NIJ HG II",
+    image: ProductListImage2,
+  },
+  {
+    id: 3,
+    title: "Bulletproof vest",
+    description: "Heavy-duty protection for NIJ RF II environments.",
+    price: "$210.00 - $450",
+    classification: "NIJ RF II",
+    image: ProductListImage3,
+  },
+  {
+    id: 4,
+    title: "Police Ballistic Vest",
+    description: "Flexible shell for NIJ RF III standards.",
+    price: "$210.00 - $450",
+    classification: "NIJ RF III",
+    image: ProductListImage1,
+  },
+  {
+    id: 5,
+    title: "Police Ballistic Vest",
+    description: "Civilian use, NIJ 0115 I rifle protection.",
+    price: "$210.00 - $450",
+    classification: "NIJ 0115 I",
+    image: ProductListImage2,
+  },
+  {
+    id: 6,
+    title: "Police Ballistic Vest",
+    description: "Enhanced plate options for NIJ 0115 II.",
+    price: "$210.00 - $450",
+    classification: "NIJ 0115 II",
+    image: ProductListImage3,
+  },
+]);
+
+const filteredProducts = computed(() => {
+  return products.value.filter(
+    (item) => item.classification === selectedClassification.value
+  );
+});
 
 const showcaseProducts = ref([
   {
@@ -119,8 +226,6 @@ const prevShowcase = () => {
 const nextShowcase = () => {
   showcaseIndex.value = (showcaseIndex.value + 1) % showcaseProducts.value.length;
 };
-
-
 </script>
 
 <style scoped lang="less">
@@ -201,12 +306,12 @@ const nextShowcase = () => {
 
     .range-tabs {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      overflow-x: auto;
       gap: 30px;
 
       .tab {
         display: flex;
+        flex-shrink: 0;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -254,7 +359,7 @@ const nextShowcase = () => {
       border-radius: 8px;
     }
     .showcase-cover {
-      height: 563px;
+      height: 46vw;
     }
     .showcase-box {
       position: absolute;
@@ -291,7 +396,7 @@ const nextShowcase = () => {
             font-size: 14px;
 
             &::marker {
-              color: #0959AF;
+              color: #0959af;
               font-size: 12px;
             }
           }
@@ -311,9 +416,10 @@ const nextShowcase = () => {
       }
 
       .showcase-right {
+        width: 50vw;
         img {
-          width: 616px;
-          height: 422px;
+          max-width: 50vw;
+          max-height: 50vw;
           object-fit: cover;
         }
       }
@@ -322,20 +428,20 @@ const nextShowcase = () => {
 
   .product-list-area {
     width: var(--container);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 240px 1fr;
+    margin: 37px auto;
+    display: flex;
+    justify-content: center;
     gap: 24px;
 
     .classification-panel {
-      background: #fff;
-      border: 1px solid #e6e6e6;
-      border-radius: 8px;
+      margin-right: 30px;
       padding: 20px;
 
       h3 {
         font-size: 18px;
-        margin-bottom: 14px;
+        padding-bottom: 14px;
+        padding-right: 30px;
+        border-bottom: 1px solid #000;
       }
 
       .classification-items {
@@ -350,25 +456,18 @@ const nextShowcase = () => {
           cursor: pointer;
           border-radius: 6px;
           padding: 6px 8px;
-
-          &.selected {
-            background: #f2f8ff;
-            border: 1px solid #1070fc;
-          }
-
-          input {
-            accent-color: #1070fc;
-          }
         }
       }
     }
 
     .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 20px;
 
       .product-card {
+        width: 200px;
+        height: 300px;
         background: #fff;
         border: 1px solid #eaeaea;
         border-radius: 10px;
@@ -388,14 +487,16 @@ const nextShowcase = () => {
 
         .content {
           padding: 14px;
+          background-color: #F9F9F9;
 
           h4 {
-            margin: 0 0 8px;
+            margin: 0 0 6px;
+            line-height: 16px;
             font-size: 16px;
           }
 
           p {
-            margin: 0 0 12px;
+            margin: 0 0 6px;
             font-size: 14px;
             color: #666;
           }
@@ -467,19 +568,7 @@ const nextShowcase = () => {
     }
   }
 
-  .product-range,
-  .product-list-area,
-  .cta-box {
-    max-width: 1440px;
-    margin: 0 auto;
-  }
   @media (max-width: 1024px) {
-    .product-range,
-    .product-list-area,
-    .cta-box {
-      width: 768px;
-      margin: 0 auto;
-    }
     .product-list-area {
       grid-template-columns: 1fr;
     }
@@ -490,12 +579,6 @@ const nextShowcase = () => {
   }
 
   @media (max-width: 768px) {
-    .product-range,
-    .product-list-area,
-    .cta-box {
-      width: 420px;
-      margin: 0 auto;
-    }
     .hero .hero-content h1 {
       font-size: 32px;
     }
