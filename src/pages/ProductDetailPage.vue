@@ -38,14 +38,14 @@
 
     <section class="detail-tabs">
       <div class="tab-nav">
-        <button
+        <div
           v-for="tab in tabs"
           :key="tab"
           :class="{ active: activeTab === tab }"
           @click="activeTab = tab"
         >
           {{ tab }}
-        </button>
+        </div>
       </div>
 
       <div class="tab-content">
@@ -259,13 +259,11 @@ const contactUs = () => {
 
     .tab-nav {
       display: flex;
-      gap: 12px;
-      margin-bottom: 18px;
+      gap: 60px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #eee;
 
-      button {
-        background: #f8f8f8;
-        border: 1px solid #ddd;
-        border-radius: 6px;
+      div {
         padding: 8px 16px;
         font-weight: 700;
         color: #555;
