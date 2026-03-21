@@ -8,7 +8,7 @@
         :style="{ '--product-bg': `url(${item.img})` }"
       >
         <div class="product-list__image" aria-hidden="true" />
-        <h6 class="product-list__title">{{ item.title }}</h6>
+        <!-- <h6 class="product-list__title">{{ item.title }}</h6> -->
       </article>
     </div>
   </section>
@@ -16,7 +16,7 @@
 
 <script setup>
 import ArmorPlate2 from "@/assets/index/ArmorPlate2.png";
-import ARMOUR from "@/assets/index/ARMOUR.png";
+import ARMOUR2 from "@/assets/index/ARMOUR2.png";
 import BallisticHelmet2 from "@/assets/index/BallisticHelmet2.png";
 import BallisticShield2 from "@/assets/index/BallisticShield2.png";
 import Bodyarmor2 from "@/assets/index/Bodyarmor2.png";
@@ -45,7 +45,7 @@ const productList = [
   },
   {
     title: "ARMOUR",
-    img: ARMOUR,
+    img: ARMOUR2,
   },
 ];
 </script>
@@ -75,7 +75,8 @@ const productList = [
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   box-shadow: 0 4px 10px rgba(23, 33, 44, 0.1);
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(23, 33, 44, 0.15);
   }
 }
 
@@ -98,7 +99,7 @@ const productList = [
   background-image: var(--product-bg);
   background-position: center calc(50% + 32px);
   background-repeat: no-repeat;
-  background-size: 84% auto;
+  background-size: cover;
   transition: transform 0.26s ease;
 }
 
@@ -132,7 +133,7 @@ const productList = [
   }
 
   .product-list__image {
-    background-size: 82% auto;
+    background-size: cover;
     background-position: center calc(50% + 24px);
   }
 }
