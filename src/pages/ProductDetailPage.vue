@@ -124,7 +124,7 @@ const contactUs = () => {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 16px;
+  padding: 0 16px 24px;
 
   .breadcrumb-area {
     margin-bottom: 18px;
