@@ -661,6 +661,7 @@ const nextShowcase = () => {
         h3 {
           margin: 0 0 14px;
           padding-right: 0;
+          text-align: center;
         }
 
         .classification-items {
@@ -755,20 +756,11 @@ const nextShowcase = () => {
     }
 
     .product-showcase {
-      padding: 0;
-
       .showcase-cover {
-        display: none;
+        height: clamp(420px, 112vw, 560px);
       }
 
       .showcase-box {
-        position: relative;
-        top: auto;
-        left: auto;
-        transform: none;
-        height: auto;
-        width: var(--container);
-        margin: 0 auto;
         padding: 16px 0 8px;
         gap: 16px;
 
@@ -792,20 +784,6 @@ const nextShowcase = () => {
             }
           }
         }
-
-        .showcase-right {
-          width: 100%;
-
-          img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-width: none;
-            max-height: none;
-            aspect-ratio: auto;
-            object-fit: contain;
-          }
-        }
       }
     }
 
@@ -814,11 +792,8 @@ const nextShowcase = () => {
 
       .classification-panel {
         h3 {
-          display: block;
-          width: 100%;
           text-align: center;
         }
-
         .classification-items label {
           padding: 8px 12px;
         }
