@@ -284,20 +284,24 @@ watch(
 .topbar__nav {
   display: flex;
   align-items: stretch;
+  justify-content: flex-start;
   align-self: stretch;
   flex: 1 1 auto;
   min-width: 0;
   overflow: visible;
+  // border: 1px solid #333;
 }
 
 .topbar__nav-list {
   display: flex;
   align-items: stretch;
-  justify-content: space-between;
-  flex: 1 1 auto;
-  min-width: 0;
+  justify-content: flex-start;
+  flex: 0 0 auto;
+  max-width: 100%;
   height: 100%;
-  gap: 18px;
+  margin-left: 0;
+  gap: clamp(18px, 1.35vw, 28px);
+  white-space: nowrap;
 }
 
 .topbar__link {
@@ -323,7 +327,8 @@ watch(
     position: absolute;
     left: 50%;
     bottom: 0;
-    width: calc(100% + 6px);
+    // width: calc(100% + 6px);
+    width: 100%;
     height: 4px;
     border-radius: 0;
     background: #1e73d8;
@@ -509,8 +514,11 @@ watch(
     grid-template-columns: 1fr;
     justify-content: stretch;
     flex: none;
+    max-width: none;
     height: auto;
+    margin-left: 0;
     gap: 10px;
+    white-space: normal;
   }
 
   .topbar__nav.is-open {
