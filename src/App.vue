@@ -1,8 +1,25 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { computed } from "vue";
+import { RouterView, useRoute } from "vue-router";
 import SiteMenu from "@/components/SiteMenu.vue";
 // import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
+
+const route = useRoute();
+
+const defaultFooterConfig = {
+  type: "index",
+  title: "SUBSCRIPTION INFORMATION",
+};
+
+const footerConfig = computed(() => {
+  const footerMeta = route.meta?.footer;
+
+  return {
+    type: footerMeta?.type ?? defaultFooterConfig.type,
+    title: footerMeta?.title ?? defaultFooterConfig.title,
+  };
+});
 </script>
 
 <template>
@@ -16,7 +33,7 @@ import Footer from "@/components/Footer.vue";
       <RouterView />
     </main>
 
-    <Footer type="index" title="SUBSCRIPTION INFORMATION" />
+    <Footer :type="footerConfig.type" :title="footerConfig.title" />
   </div>
 </template>
 
