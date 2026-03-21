@@ -46,11 +46,13 @@
           </ul>
           <div class="showcase-nav">
             <img
+              class="prev"
               @click="prevShowcase"
               src="@/assets/product/arrowLeft.png"
               alt="Previous"
             />
             <img
+              class="next"
               @click="nextShowcase"
               src="@/assets/product/arrowRight.png"
               alt="Next"
@@ -403,7 +405,7 @@ const nextShowcase = () => {
             margin-bottom: 8px;
             color: #000;
             font-size: 14px;
-
+            // list-style: none;
             &::marker {
               color: #0959af;
               font-size: 12px;
@@ -420,6 +422,17 @@ const nextShowcase = () => {
             height: 48px;
             cursor: pointer;
             margin-right: 10px;
+            transition: transform 0.2s ease;
+          }
+          .prev {
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+          .next {
+            &:hover {
+              transform: scale(1.1);
+            }
           }
         }
       }
@@ -618,18 +631,30 @@ const nextShowcase = () => {
         left: 50%;
         transform: translateX(-50%);
         width: var(--container);
-        padding: 28px 0;
+        padding: 28px 0 14px;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
         gap: 28px;
-
+        .showcase-nav {
+          justify-content: center;
+        }
         .showcase-left {
           width: 100%;
           margin-right: 0;
+          text-align: center;
 
           h2 {
             margin: 0 0 12px;
+          }
+
+          ul {
+            display: inline-block;
+            margin: 0 auto;
+            padding-left: 18px;
+            max-width: 100%;
+            text-align: left;
+            list-style-position: outside;
           }
         }
 
@@ -640,9 +665,9 @@ const nextShowcase = () => {
 
           img {
             width: 100%;
-            aspect-ratio: 986 / 675;
-            max-height: 260px;
-            object-fit: cover;
+            // aspect-ratio: 986 / 675;
+            // max-height: 260px;
+            // object-fit: cover;
           }
         }
       }
@@ -770,9 +795,18 @@ const nextShowcase = () => {
             font-size: 28px;
           }
 
+          ul {
+            display: inline-block;
+            margin: 0 auto;
+            padding-left: 18px;
+            max-width: 100%;
+            text-align: left;
+            list-style-position: outside;
+          }
+
           ul li {
             font-size: 13px;
-            list-style: none;
+            // list-style: none;
           }
 
           .showcase-nav {
