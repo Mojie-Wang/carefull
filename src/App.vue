@@ -16,7 +16,7 @@ import Footer from "@/components/Footer.vue";
       <RouterView />
     </main>
 
-    <Footer />
+    <Footer type="index" title="SUBSCRIPTION INFORMATION" />
   </div>
 </template>
 

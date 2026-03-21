@@ -170,13 +170,13 @@ watch(
       @keydown.enter.prevent="goToPath('/')"
       @keydown.space.prevent="goToPath('/')"
     >
-      <!-- <img
+      <img
         class="logo"
         :class="{ 'is-compact': useCompactLogo }"
         :src="useCompactLogo ? compactLogo : logo"
         alt="Careful"
         @load="syncLogoMode"
-      /> -->
+      />
     </span>
 
     <nav
@@ -233,22 +233,27 @@ watch(
 
 <style scoped lang="less">
 .topbar {
+  width: var(--container);
+  margin: 0 auto;
   position: relative;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  column-gap: clamp(18px, 2.4vw, 34px);
-  padding: 16px 0 24px;
+  align-items: stretch;
+  column-gap: clamp(26px, 1.8vw, 55px);
+  min-height: 96px;
+  padding: 0;
+  // border-bottom: 2px solid #2a82e8;
   transition: column-gap 0.24s ease;
 
   &.is-compact {
-    column-gap: clamp(14px, 1.8vw, 22px);
+    column-gap: clamp(14px, 1.3vw, 22px);
   }
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
+  align-self: center;
   cursor: pointer;
   user-select: none;
 
@@ -268,9 +273,12 @@ watch(
 .topbar__nav {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: clamp(16px, 1.8vw, 30px);
+  // justify-content: flex-end;
+  align-self: stretch;
+  gap: clamp(16px, 1.4vw, 34px);
+  flex-wrap: nowrap;
   min-width: 0;
+  overflow: hidden;
 }
 
 .topbar__link {
@@ -278,24 +286,26 @@ watch(
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: 42px;
-  padding: 4px 0 12px;
-  color: #111827;
+  align-self: stretch;
+  min-height: 100%;
+  // padding: 0 0 22px;
+  color: #151b24;
   cursor: pointer;
   white-space: nowrap;
-  font-size: clamp(1.02rem, 1.12vw, 1.18rem);
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-size: clamp(16px, 1.1vw, 18px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
   transition: color 0.22s ease, transform 0.22s ease;
 
   &::after {
     content: "";
     position: absolute;
     left: 50%;
-    bottom: 0;
-    width: 68%;
-    height: 3px;
-    border-radius: 999px;
+    bottom: -2px;
+    width: 100%;
+    height: 4px;
+    border-radius: 0;
     background: #1e73d8;
     opacity: 0;
     transform: translateX(-50%) scaleX(0.2);
@@ -314,7 +324,7 @@ watch(
 
   &.is-active {
     color: #1e73d8;
-    font-weight: 700;
+    font-weight: 600;
 
     &::after {
       opacity: 1;
@@ -327,6 +337,7 @@ watch(
 .topbar__nav-tools {
   display: flex;
   align-items: center;
+  align-self: center;
   gap: 16px;
 }
 
@@ -346,15 +357,13 @@ watch(
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #0f75e6, #0656ba);
-  box-shadow: 0 14px 28px rgba(15, 117, 230, 0.2);
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -417,6 +426,8 @@ watch(
     grid-template-columns: minmax(0, 1fr) auto;
     column-gap: 16px;
     padding: 10px 0 18px;
+    min-height: auto;
+    border-bottom: 0;
   }
 
   .brand {
@@ -461,6 +472,7 @@ watch(
     transform-origin: top right;
     transition: opacity 0.24s ease, transform 0.24s ease,
       visibility 0s linear 0.24s;
+    overflow: visible;
   }
 
   .topbar__nav.is-open {
