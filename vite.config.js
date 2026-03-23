@@ -3,8 +3,12 @@ import vue from "@vitejs/plugin-vue";
 import { fileURLToPath, URL } from "node:url";
 
 // https://vite.dev/config/
-export default defineConfig(({ command }) => ({
-  base: command === "serve" ? "/" : "/carefull/",
+export default defineConfig(({ command }) => {
+  const isNetlify = process.env.NETLIFY === "true";
+  const base = command === "serve" ? "/" : isNetlify ? "/" : "/carefull/";
+
+  return {
+    base,
   plugins: [vue()],
   server: {
     host: "0.0.0.0",
@@ -21,4 +25,5 @@ export default defineConfig(({ command }) => ({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
-}));
+  };
+});
