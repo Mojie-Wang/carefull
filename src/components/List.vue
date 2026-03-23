@@ -32,6 +32,14 @@ const list = ref([
     img: ARMOUR1,
   },
 ]);
+
+defineProps({
+  immersive: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 const currentTitle = ref(list.value[0]?.title ?? "");
 const handleClick = (title) => {
   currentTitle.value = title;
@@ -39,7 +47,7 @@ const handleClick = (title) => {
 </script>
 
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :class="{ 'is-immersive': immersive }">
     <div class="listWrap">
       <div
         v-for="item in list"
@@ -65,6 +73,14 @@ const handleClick = (title) => {
 .wrapper {
   background-color: #e5e9ee;
   padding: 24px 0;
+}
+
+.wrapper.is-immersive {
+  background: rgba(229, 233, 238, 0.82);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 48px rgba(9, 22, 37, 0.18);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 24px 0 28px;
 }
 
 .listWrap {
@@ -136,6 +152,22 @@ const handleClick = (title) => {
       display: block;
       transition: transform 0.22s ease;
     }
+  }
+}
+
+.wrapper.is-immersive .listWrap {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.wrapper.is-immersive .listWrap .item {
+  .title {
+    margin-bottom: 16px;
+  }
+
+  .img {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 14px 28px rgba(18, 29, 42, 0.08);
   }
 }
 

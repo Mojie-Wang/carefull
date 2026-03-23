@@ -27,6 +27,8 @@ const defaultFooterConfig = {
   title: "SUBSCRIPTION INFORMATION",
 };
 
+const isHomeRoute = computed(() => route.name === "home");
+
 const footerConfig = computed(() => {
   const footerMeta = route.meta?.footer;
 
@@ -131,8 +133,11 @@ watch(
 </script>
 
 <template>
-  <div class="app-shell">
-    <div class="app-shell__header">
+  <div class="app-shell" :class="{ 'app-shell--home': isHomeRoute }">
+    <div
+      class="app-shell__header"
+      :class="{ 'app-shell__header--immersive': isHomeRoute }"
+    >
       <SiteMenu />
     </div>
     <!-- <Header /> -->
@@ -165,14 +170,19 @@ watch(
 .app-shell {
   min-height: 100vh;
   padding-top: 24px;
+  position: relative;
 }
 
 .app-shell__header {
   width: 100%;
+  position: relative;
+  z-index: 30;
 }
 
 .content-frame {
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .app-shell__back-to-top {
@@ -222,6 +232,20 @@ watch(
       width: 20px;
       height: 20px;
     }
+  }
+}
+
+@media (min-width: 981px) {
+  .app-shell--home {
+    padding-top: 0;
+  }
+
+  .app-shell__header--immersive {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 35;
   }
 }
 </style>

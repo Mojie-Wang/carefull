@@ -190,7 +190,8 @@ onBeforeUnmount(() => {
 .banner {
   position: relative;
   width: 100%;
-  height: clamp(240px, 28vw, 450px);
+  // height: clamp(400px, 40vw, 900px);
+  height: 900px;
   overflow: hidden;
   background: #151a1f;
   touch-action: pan-y;
@@ -291,6 +292,12 @@ onBeforeUnmount(() => {
   inset: 0;
   z-index: 1;
   background: linear-gradient(
+      180deg,
+      rgba(10, 16, 25, 0.5) 0%,
+      rgba(10, 16, 25, 0.18) 18%,
+      rgba(10, 16, 25, 0) 34%
+    ),
+    linear-gradient(
       90deg,
       rgba(13, 17, 23, 0.28) 0%,
       rgba(13, 17, 23, 0.08) 40%,
@@ -306,7 +313,7 @@ onBeforeUnmount(() => {
 
 .bannerCtrBtn {
   position: absolute;
-  top: 0;
+  top: 50%;
   bottom: 0;
   left: 50%;
   z-index: 2;

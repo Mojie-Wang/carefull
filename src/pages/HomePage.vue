@@ -1,6 +1,6 @@
 <template>
-  <div class="pages">
-    <List />
+  <div class="pages home-page">
+    <List class="home-page__catalog" />
     <Banner />
     <h6 class="title">
       — Engineered for Advanced Protection and Customization —
@@ -32,5 +32,11 @@ import IntroList from "@/components/IntroList.vue";
 }
 .productsTitle {
   font-size: clamp(40px, 4vw, 60px);
+}
+
+@media (min-width: 981px) {
+  .home-page__catalog {
+    display: none;
+  }
 }
 </style>
