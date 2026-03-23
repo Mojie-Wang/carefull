@@ -23,7 +23,14 @@
     sans-serif;
   --container-max: 1440px;
   --container-gutter: clamp(20px, 3.8vw, 56px);
-  --container: min(var(--container-max), calc(100% - var(--container-gutter)));
+  --container-gutter-double: calc(
+    var(--container-gutter) + var(--container-gutter)
+  );
+  --container: clamp(
+    0px,
+    calc(100vw - var(--container-gutter-double)),
+    var(--container-max)
+  );
   font-family:
     'Avenir Next',
     'PingFang SC',
@@ -44,7 +51,10 @@
 @media (max-width: 767px) {
   :root {
     --container-gutter: 20px;
-    --container: calc(100% - var(--container-gutter));
+    --container-gutter-double: calc(
+      var(--container-gutter) + var(--container-gutter)
+    );
+    --container: calc(100vw - var(--container-gutter-double));
     --radius-xl: 24px;
     --radius-lg: 20px;
   }
