@@ -128,7 +128,8 @@ const contactUs = () => {
 
 <style scoped lang="less">
 .product-detail-page {
-  width: min(1200px, var(--container));
+  // width: min(1200px, var(--container));
+  width: var(--container);
   margin: 0 auto;
   padding: 0 0 clamp(24px, 4vw, 40px);
   box-sizing: border-box;
