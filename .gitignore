@@ -11,6 +11,10 @@ node_modules
 dist
 dist-ssr
 *.local
+.netlify
+.npm-cache
+.npm-cache-netlify*
+dist-netlify
 
 # Editor directories and files
 .vscode/*

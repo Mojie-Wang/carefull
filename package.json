@@ -6,6 +6,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && cp dist/index.html dist/404.html",
+    "build:netlify": "NETLIFY=true npm run build",
+    "netlify:login": "npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 login",
+    "netlify:status": "npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 status",
+    "deploy:netlify": "npm run build:netlify && npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 deploy --prod --no-build --dir=dist --site scintillating-churros-e8d74b",
     "preview": "vite preview"
   },
   "dependencies": {
