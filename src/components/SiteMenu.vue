@@ -415,7 +415,7 @@ watch(
 .topbar__nav {
   display: flex;
   align-items: stretch;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-self: stretch;
   flex: 1 1 auto;
   min-width: 0;

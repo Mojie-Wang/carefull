@@ -182,7 +182,6 @@ import patent4 from "@/assets/aboutus/patent4.png";
       font-weight: 400;
     }
     .desc {
-      max-width: 980px;
       margin: 0 0 40px;
       text-align: left;
       font-family: var(--font-montserrat);
