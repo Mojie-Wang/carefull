@@ -77,11 +77,7 @@
       </div>
 
       <div class="products-grid">
-        <div
-          class="product-card"
-          v-for="product in products"
-          :key="product.id"
-        >
+        <div class="product-card" v-for="product in products" :key="product.id">
           <img :src="product.image" :alt="product.title" />
           <div class="content">
             <h4>{{ product.title }}</h4>
@@ -290,18 +286,16 @@ const nextShowcase = () => {
 
   .product-range {
     display: flex;
-    justify-content: center;
     width: var(--container);
     margin: 0 auto 20px;
 
     h2 {
-      font-size: 28px;
+      font-size: 31px;
       font-weight: bold;
       font-style: oblique;
       margin-top: 17px;
       margin-bottom: 5px;
-      margin-right: 40px;
-      text-align: center;
+      margin-right: 50px;
     }
 
     .range-tabs {
@@ -364,12 +358,12 @@ const nextShowcase = () => {
     .showcase-box {
       position: absolute;
       top: 0;
-      left: 0;
+      left: 50%;
       display: flex;
-      justify-content: center;
       align-items: center;
-      width: 100%;
+      width: var(--container);
       height: 100%;
+      transform: translateX(-50%);
       z-index: 1;
       .showcase-left {
         width: 270px;
@@ -487,7 +481,7 @@ const nextShowcase = () => {
 
         .content {
           padding: 14px;
-          background-color: #F9F9F9;
+          background-color: #f9f9f9;
 
           h4 {
             margin: 0 0 6px;
