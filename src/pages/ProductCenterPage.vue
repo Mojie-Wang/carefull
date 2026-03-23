@@ -252,11 +252,11 @@ const goProductDetail = (product) => {
   router.push({
     name: "product-detail",
     query: {
-      title: product.title,
-      price: product.price,
+      // title: product.title,
+      // price: product.price,
       category: selectedCategory.value,
-      image: product.image,
-      subtitle: product.description,
+      // image: product.image,
+      // subtitle: product.description,
     },
   });
 };
