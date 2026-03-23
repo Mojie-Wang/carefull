@@ -86,7 +86,16 @@
       </div>
 
       <div class="products-grid">
-        <div class="product-card" v-for="product in products" :key="product.id">
+        <div
+          class="product-card"
+          v-for="product in products"
+          :key="product.id"
+          role="link"
+          tabindex="0"
+          @click="goProductDetail(product)"
+          @keydown.enter.prevent="goProductDetail(product)"
+          @keydown.space.prevent="goProductDetail(product)"
+        >
           <img :src="product.image" :alt="product.title" />
           <div class="content">
             <h4>{{ product.title }}</h4>
@@ -237,6 +246,19 @@ const prevShowcase = () => {
 const nextShowcase = () => {
   showcaseIndex.value =
     (showcaseIndex.value + 1) % showcaseProducts.value.length;
+};
+
+const goProductDetail = (product) => {
+  router.push({
+    name: "product-detail",
+    query: {
+      title: product.title,
+      price: product.price,
+      category: selectedCategory.value,
+      image: product.image,
+      subtitle: product.description,
+    },
+  });
 };
 
 const syncSelectedCategory = () => {
