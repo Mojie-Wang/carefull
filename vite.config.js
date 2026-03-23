@@ -9,21 +9,21 @@ export default defineConfig(({ command }) => {
 
   return {
     base,
-  plugins: [vue()],
-  server: {
-    host: "0.0.0.0",
-    port: 80,
-    strictPort: true,
-  },
-  preview: {
-    host: "0.0.0.0",
-    port: 80,
-    strictPort: true,
-  },
-  resolve: {
-    alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    plugins: [vue()],
+    server: {
+      host: "0.0.0.0",
+      port: 80,
+      strictPort: true,
     },
-  },
+    preview: {
+      host: "0.0.0.0",
+      port: 80,
+      strictPort: true,
+    },
+    resolve: {
+      alias: {
+        "@": fileURLToPath(new URL("./src", import.meta.url)),
+      },
+    },
   };
 });
