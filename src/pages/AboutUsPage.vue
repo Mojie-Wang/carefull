@@ -140,15 +140,15 @@
   </div>
 </template>
 <script setup>
-import banner from "@/assets/aboutUs/banner.png";
-import produce1 from "@/assets/aboutUs/produce1.png";
-import produce2 from "@/assets/aboutUs/produce2.png";
+import banner from "@/assets/aboutus/banner.png";
+import produce1 from "@/assets/aboutus/produce1.png";
+import produce2 from "@/assets/aboutus/produce2.png";
 import arrowRightBlack from "@/assets/cases/arrowRightBlack.png";
 import arrowRightWhite from "@/assets/cases/arrowRightWhite.png";
-import patent1 from "@/assets/aboutUs/patent1.png";
-import patent2 from "@/assets/aboutUs/patent2.png";
-import patent3 from "@/assets/aboutUs/patent3.png";
-import patent4 from "@/assets/aboutUs/patent4.png";
+import patent1 from "@/assets/aboutus/patent1.png";
+import patent2 from "@/assets/aboutus/patent2.png";
+import patent3 from "@/assets/aboutus/patent3.png";
+import patent4 from "@/assets/aboutus/patent4.png";
 </script>
 <style scoped lang="less">
 .pages {
@@ -567,12 +567,12 @@ import patent4 from "@/assets/aboutUs/patent4.png";
         }
 
         .btn {
-          width: 100%;
-          min-height: 56px;
+          width: 50%;
+          min-height: 50px;
           padding: 0 24px;
           gap: 10px;
           font-size: 18px;
-
+          margin: 0 auto;
           .arrowRight {
             width: 44px;
             height: auto;

@@ -80,10 +80,14 @@ const product = computed(() => {
     title: q.title || "Police Ballistic Vest",
     category: q.category || "Body armor",
     price: q.price || "$210.00 - $450",
-    subtitle: q.subtitle || "Ergonomic & Tactical Design Comfortable for Long Patrols",
+    subtitle:
+      q.subtitle || "Ergonomic & Tactical Design Comfortable for Long Patrols",
     image: q.image ? String(q.image) : productImage,
     options: [
-      { name: "material", values: ["composite material", "aramid fiber", "UHMWPE"] },
+      {
+        name: "material",
+        values: ["composite material", "aramid fiber", "UHMWPE"],
+      },
       { name: "size", values: ["S", "M", "L", "XL"] },
       { name: "color", values: ["black", "navy", "coyote"] },
     ],
@@ -93,7 +97,10 @@ const product = computed(() => {
     specifications: [
       { title: "Protection Level", value: "NIJ HG I / II / RF I" },
       { title: "Weight", value: "1.9 - 2.5 kg" },
-      { title: "Material", value: "Ultra-high molecular weight polyethylene + aramid" },
+      {
+        title: "Material",
+        value: "Ultra-high molecular weight polyethylene + aramid",
+      },
       { title: "Available Sizes", value: "S, M, L, XL" },
       { title: "Color", value: "Black, Navy, Coyote" },
     ],
@@ -121,20 +128,23 @@ const contactUs = () => {
 
 <style scoped lang="less">
 .product-detail-page {
-  width: 100%;
-  max-width: 1200px;
+  // width: min(1200px, var(--container));
+  width: var(--container);
   margin: 0 auto;
-  padding: 0 16px 24px;
+  padding: 0 0 clamp(24px, 4vw, 40px);
+  box-sizing: border-box;
 
   .breadcrumb-area {
-    margin-bottom: 18px;
+    margin-bottom: clamp(16px, 2vw, 18px);
 
     .breadcrumb-inner {
       font-size: 14px;
+      line-height: 1.5;
       color: #444;
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      overflow-wrap: anywhere;
 
       span {
         cursor: pointer;
@@ -153,11 +163,13 @@ const contactUs = () => {
 
   .top-area {
     display: flex;
-    gap: 40px;
-    margin-bottom: 30px;
+    align-items: flex-start;
+    gap: clamp(24px, 3vw, 40px);
+    margin-bottom: clamp(24px, 3vw, 32px);
 
     .image-card {
-      flex: 1;
+      flex: 1 1 0;
+      min-width: 0;
       background: #fff;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
       border-radius: 18px;
@@ -173,12 +185,13 @@ const contactUs = () => {
     }
 
     .info-card {
-      flex: 1;
-      min-width: 320px;
+      flex: 1 1 0;
+      min-width: 0;
 
       h1 {
         margin: 0;
         font-size: 36px;
+        line-height: 1.15;
         font-weight: 800;
         color: #121212;
       }
@@ -194,25 +207,51 @@ const contactUs = () => {
         margin-bottom: 20px;
         color: #333;
         font-size: 16px;
+        line-height: 1.55;
       }
 
       .option-row {
-        margin: 10px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 14px 0;
 
         .option-name {
-          width: 80px;
+          width: auto;
           text-transform: capitalize;
           font-weight: 600;
-          margin: 10px 0;
+          margin: 0;
         }
 
         select {
           width: 100%;
-          border: none;
-          border-bottom: 1px solid #EAEAEA;
-          border-radius: 6px;
-          padding: 8px 10px;
+          min-height: 46px;
+          border: 1px solid rgba(18, 18, 18, 0.12);
+          border-radius: 12px;
+          padding: 10px 42px 10px 14px;
+          background-color: #fff;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5 7 7.5 13 1.5' fill='none' stroke='%23555' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+          background-position: right 14px center;
+          background-repeat: no-repeat;
+          background-size: 14px 9px;
+          appearance: none;
+          -webkit-appearance: none;
+          color: #121212;
           font-size: 14px;
+          font-family: inherit;
+          line-height: 1.4;
+          cursor: pointer;
+          box-sizing: border-box;
+          box-shadow: 0 10px 24px rgba(15, 43, 87, 0.06);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease,
+            background-color 0.2s ease;
+
+          &:focus {
+            outline: none;
+            border-color: rgba(29, 120, 255, 0.9);
+            box-shadow: 0 0 0 4px rgba(29, 120, 255, 0.14),
+              0 12px 28px rgba(15, 43, 87, 0.12);
+          }
         }
 
         .option-selected {
@@ -259,11 +298,12 @@ const contactUs = () => {
 
     .tab-nav {
       display: flex;
-      gap: 60px;
+      gap: clamp(18px, 4vw, 60px);
       padding-bottom: 6px;
       border-bottom: 1px solid #eee;
 
       div {
+        flex: 0 0 auto;
         padding: 8px 16px;
         font-weight: 700;
         color: #555;
@@ -278,6 +318,8 @@ const contactUs = () => {
     }
 
     .tab-content {
+      padding-top: 16px;
+
       .description,
       .specifications {
         color: #444;
@@ -286,10 +328,14 @@ const contactUs = () => {
       }
 
       .specifications ul {
+        margin: 0;
         padding-left: 18px;
       }
 
       .specifications li {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 4px;
         margin-bottom: 8px;
       }
 
@@ -306,22 +352,205 @@ const contactUs = () => {
   @media (max-width: 990px) {
     .top-area {
       flex-direction: column;
+      gap: 24px;
+
+      .image-card {
+        min-height: clamp(260px, 58vw, 420px);
+      }
     }
   }
 
   @media (max-width: 640px) {
-    padding: 16px 8px;
+    padding-bottom: 24px;
 
-    .breadcrumb-area .breadcrumb-inner {
-      font-size: 12px;
+    .breadcrumb-area {
+      margin-bottom: 14px;
+
+      .breadcrumb-inner {
+        font-size: 12px;
+        gap: 6px;
+      }
     }
 
-    .info-card h1 {
-      font-size: 26px;
+    .top-area {
+      gap: 18px;
+      margin-bottom: 22px;
+      align-items: center;
+
+      .image-card {
+        width: 100%;
+        max-width: none;
+        margin: 0 auto;
+        // min-height: 0;
+        border-radius: 14px;
+        padding: 12px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: auto;
+          max-width: 100%;
+          height: auto;
+          max-height: none;
+          object-fit: contain;
+          padding: 0;
+          background: transparent;
+        }
+      }
+
+      .info-card {
+        width: 100%;
+        max-width: 460px;
+        margin: 0 auto;
+        text-align: center;
+
+        h1 {
+          font-size: 26px;
+          line-height: 1.2;
+        }
+
+        .price {
+          margin: 10px 0;
+          font-size: 22px;
+        }
+
+        .subtitle {
+          margin-bottom: 16px;
+          font-size: 15px;
+          line-height: 1.5;
+        }
+
+        .option-row {
+          margin: 12px 0;
+          max-width: 100%;
+
+          .option-name {
+            font-size: 14px;
+            text-align: center;
+          }
+
+          select {
+            min-height: 48px;
+            padding: 12px 44px 12px 14px;
+            font-size: 15px;
+            text-align: left;
+          }
+        }
+      }
     }
 
-    .price {
-      font-size: 22px;
+    .detail-tabs {
+      padding: 16px;
+      border-radius: 14px;
+
+      .tab-nav {
+        gap: 18px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        div {
+          padding: 8px 0;
+          font-size: 14px;
+        }
+      }
+
+      .tab-content {
+        .description,
+        .specifications {
+          font-size: 14px;
+          line-height: 1.65;
+        }
+
+        .specifications ul {
+          padding-left: 16px;
+        }
+
+        .spec-value {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 420px) {
+    .breadcrumb-area {
+      .breadcrumb-inner {
+        font-size: 11px;
+        gap: 4px;
+      }
+    }
+
+    .top-area {
+      gap: 16px;
+
+      .image-card {
+        border-radius: 12px;
+        padding: 10px;
+
+        img {
+          max-width: 100%;
+        }
+      }
+
+      .info-card {
+        h1 {
+          font-size: 22px;
+        }
+
+        .price {
+          font-size: 19px;
+        }
+
+        .subtitle {
+          font-size: 14px;
+        }
+
+        .option-row {
+          gap: 6px;
+
+          .option-name {
+            font-size: 13px;
+          }
+
+          select {
+            min-height: 42px;
+            padding: 10px 40px 10px 12px;
+            font-size: 14px;
+            background-position: right 12px center;
+            background-size: 12px 8px;
+          }
+        }
+      }
+    }
+
+    .detail-tabs {
+      padding: 14px 12px;
+
+      .tab-nav {
+        gap: 14px;
+
+        div {
+          font-size: 13px;
+        }
+      }
+
+      .tab-content {
+        padding-top: 14px;
+
+        .description,
+        .specifications {
+          font-size: 13px;
+        }
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ import ArmorPlate1 from "@/assets/index/ArmorPlate1.png";
 import Bodyarmor1 from "@/assets/index/Bodyarmor1.png";
 import BallisticHelmet1 from "@/assets/index/BallisticHelmet1.png";
 import BallisticShield1 from "@/assets/index/BallisticShield1.png";
-import ARMOUR from "@/assets/index/ARMOUR.png";
+import ARMOUR1 from "@/assets/index/ARMOUR1.png";
 const list = ref([
   {
     title: "Fiber",
@@ -29,7 +29,7 @@ const list = ref([
   },
   {
     title: "ARMOUR",
-    img: ARMOUR,
+    img: ARMOUR1,
   },
 ]);
 const currentTitle = ref(list.value[0]?.title ?? "");

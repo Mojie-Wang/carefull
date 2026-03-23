@@ -6,7 +6,7 @@
       — Engineered for Advanced Protection and Customization —
     </h6>
     <ApplyCard />
-    <h6 class="title">Our Products</h6>
+    <h6 class="title productsTitle">Our Products</h6>
     <ProductList />
     <IntroList />
   </div>
@@ -29,5 +29,8 @@ import IntroList from "@/components/IntroList.vue";
   line-height: 48px;
   margin: clamp(25px, 8vw, 108px) auto clamp(25px, 8vw, 115px);
   text-align: center;
+}
+.productsTitle {
+  font-size: clamp(40px, 4vw, 60px);
 }
 </style>
