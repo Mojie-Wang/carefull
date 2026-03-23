@@ -1,11 +1,20 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Fiber1 from "@/assets/index/Fiber1.png";
 import ArmorPlate1 from "@/assets/index/ArmorPlate1.png";
 import Bodyarmor1 from "@/assets/index/Bodyarmor1.png";
 import BallisticHelmet1 from "@/assets/index/BallisticHelmet1.png";
 import BallisticShield1 from "@/assets/index/BallisticShield1.png";
 import ARMOUR1 from "@/assets/index/ARMOUR1.png";
+import {
+  LIST_TO_CATEGORY_MAP,
+  getListTitleByCategory,
+} from "@/constants/productCategories";
+
+const route = useRoute();
+const router = useRouter();
+
 const list = ref([
   {
     title: "Fiber",
@@ -40,9 +49,28 @@ defineProps({
   },
 });
 
-const currentTitle = ref(list.value[0]?.title ?? "");
+const currentTitle = computed(() => {
+  if (route.name !== "product-center") {
+    return "";
+  }
+
+  return getListTitleByCategory(route.query.category);
+});
+
 const handleClick = (title) => {
-  currentTitle.value = title;
+  const category = LIST_TO_CATEGORY_MAP[title];
+
+  if (!category) {
+    return;
+  }
+
+  router.push({
+    name: "product-center",
+    query: {
+      ...route.query,
+      category,
+    },
+  });
 };
 </script>
 

@@ -16,7 +16,7 @@
           v-for="category in categories"
           :key="category"
           :class="{ active: category === selectedCategory }"
-          @click="selectedCategory = category"
+          @click="selectCategory(category)"
         >
           <div class="text">
             {{ category }}
@@ -99,21 +99,22 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import ProductListImage1 from "@/assets/product/productList1.png";
 import ProductListImage2 from "@/assets/product/classification1.png";
 import ProductListImage3 from "@/assets/product/classification2.png";
+import {
+  DEFAULT_PRODUCT_CATEGORY,
+  PRODUCT_CATEGORIES,
+  resolveProductCategory,
+} from "@/constants/productCategories";
 
-const categories = ref([
-  "FIBER",
-  "ARMOR PLATE",
-  "BODY ARMOR",
-  "BALLISTIC HELMET",
-  "BALLISTIC SHIELD",
-  "ARMOUR",
-  "OTHER",
-]);
-const selectedCategory = ref("BODY ARMOR");
+const route = useRoute();
+const router = useRouter();
+
+const categories = PRODUCT_CATEGORIES;
+const selectedCategory = ref(DEFAULT_PRODUCT_CATEGORY);
 
 const classifications = ref([
   "NIJ HG I",
@@ -237,6 +238,38 @@ const nextShowcase = () => {
   showcaseIndex.value =
     (showcaseIndex.value + 1) % showcaseProducts.value.length;
 };
+
+const syncSelectedCategory = () => {
+  selectedCategory.value = resolveProductCategory(route.query.category);
+};
+
+const selectCategory = (category) => {
+  const nextCategory = resolveProductCategory(category);
+  selectedCategory.value = nextCategory;
+
+  if (
+    route.name === "product-center" &&
+    resolveProductCategory(route.query.category) === nextCategory
+  ) {
+    return;
+  }
+
+  router.replace({
+    name: "product-center",
+    query: {
+      ...route.query,
+      category: nextCategory,
+    },
+  });
+};
+
+watch(
+  () => route.query.category,
+  () => {
+    syncSelectedCategory();
+  },
+  { immediate: true }
+);
 </script>
 
 <style scoped lang="less">

@@ -159,7 +159,8 @@ import patent4 from "@/assets/aboutus/patent4.png";
     display: block;
   }
   .topContent {
-    width: min(1120px, var(--container));
+    // width: min(1120px, var(--container));
+    width: var(--container);
     margin: 0 auto;
     padding-top: clamp(40px, 4vw, 56px);
 

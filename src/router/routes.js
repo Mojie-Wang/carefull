@@ -36,6 +36,7 @@ export const routes = [
     name: "product-detail",
     component: ProductDetailPage,
     meta: {
+      hideInNav: true,
       footer: {
         type: "page",
         title: "LIGHTER THINNER SOFTER",
@@ -98,7 +99,7 @@ export const routes = [
 ];
 
 export const navigationItems = routes
-  .filter((route) => route.meta?.label)
+  .filter((route) => route.meta?.label && !route.meta?.hideInNav)
   .map((route) => ({
     name: route.name,
     path: route.path,

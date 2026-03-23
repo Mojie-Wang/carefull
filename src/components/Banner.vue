@@ -190,8 +190,7 @@ onBeforeUnmount(() => {
 .banner {
   position: relative;
   width: 100%;
-  // height: clamp(400px, 40vw, 900px);
-  height: 900px;
+  height: clamp(520px, 46.875vw, 900px);
   overflow: hidden;
   background: #151a1f;
   touch-action: pan-y;
@@ -313,7 +312,7 @@ onBeforeUnmount(() => {
 
 .bannerCtrBtn {
   position: absolute;
-  top: 50%;
+  // top: 50%;
   bottom: 0;
   left: 50%;
   z-index: 2;
@@ -325,6 +324,16 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   transform: translateX(-50%);
   pointer-events: none;
+}
+
+@media (min-width: 981px) {
+  .bannerCtrBtn {
+    top: calc(
+      var(--home-immersive-menu-top, 0px) +
+        var(--home-immersive-menu-height, 108px) +
+        var(--home-banner-controls-gap, 20px)
+    );
+  }
 }
 
 .banner__nav {
@@ -413,6 +422,7 @@ onBeforeUnmount(() => {
 
   .bannerCtrBtn {
     width: calc(100% - 28px);
+    top: 20px;
   }
 
   .banner__nav {

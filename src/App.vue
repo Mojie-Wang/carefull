@@ -238,11 +238,14 @@ watch(
 @media (min-width: 981px) {
   .app-shell--home {
     padding-top: 0;
+    --home-immersive-menu-top: clamp(0px, 0vw, 0px);
+    --home-immersive-menu-height: clamp(92px, 6.4vw, 108px);
+    --home-banner-controls-gap: clamp(16px, 1.1vw, 20px);
   }
 
   .app-shell__header--immersive {
     position: absolute;
-    top: 0;
+    top: var(--home-immersive-menu-top);
     left: 0;
     right: 0;
     z-index: 35;

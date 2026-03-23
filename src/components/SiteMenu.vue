@@ -24,7 +24,7 @@ const actionsRef = ref(null);
 const isMenuOpen = ref(false);
 const useCompactLogo = ref(false);
 const isDesktop = ref(false);
-const isProductDropdownOpen = ref(false);
+const isDropdownOpen = ref(false);
 
 const MENU_BREAKPOINT = 980;
 const LARGE_LOGO_WIDTH = 338;
@@ -39,10 +39,11 @@ let dropdownCloseTimer = 0;
 
 const isHomeRoute = computed(() => route.name === "home");
 const useImmersiveMenu = computed(() => isHomeRoute.value && isDesktop.value);
+const useDesktopDropdown = computed(() => isDesktop.value);
 
 const closeMenu = () => {
   isMenuOpen.value = false;
-  isProductDropdownOpen.value = false;
+  isDropdownOpen.value = false;
 };
 
 const toggleMenu = () => {
@@ -104,39 +105,39 @@ const clearDropdownCloseTimer = () => {
   dropdownCloseTimer = 0;
 };
 
-const openProductDropdown = () => {
-  if (!useImmersiveMenu.value) {
+const openDropdown = () => {
+  if (!useDesktopDropdown.value) {
     return;
   }
 
   clearDropdownCloseTimer();
-  isProductDropdownOpen.value = true;
+  isDropdownOpen.value = true;
 };
 
-const scheduleProductDropdownClose = () => {
-  if (!useImmersiveMenu.value) {
-    isProductDropdownOpen.value = false;
+const scheduleDropdownClose = () => {
+  if (!useDesktopDropdown.value) {
+    isDropdownOpen.value = false;
     return;
   }
 
   clearDropdownCloseTimer();
   dropdownCloseTimer = window.setTimeout(() => {
-    isProductDropdownOpen.value = false;
+    isDropdownOpen.value = false;
   }, 140);
 };
 
 const handleNavItemEnter = (path) => {
-  if (!useImmersiveMenu.value) {
+  if (!useDesktopDropdown.value) {
     return;
   }
 
   if (path === PRODUCT_CENTER_PATH) {
-    openProductDropdown();
+    openDropdown();
     return;
   }
 
   clearDropdownCloseTimer();
-  isProductDropdownOpen.value = false;
+  isDropdownOpen.value = false;
 };
 
 const syncLogoMode = () => {
@@ -151,7 +152,7 @@ const syncLogoMode = () => {
 
   if (window.innerWidth <= MENU_BREAKPOINT) {
     useCompactLogo.value = false;
-    isProductDropdownOpen.value = false;
+    isDropdownOpen.value = false;
     return;
   }
 
@@ -230,7 +231,7 @@ watch(
     class="site-menu"
     :class="{ 'is-home-immersive': useImmersiveMenu }"
     @mouseenter="clearDropdownCloseTimer"
-    @mouseleave="scheduleProductDropdownClose"
+    @mouseleave="scheduleDropdownClose"
   >
     <header
       ref="topbarRef"
@@ -310,11 +311,11 @@ watch(
     </header>
 
     <div
-      v-if="useImmersiveMenu"
+      v-if="useDesktopDropdown"
       class="site-menu__dropdown"
-      :class="{ 'is-open': isProductDropdownOpen }"
+      :class="{ 'is-open': isDropdownOpen }"
       @mouseenter="clearDropdownCloseTimer"
-      @mouseleave="scheduleProductDropdownClose"
+      @mouseleave="scheduleDropdownClose"
     >
       <List immersive />
     </div>
@@ -336,7 +337,7 @@ watch(
   left: 50%;
   z-index: 0;
   width: 100vw;
-  height: 108px;
+  height: var(--home-immersive-menu-height, 108px);
   // transform: translateX(-50%);
   // border-bottom: 1px solid rgba(255, 255, 255, 0.16);
   // background: linear-gradient(
@@ -585,7 +586,7 @@ watch(
 @media (min-width: 981px) {
   .site-menu.is-home-immersive {
     .topbar {
-      min-height: 108px;
+      min-height: var(--home-immersive-menu-height, 108px);
       border-bottom: 0;
       background: transparent;
       backdrop-filter: none;
