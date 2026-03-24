@@ -1,7 +1,9 @@
 <template>
   <div class="pages home-page">
     <List class="home-page__catalog" />
+
     <Banner />
+    <!-- <Demo /> -->
     <h6 class="title">
       — Engineered for Advanced Protection and Customization —
     </h6>
@@ -12,6 +14,7 @@
   </div>
 </template>
 <script setup>
+import Demo from "@/components/demo.vue";
 import ApplyCard from "@/components/ApplyCard.vue";
 import Banner from "@/components/Banner.vue";
 import List from "@/components/List.vue";

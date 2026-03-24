@@ -243,7 +243,7 @@ onBeforeUnmount(() => {
 
 .banner__title {
   margin: 0;
-  font-family: var(--font-din-alternate);
+  font-family: var(--font-din-alternate-bold);
   font-size: clamp(56px, 6.4vw, 104px);
   line-height: 1.08;
   font-weight: 700;
@@ -251,7 +251,7 @@ onBeforeUnmount(() => {
 
 .banner__desc {
   margin: 0;
-  font-family: var(--font-alibaba-puhuiti);
+  font-family: var(--font-alibaba-puhuiti-light);
   font-size: clamp(28px, 2.6vw, 40px);
   line-height: 1.5;
   font-weight: 400;
@@ -272,7 +272,7 @@ onBeforeUnmount(() => {
   font-weight: 400;
   line-height: 1;
   cursor: pointer;
-  font-family: var(--font-montserrat);
+  font-family: var(--font-montserrat-regular);
   transition: background 0.22s ease, border-color 0.22s ease,
     transform 0.22s ease;
 

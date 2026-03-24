@@ -154,6 +154,7 @@ const handleClick = (title) => {
 
       .title {
         span {
+          font-family: var(--montserrat-medium);
           color: #0766cb;
           border-bottom: 2px solid #0766cb;
           font-weight: 600;
@@ -162,6 +163,7 @@ const handleClick = (title) => {
     }
 
     .title {
+      font-family: var(--montserrat-regular);
       display: inline-block;
       font-size: 24px;
       color: #17212c;

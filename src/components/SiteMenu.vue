@@ -27,11 +27,7 @@ const isDesktop = ref(false);
 const isDropdownOpen = ref(false);
 
 const MENU_BREAKPOINT = 980;
-const LARGE_LOGO_WIDTH = 338;
-const COMPACT_LOGO_WIDTH = 92;
-const LOGO_TO_NAV_GAP = 55;
-const NAV_TO_ACTIONS_GAP = 22;
-const RESTORE_BUFFER = 24;
+const COMPACT_LOGO_MAX_WIDTH = 1200;
 const PRODUCT_CENTER_PATH = "/product-center";
 
 let resizeObserver;
@@ -61,44 +57,6 @@ const goToPath = (path) => {
 };
 
 const isActive = (path) => route.path === path;
-
-const getNavItems = () => {
-  return navListRef.value
-    ? [...navListRef.value.querySelectorAll(".topbar__link")]
-    : [];
-};
-
-const hasWrappedMenuItems = () => {
-  const items = getNavItems();
-
-  if (items.length < 2) {
-    return false;
-  }
-
-  const firstTop = items[0].offsetTop;
-  return items.some((item) => item.offsetTop > firstTop + 1);
-};
-
-const getRequiredNavWidth = () => {
-  const navListElement = navListRef.value;
-  const items = getNavItems();
-
-  if (!navListElement || !items.length) {
-    return 0;
-  }
-
-  const navStyles = window.getComputedStyle(navListElement);
-  const gap = parseFloat(navStyles.columnGap || navStyles.gap || "0");
-
-  return (
-    items.reduce((total, item) => total + item.offsetWidth, 0) +
-    gap * Math.max(items.length - 1, 0)
-  );
-};
-
-const getActionsWidth = () => {
-  return actionsRef.value?.offsetWidth ?? 0;
-};
 
 const clearDropdownCloseTimer = () => {
   window.clearTimeout(dropdownCloseTimer);
@@ -141,47 +99,17 @@ const handleNavItemEnter = (path) => {
 };
 
 const syncLogoMode = () => {
-  const topbarElement = topbarRef.value;
-  const navElement = navRef.value;
+  const viewportWidth = window.innerWidth;
 
-  if (!topbarElement || !navElement) {
-    return;
-  }
+  isDesktop.value = viewportWidth > MENU_BREAKPOINT;
 
-  isDesktop.value = window.innerWidth > MENU_BREAKPOINT;
-
-  if (window.innerWidth <= MENU_BREAKPOINT) {
+  if (!isDesktop.value) {
     useCompactLogo.value = false;
     isDropdownOpen.value = false;
     return;
   }
 
-  const topbarWidth = topbarElement.clientWidth;
-  const navRequiredWidth = getRequiredNavWidth();
-  const actionsWidth = getActionsWidth();
-  const largeLayoutWidth =
-    LARGE_LOGO_WIDTH +
-    LOGO_TO_NAV_GAP +
-    navRequiredWidth +
-    NAV_TO_ACTIONS_GAP +
-    actionsWidth;
-  const compactLayoutWidth =
-    COMPACT_LOGO_WIDTH +
-    LOGO_TO_NAV_GAP +
-    navRequiredWidth +
-    NAV_TO_ACTIONS_GAP +
-    actionsWidth;
-
-  if (!useCompactLogo.value) {
-    useCompactLogo.value =
-      hasWrappedMenuItems() || largeLayoutWidth > topbarWidth;
-    return;
-  }
-
-  useCompactLogo.value =
-    compactLayoutWidth > topbarWidth
-      ? true
-      : largeLayoutWidth > topbarWidth - RESTORE_BUFFER;
+  useCompactLogo.value = viewportWidth <= COMPACT_LOGO_MAX_WIDTH;
 };
 
 onMounted(async () => {
@@ -268,6 +196,7 @@ watch(
             :key="item.name"
             class="topbar__link"
             :class="{ 'is-active': isActive(item.path) }"
+            :data-label="item.label"
             role="link"
             tabindex="0"
             @click="goToPath(item.path)"
@@ -276,7 +205,7 @@ watch(
             @keydown.enter.prevent="goToPath(item.path)"
             @keydown.space.prevent="goToPath(item.path)"
           >
-            {{ item.label }}
+            <span class="topbar__link-label">{{ item.label }}</span>
           </span>
         </div>
 
@@ -436,9 +365,9 @@ watch(
 }
 
 .topbar__link {
-  display: inline-flex;
+  display: inline-grid;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   position: relative;
   align-self: stretch;
   flex: 0 0 auto;
@@ -447,11 +376,30 @@ watch(
   color: #030303;
   cursor: pointer;
   white-space: nowrap;
-  font-size: 17px;
+  font-size: 24px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
+  font-family: var(--montserrat-regular);
   transition: color 0.22s ease, transform 0.22s ease;
+
+  &::before,
+  .topbar__link-label {
+    grid-area: 1 / 1;
+  }
+
+  &::before {
+    content: attr(data-label);
+    font-family: var(--font-montserrat);
+    font-weight: 600;
+    line-height: 1;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .topbar__link-label {
+    line-height: 1;
+  }
 
   &::after {
     content: "";
@@ -471,7 +419,8 @@ watch(
 
   &:hover {
     color: #1e73d8;
-
+    font-family: var(--font-montserrat);
+    font-weight: 600;
     &::after {
       opacity: 1;
       transform: translateX(-50%) scaleX(1);
@@ -480,6 +429,7 @@ watch(
 
   &.is-active {
     color: #1e73d8;
+    font-family: var(--font-montserrat);
     font-weight: 600;
 
     &::after {
@@ -583,6 +533,34 @@ watch(
   }
 }
 
+@media (min-width: 981px) and (max-width: 1200px) {
+  .topbar__nav-list {
+    gap: clamp(12px, calc(12px + (100vw - 980px) * 0.0273), 18px);
+  }
+
+  .topbar__link {
+    font-size: clamp(18px, calc(18px + (100vw - 980px) * 0.0273), 24px);
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) {
+  .brand {
+    margin-right: clamp(28px, calc(28px + (100vw - 1200px) * 0.1125), 55px);
+  }
+
+  .topbar__actions {
+    margin-left: clamp(14px, calc(14px + (100vw - 1200px) * 0.0333), 22px);
+  }
+
+  .topbar__nav-list {
+    gap: clamp(10px, calc(10px + (100vw - 1200px) * 0.0333), 18px);
+  }
+
+  .topbar__link {
+    font-size: clamp(18px, calc(18px + (100vw - 1200px) * 0.025), 24px);
+  }
+}
+
 @media (min-width: 981px) {
   .site-menu.is-home-immersive {
     .topbar {
@@ -595,11 +573,12 @@ watch(
 
     .topbar__link {
       color: #030303;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
+      // text-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
 
       &:hover,
       &.is-active {
         color: #0766cb;
+        font-family: var(--font-montserrat);
       }
 
       &::after {
@@ -713,7 +692,7 @@ watch(
 
   .topbar__link {
     width: 100%;
-    justify-content: flex-start;
+    justify-items: start;
     min-height: 52px;
     padding: 0 16px;
     border: 1px solid rgba(23, 33, 44, 0.08);
