@@ -37,10 +37,7 @@
         <div class="showcase-left">
           <h2>{{ showcaseProduct.title }}</h2>
           <ul>
-            <li
-              v-for="(feature, index) in showcaseProduct.features"
-              :key="index"
-            >
+            <li v-for="(feature, index) in showcaseProduct.features" :key="index">
               {{ feature }}
             </li>
           </ul>
@@ -196,8 +193,7 @@ const filteredProducts = computed(() => {
 const showcaseProducts = ref([
   {
     title: "Ballistic Vest",
-    description:
-      "Top-tier protection with lightweight comfort and modular design.",
+    description: "Top-tier protection with lightweight comfort and modular design.",
     features: [
       "Lightweight design",
       "Waterproof fabric",
@@ -208,8 +204,7 @@ const showcaseProducts = ref([
   },
   {
     title: "Tactical Helmet",
-    description:
-      "Rigorous impact test, multiple mounting options, 360° defense.",
+    description: "Rigorous impact test, multiple mounting options, 360° defense.",
     features: [
       "Impact-resistant",
       "Ventilation system",
@@ -220,8 +215,7 @@ const showcaseProducts = ref([
   },
   {
     title: "Ballistic Shield",
-    description:
-      "Superior stopping power with ergonomic handle and shooting window.",
+    description: "Superior stopping power with ergonomic handle and shooting window.",
     features: [
       "Bulletproof glass window",
       "Lightweight frame",
@@ -233,9 +227,7 @@ const showcaseProducts = ref([
 ]);
 
 const showcaseIndex = ref(0);
-const showcaseProduct = computed(
-  () => showcaseProducts.value[showcaseIndex.value]
-);
+const showcaseProduct = computed(() => showcaseProducts.value[showcaseIndex.value]);
 
 const prevShowcase = () => {
   showcaseIndex.value =
@@ -244,8 +236,7 @@ const prevShowcase = () => {
 };
 
 const nextShowcase = () => {
-  showcaseIndex.value =
-    (showcaseIndex.value + 1) % showcaseProducts.value.length;
+  showcaseIndex.value = (showcaseIndex.value + 1) % showcaseProducts.value.length;
 };
 
 const goProductDetail = (product) => {
@@ -296,9 +287,10 @@ watch(
 
 <style scoped lang="less">
 .product-center-page {
+  font-family: var(--font-montserrat-regular);
   .hero {
     position: relative;
-    min-height: 420px;
+    min-height: 630px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -319,15 +311,16 @@ watch(
     .hero-content {
       position: absolute;
       z-index: 2;
-      bottom: 50px;
+      bottom: 75px;
 
       h1 {
-        font-size: 60px;
+        font-size: 100px;
         line-height: 1;
+        font-weight: 700;
         margin: 0;
       }
       p {
-        font-size: 30px;
+        font-size: 50px;
         margin: 0;
       }
       .btn-learn {
@@ -340,9 +333,9 @@ watch(
         color: #fff;
         font-size: 24px;
         cursor: pointer;
-        width: 200px;
-        height: 40px;
-        margin-top: 10px;
+        width: 302px;
+        height: 60px;
+        margin-top: 20px;
       }
     }
 
@@ -360,7 +353,7 @@ watch(
     margin: 0 auto 20px;
 
     h2 {
-      font-size: 31px;
+      font-size: 50px;
       font-weight: bold;
       font-style: oblique;
       margin-top: 17px;
@@ -374,13 +367,14 @@ watch(
       gap: 30px;
 
       .tab {
+        position: relative;
         display: flex;
         flex-shrink: 0;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        width: 70px;
+        width: 100px;
         cursor: pointer;
 
         &.active {
@@ -393,14 +387,18 @@ watch(
           align-items: center;
           justify-content: center;
           font-weight: 500;
-          font-size: 15px;
-          line-height: 16px;
+          font-size: 22px;
+          line-height: 22px;
         }
 
         img {
+          position: absolute;
+          left: 50%;
+          bottom: 0;
           width: 60px;
           height: 12px;
           margin-top: 2px;
+          transform: translateX(-50%);
         }
       }
     }
@@ -436,18 +434,12 @@ watch(
       transform: translateX(-50%);
       z-index: 1;
       .showcase-left {
-        width: 270px;
+        width: 446px;
         margin-right: 10px;
 
         h2 {
-          font-size: 36px;
+          font-size: 50px;
           margin-bottom: 12px;
-        }
-
-        p {
-          font-size: 16px;
-          color: #555;
-          margin-bottom: 16px;
         }
 
         ul {
@@ -457,11 +449,11 @@ watch(
           li {
             margin-bottom: 8px;
             color: #000;
-            font-size: 14px;
+            font-size: 22px;
             // list-style: none;
             &::marker {
               color: #0959af;
-              font-size: 12px;
+              font-size: 20px;
             }
           }
         }
@@ -471,10 +463,10 @@ watch(
           margin-top: 22px;
 
           img {
-            width: 48px;
-            height: 48px;
+            width: 77px;
+            height: 77px;
             cursor: pointer;
-            margin-right: 10px;
+            margin-right: 33px;
             transition: transform 0.2s ease;
           }
           .prev {
@@ -510,11 +502,11 @@ watch(
 
     .classification-panel {
       margin-right: 30px;
-      padding: 20px;
+      padding: 20px 0;
 
       h3 {
-        font-size: 18px;
         padding-bottom: 14px;
+        font-size: 34px;
         padding-right: 30px;
         border-bottom: 1px solid #000;
       }
@@ -528,6 +520,7 @@ watch(
           display: flex;
           align-items: center;
           gap: 8px;
+        font-size: 24px;
           cursor: pointer;
           border-radius: 6px;
           padding: 6px 8px;
@@ -541,13 +534,16 @@ watch(
       gap: 20px;
 
       .product-card {
-        width: 200px;
-        height: 300px;
+        display: flex;
+        flex-direction: column;
+        width: 320px;
+        height: 470px;
         background: #fff;
         border: 1px solid #eaeaea;
         border-radius: 10px;
         overflow: hidden;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #f9f9f9;
 
         &:hover {
           transform: translateY(-4px);
@@ -556,29 +552,33 @@ watch(
 
         img {
           width: 100%;
-          height: 220px;
-          object-fit: cover;
+          height: 359px;
         }
 
         .content {
-          padding: 14px;
-          background-color: #f9f9f9;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          padding: 12px 16px;
 
           h4 {
             margin: 0 0 6px;
-            line-height: 16px;
-            font-size: 16px;
+            line-height: 20px;
+            font-size: 24px;
           }
 
           p {
             margin: 0 0 6px;
-            font-size: 14px;
+            font-size: 24px;
             color: #666;
           }
 
           .price {
             color: #1070fc;
+            font-size: 24px;
             font-weight: 600;
+            margin: 0;
+            margin-top: auto;
           }
         }
       }
