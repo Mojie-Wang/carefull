@@ -25,13 +25,14 @@ import IntroList from "@/components/IntroList.vue";
 .title {
   // font-size: 24px;
   font-weight: 600;
-  font-family: var(--font-montserrat);
-  // font-size: 39px;
-  font-size: clamp(15px, 4vw, 39px);
+  font-family: var(--font-montserrat-regular);
+  font-size: 39px;
+  // font-size: clamp(15px, 4vw, 39px);
   color: #000000;
   line-height: 48px;
   margin: clamp(25px, 8vw, 108px) auto clamp(25px, 8vw, 115px);
   text-align: center;
+  letter-spacing: -1px;
 }
 .productsTitle {
   font-size: clamp(40px, 4vw, 60px);
@@ -40,6 +41,12 @@ import IntroList from "@/components/IntroList.vue";
 @media (min-width: 981px) {
   .home-page__catalog {
     display: none;
+  }
+}
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+    letter-spacing: -1px;
   }
 }
 </style>
