@@ -171,10 +171,10 @@ const handleSubmit = () => {
 
           <article class="contact-panel contact-panel--social">
             <div class="contact-icons">
+              <!-- :href="item.href" -->
               <a
                 v-for="item in socialLinks"
                 :key="item.key"
-                :href="item.href"
                 class="contact-icon-card"
                 :class="`contact-icon-card--${item.key}`"
                 target="_blank"
@@ -297,13 +297,20 @@ const handleSubmit = () => {
     </section>
     <section class="page-container">
       <div class="mapWrap">
-        <iframe
+        <!-- <iframe
           class="mapWrap__frame"
           :src="mapEmbedUrl"
           :title="`Amap page for ${mapAddress}`"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-        />
+        /> -->
+        <a
+          class="mapWrap__link"
+          href="https://www.amap.com/ssr/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
+          target="_blank"
+        >
+          <img class="mapWrap__img" src="@/assets/map.jpg" alt="map" />
+        </a>
       </div>
     </section>
   </div>
@@ -610,8 +617,7 @@ const handleSubmit = () => {
   border-radius: 50%;
   color: #fff;
   text-decoration: none;
-  transition: transform 0.22s ease, box-shadow 0.22s ease,
-    opacity 0.22s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -654,6 +660,24 @@ const handleSubmit = () => {
   border-radius: 30px;
   background: var(--contact-card);
   box-shadow: var(--contact-shadow);
+  .mapWrap__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .mapWrap__img {
+    display: block;
+    width: 100%;
+    // max-height: 100%;
+    margin: auto;
+    object-fit: cover;
+  }
 }
 
 .mapWrap__frame {
