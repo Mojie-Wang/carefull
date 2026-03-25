@@ -655,9 +655,9 @@ const handleSubmit = () => {
 .mapWrap {
   margin-top: clamp(28px, 4vw, 40px);
   overflow: hidden;
-  height: 400px;
+  max-height: 400px;
   border: 1px solid var(--contact-border);
-  border-radius: 30px;
+  border-radius: clamp(18px, 4vw, 30px);
   background: var(--contact-card);
   box-shadow: var(--contact-shadow);
   .mapWrap__link {
@@ -909,7 +909,7 @@ const handleSubmit = () => {
 
 @media (max-width: 980px) {
   .contact-page {
-    padding-bottom: 72px;
+    padding-bottom: clamp(28px, 4vw, 40px);
   }
 
   .contact-hero__inner {
