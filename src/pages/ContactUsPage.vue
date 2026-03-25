@@ -1,7 +1,5 @@
 <script setup>
 import { reactive, ref } from "vue";
-import contactBanner from "@/assets/aboutus/banner.png";
-import contactMap from "@/assets/contact/contact-map.svg";
 
 const contactMethods = [
   {
@@ -27,20 +25,27 @@ const contactMethods = [
   },
 ];
 
-const socialChannels = [
+const socialLinks = [
   {
     key: "facebook",
-    name: "Facebook",
-    description:
-      "Follow our Facebook channel for company updates and product highlights.",
+    label: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61579197240636",
+  },
+  {
+    key: "x",
+    label: "X",
+    href: "https://x.com/",
   },
   {
     key: "linkedin",
-    name: "LinkedIn",
-    description:
-      "Connect with us on LinkedIn for business communication and cooperation.",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/",
   },
 ];
+
+const mapAddress = "上海市奉贤区金汇镇大叶公路7208号7号楼";
+const mapEmbedUrl =
+  "https://www.amap.com/ssr/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8";
 
 const feedbackForm = reactive({
   name: "",
@@ -82,27 +87,6 @@ const handleSubmit = () => {
 
 <template>
   <div class="pages contact-page">
-    <section class="contact-hero">
-      <img class="contact-hero__bg" :src="contactBanner" alt="Contact banner" />
-      <div class="contact-hero__overlay" />
-      <div class="contact-hero__inner page-container">
-        <p class="contact-hero__eyebrow">CONTACT CAREFUL</p>
-        <p class="contact-hero__desc">
-          Reach out to us by phone, email, or social channels. Whether you are
-          looking for product information, business cooperation, or want to
-          share suggestions, our team will review your message carefully and
-          reply as soon as possible.
-        </p>
-
-        <div class="contact-hero__tags">
-          <span>Phone</span>
-          <span>Email</span>
-          <span>Facebook</span>
-          <span>LinkedIn</span>
-        </div>
-      </div>
-    </section>
-
     <section class="contact-page__main page-container">
       <div class="contact-page__grid">
         <div class="contact-page__info">
@@ -185,57 +169,50 @@ const handleSubmit = () => {
             </div>
           </article>
 
-          <div class="contact-secondary-grid">
-            <article class="contact-panel contact-panel--social">
-              <p class="contact-panel__eyebrow">SOCIAL CHANNELS</p>
-              <h2 class="contact-panel__title">Social channels</h2>
-              <div class="social-list">
-                <article
-                  v-for="channel in socialChannels"
-                  :key="channel.key"
-                  class="social-item"
-                >
-                  <span class="social-item__icon" aria-hidden="true">
-                    <svg
-                      v-if="channel.key === 'facebook'"
-                      viewBox="0 0 24 24"
+          <article class="contact-panel contact-panel--social">
+            <div class="contact-icons">
+              <a
+                v-for="item in socialLinks"
+                :key="item.key"
+                :href="item.href"
+                class="contact-icon-card"
+                :class="`contact-icon-card--${item.key}`"
+                target="_blank"
+                rel="noopener noreferrer"
+                :aria-label="`Open ${item.label}`"
+                :title="item.label"
+              >
+                <span class="contact-icon-card__icon" aria-hidden="true">
+                  <svg
+                    v-if="item.key === 'facebook'"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M13.4 21V12.8h2.76l.42-3.18H13.4V7.6c0-.92.27-1.55 1.62-1.55H16.7V3.2c-.3-.04-1.32-.12-2.5-.12-2.47 0-4.17 1.5-4.17 4.27v2.27H7.2v3.18h2.83V21h3.37Z"
                       fill="currentColor"
-                    >
-                      <path
-                        d="M13.34 21v-7.72h2.6l.39-3h-2.99V8.37c0-.88.24-1.47 1.5-1.47H16.4V4.2c-.27-.04-1.18-.12-2.24-.12-2.22 0-3.74 1.36-3.74 3.86v2.34H7.9v3h2.52V21h2.92Z"
-                      />
-                    </svg>
-                    <svg v-else viewBox="0 0 24 24" fill="currentColor">
-                      <path
-                        d="M6.94 8.56A1.81 1.81 0 1 1 6.93 4.94a1.81 1.81 0 0 1 .01 3.62ZM5.4 10.12h3.07V20H5.4v-9.88Zm4.82 0h2.94v1.35h.04c.41-.78 1.42-1.61 2.92-1.61 3.12 0 3.7 2.05 3.7 4.72V20h-3.06v-4.81c0-1.15-.02-2.62-1.6-2.62-1.61 0-1.86 1.25-1.86 2.54V20h-3.08v-9.88Z"
-                      />
-                    </svg>
-                  </span>
-
-                  <div class="social-item__body">
-                    <h3 class="social-item__title">{{ channel.name }}</h3>
-                    <p class="social-item__text">{{ channel.description }}</p>
-                  </div>
-                </article>
-              </div>
-            </article>
-
-            <article class="contact-panel contact-panel--map">
-              <p class="contact-panel__eyebrow">STATIC MAP</p>
-              <h2 class="contact-panel__title">Location overview</h2>
-              <div class="map-card">
-                <img
-                  class="map-card__image"
-                  :src="contactMap"
-                  alt="Static map for the office location"
-                />
-              </div>
-              <p class="contact-panel__desc">
-                Building 7, No. 7208 Daye Highway, Jinhui Town, Fengxian
-                District, Shanghai
-              </p>
-            </article>
-          </div>
+                    />
+                  </svg>
+                  <svg
+                    v-else-if="item.key === 'x'"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M4 4h4.34l4.03 5.76L17.24 4H20l-6.4 7.34L20 20h-4.34l-4.25-6.06L6.14 20H4l6.58-7.54L4 4Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <svg v-else viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M6.86 8.43a1.93 1.93 0 1 1 0-3.86 1.93 1.93 0 0 1 0 3.86ZM5.2 9.9h3.33V19H5.2V9.9Zm5.43 0h3.2v1.25h.05c.44-.8 1.52-1.65 3.13-1.65 3.35 0 3.97 2.2 3.97 5.06V19h-3.33v-3.94c0-.94-.02-2.15-1.31-2.15-1.32 0-1.52 1.03-1.52 2.08V19h-3.33V9.9Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </article>
         </div>
 
         <aside class="contact-panel contact-panel--form">
@@ -318,6 +295,17 @@ const handleSubmit = () => {
         </aside>
       </div>
     </section>
+    <section class="page-container">
+      <div class="mapWrap">
+        <iframe
+          class="mapWrap__frame"
+          :src="mapEmbedUrl"
+          :title="`Amap page for ${mapAddress}`"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        />
+      </div>
+    </section>
   </div>
 </template>
 
@@ -330,13 +318,9 @@ const handleSubmit = () => {
   --contact-card: rgba(255, 255, 255, 0.92);
   --contact-border: rgba(18, 34, 53, 0.1);
   --contact-shadow: 0 24px 56px rgba(15, 30, 52, 0.12);
-  background: radial-gradient(
-      circle at top left,
-      rgba(15, 117, 230, 0.12),
-      transparent 42%
-    ),
-    linear-gradient(180deg, #f6f9fc 0%, #edf3f8 100%);
+
   padding-bottom: clamp(72px, 9vw, 108px);
+  margin-top: clamp(56px, 4vw, 80px);
 }
 
 .contact-hero {
@@ -428,18 +412,13 @@ const handleSubmit = () => {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
   gap: clamp(24px, 2.6vw, 36px);
-  align-items: start;
+  align-items: stretch;
 }
 
 .contact-page__info {
   display: grid;
   gap: clamp(24px, 2.6vw, 32px);
-}
-
-.contact-secondary-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 2.4vw, 32px);
+  height: 100%;
 }
 
 .contact-panel {
@@ -488,6 +467,12 @@ const handleSubmit = () => {
   font-family: var(--font-alibaba-puhuiti);
   font-size: 16px;
   line-height: 1.8;
+}
+
+.contact-panel--form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-methods {
@@ -601,18 +586,80 @@ const handleSubmit = () => {
   line-height: 1.75;
 }
 
-.map-card {
-  margin: 18px 0 16px;
-  overflow: hidden;
-  border-radius: 24px;
-  border: 1px solid rgba(15, 117, 230, 0.1);
-  background: #d8e8f5;
+.contact-panel--social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
 }
 
-.map-card__image {
+.contact-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+}
+
+.contact-icon-card {
+  width: 78px;
+  height: 78px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.22s ease, box-shadow 0.22s ease,
+    opacity 0.22s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(15, 30, 52, 0.16);
+    opacity: 0.94;
+  }
+}
+
+.contact-icon-card--facebook {
+  background: #1877f2;
+}
+
+.contact-icon-card--x {
+  background: #111111;
+}
+
+.contact-icon-card--linkedin {
+  background: #0a66c2;
+}
+
+.contact-icon-card__icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mapWrap {
+  margin-top: clamp(28px, 4vw, 40px);
+  overflow: hidden;
+  height: 400px;
+  border: 1px solid var(--contact-border);
+  border-radius: 30px;
+  background: var(--contact-card);
+  box-shadow: var(--contact-shadow);
+}
+
+.mapWrap__frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .feedback-form {
@@ -706,6 +753,130 @@ const handleSubmit = () => {
   font-weight: 600;
 }
 
+@media (min-width: 1181px) {
+  .contact-page__grid {
+    gap: 24px;
+  }
+
+  .contact-page__info {
+    gap: 18px;
+  }
+
+  .contact-panel--details,
+  .contact-panel--form,
+  .contact-panel--social,
+  .contact-panel--map {
+    padding: 22px 24px;
+  }
+
+  .contact-panel__header {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+
+  .contact-panel__title {
+    font-size: clamp(24px, 2.2vw, 32px);
+  }
+
+  .contact-panel__desc {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .contact-methods {
+    gap: 12px;
+  }
+
+  .contact-method {
+    gap: 14px;
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .contact-method__icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  .contact-method__label {
+    margin-bottom: 6px;
+  }
+
+  .contact-method__value {
+    font-size: clamp(16px, 1.35vw, 20px);
+    line-height: 1.35;
+  }
+
+  .contact-method__note {
+    margin-top: 6px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .contact-panel--social {
+    min-height: 112px;
+  }
+
+  .contact-icons {
+    gap: 18px;
+  }
+
+  .contact-icon-card {
+    width: 66px;
+    height: 66px;
+  }
+
+  .contact-icon-card__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .feedback-form {
+    gap: 14px;
+    margin-top: 18px;
+    flex: 1;
+    align-content: start;
+  }
+
+  .feedback-form__row {
+    gap: 14px;
+  }
+
+  .feedback-field {
+    gap: 8px;
+
+    input,
+    textarea {
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+    }
+
+    textarea {
+      min-height: 118px;
+    }
+  }
+
+  .feedback-form__submit {
+    min-height: 48px;
+    border-radius: 16px;
+    font-size: 15px;
+  }
+
+  .feedback-form__tip,
+  .feedback-form__status {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+}
+
 @media (max-width: 1180px) {
   .contact-page__grid {
     grid-template-columns: 1fr;
@@ -720,11 +891,6 @@ const handleSubmit = () => {
   .contact-hero__inner {
     justify-content: flex-end;
     padding-bottom: 44px;
-  }
-
-  .contact-secondary-grid,
-  .feedback-form__row {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -771,6 +937,24 @@ const handleSubmit = () => {
   .social-item__icon {
     width: 48px;
     height: 48px;
+  }
+
+  .contact-icons {
+    gap: 16px;
+  }
+
+  .contact-icon-card {
+    width: 64px;
+    height: 64px;
+  }
+
+  .contact-icon-card__icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mapWrap {
+    border-radius: 24px;
   }
 }
 </style>
