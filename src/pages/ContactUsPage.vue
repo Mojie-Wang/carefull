@@ -45,7 +45,7 @@ const socialLinks = [
 
 const mapAddress = "上海市奉贤区金汇镇大叶公路7208号7号楼";
 const mapEmbedUrl =
-  "https://www.amap.com/ssr/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8";
+  "https://www.amap.com/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8";
 
 const feedbackForm = reactive({
   name: "",
