@@ -9,7 +9,7 @@
     "build:netlify": "NETLIFY=true npm run build",
     "netlify:login": "npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 login",
     "netlify:status": "npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 status",
-    "deploy:netlify": "npm run build:netlify && npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 deploy --prod --no-build --dir=dist --site scintillating-churros-e8d74b",
+    "deploy:netlify": "npm run build:netlify && npm_config_cache=.npm-cache-netlify npx --yes netlify-cli@24.4.1 deploy --prod --no-build --dir=dist",
     "preview": "vite preview"
   },
   "dependencies": {
