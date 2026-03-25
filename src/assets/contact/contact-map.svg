@@ -1,0 +1,20 @@
+<svg width="1280" height="800" viewBox="0 0 1280 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="800" rx="48" fill="#DCEBF6"/>
+  <rect x="52" y="52" width="1176" height="696" rx="36" fill="#EAF3FA"/>
+  <path d="M-8 218C165 248 242 291 389 396C542 506 639 537 891 527C1041 521 1129 557 1288 645" stroke="#F6FAFD" stroke-width="94" stroke-linecap="round"/>
+  <path d="M119 704C247 583 340 474 446 349C583 188 708 120 940 119C1040 119 1138 91 1262 28" stroke="#F9FCFF" stroke-width="72" stroke-linecap="round"/>
+  <path d="M178 112C317 160 459 257 554 350C660 455 770 494 948 505" stroke="#FFFFFF" stroke-width="42" stroke-linecap="round"/>
+  <path d="M153 614C280 540 393 447 511 315" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+  <circle cx="859" cy="267" r="88" fill="#0F75E6" fill-opacity="0.16"/>
+  <circle cx="859" cy="267" r="54" fill="#0F75E6" fill-opacity="0.22"/>
+  <path d="M859 173C814.265 173 778 209.265 778 254C778 314.75 859 392 859 392C859 392 940 314.75 940 254C940 209.265 903.735 173 859 173Z" fill="#0F75E6"/>
+  <circle cx="859" cy="254" r="31" fill="#F5FBFF"/>
+  <rect x="536" y="432" width="518" height="182" rx="28" fill="#0A3D7F"/>
+  <text x="584" y="500" fill="white" font-family="Arial, sans-serif" font-size="28" font-weight="700">Shanghai Careful Technology</text>
+  <text x="584" y="548" fill="#C6D9F4" font-family="Arial, sans-serif" font-size="24">No. 7208 Daye Highway, Building 7</text>
+  <text x="584" y="588" fill="#C6D9F4" font-family="Arial, sans-serif" font-size="24">Jinhui Town, Fengxian District, Shanghai</text>
+  <circle cx="213" cy="251" r="14" fill="#7DB8F2"/>
+  <circle cx="300" cy="316" r="10" fill="#A5D2F8"/>
+  <circle cx="1037" cy="645" r="18" fill="#7DB8F2"/>
+  <circle cx="1099" cy="186" r="12" fill="#A5D2F8"/>
+</svg>

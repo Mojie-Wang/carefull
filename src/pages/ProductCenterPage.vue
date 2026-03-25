@@ -37,7 +37,10 @@
         <div class="showcase-left">
           <h2>{{ showcaseProduct.title }}</h2>
           <ul>
-            <li v-for="(feature, index) in showcaseProduct.features" :key="index">
+            <li
+              v-for="(feature, index) in showcaseProduct.features"
+              :key="index"
+            >
               {{ feature }}
             </li>
           </ul>
@@ -193,7 +196,8 @@ const filteredProducts = computed(() => {
 const showcaseProducts = ref([
   {
     title: "Ballistic Vest",
-    description: "Top-tier protection with lightweight comfort and modular design.",
+    description:
+      "Top-tier protection with lightweight comfort and modular design.",
     features: [
       "Lightweight design",
       "Waterproof fabric",
@@ -204,7 +208,8 @@ const showcaseProducts = ref([
   },
   {
     title: "Tactical Helmet",
-    description: "Rigorous impact test, multiple mounting options, 360° defense.",
+    description:
+      "Rigorous impact test, multiple mounting options, 360° defense.",
     features: [
       "Impact-resistant",
       "Ventilation system",
@@ -215,7 +220,8 @@ const showcaseProducts = ref([
   },
   {
     title: "Ballistic Shield",
-    description: "Superior stopping power with ergonomic handle and shooting window.",
+    description:
+      "Superior stopping power with ergonomic handle and shooting window.",
     features: [
       "Bulletproof glass window",
       "Lightweight frame",
@@ -227,7 +233,9 @@ const showcaseProducts = ref([
 ]);
 
 const showcaseIndex = ref(0);
-const showcaseProduct = computed(() => showcaseProducts.value[showcaseIndex.value]);
+const showcaseProduct = computed(
+  () => showcaseProducts.value[showcaseIndex.value]
+);
 
 const prevShowcase = () => {
   showcaseIndex.value =
@@ -236,7 +244,8 @@ const prevShowcase = () => {
 };
 
 const nextShowcase = () => {
-  showcaseIndex.value = (showcaseIndex.value + 1) % showcaseProducts.value.length;
+  showcaseIndex.value =
+    (showcaseIndex.value + 1) % showcaseProducts.value.length;
 };
 
 const goProductDetail = (product) => {
@@ -314,6 +323,7 @@ watch(
       bottom: 75px;
 
       h1 {
+        font-family: var(--font-din-alternate-bold);
         font-size: 100px;
         line-height: 1;
         font-weight: 700;
@@ -376,7 +386,7 @@ watch(
         text-align: center;
         width: 100px;
         cursor: pointer;
-
+        font-weight: 400;
         &.active {
           color: #0072ff;
           border-color: #0072ff;
@@ -520,7 +530,7 @@ watch(
           display: flex;
           align-items: center;
           gap: 8px;
-        font-size: 24px;
+          font-size: 24px;
           cursor: pointer;
           border-radius: 6px;
           padding: 6px 8px;
