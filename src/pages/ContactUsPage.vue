@@ -295,14 +295,17 @@ const handleSubmit = () => {
     </section>
     <section class="page-container">
       <div class="mapWrap">
-        <MapContainer />
-        <!-- <a
+        <!-- <MapContainer /> -->
+        <a
           class="mapWrap__link"
           href="https://www.amap.com/ssr/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
           target="_blank"
         >
-          <img class="mapWrap__img" src="@/assets/map.jpg" alt="map" />
-        </a> -->
+          <picture class="mapWrap__picture">
+            <source media="(max-width: 640px)" srcset="@/assets/map_s.jpg" />
+            <img class="mapWrap__img" src="@/assets/map.jpg" alt="map" />
+          </picture>
+        </a>
       </div>
     </section>
   </div>
@@ -663,9 +666,16 @@ const handleSubmit = () => {
     cursor: pointer;
   }
 
+  .mapWrap__picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   .mapWrap__img {
     display: block;
     width: 100%;
+    height: 100%;
     // max-height: 100%;
     margin: auto;
     object-fit: cover;
