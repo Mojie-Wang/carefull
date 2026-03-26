@@ -42,10 +42,8 @@ const socialLinks = [
     href: "https://www.linkedin.com/",
   },
 ];
-
+import MapContainer from "@/components/MapContainer.vue";
 const mapAddress = "上海市奉贤区金汇镇大叶公路7208号7号楼";
-const mapEmbedUrl =
-  "https://www.amap.com/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8";
 
 const feedbackForm = reactive({
   name: "",
@@ -297,20 +295,14 @@ const handleSubmit = () => {
     </section>
     <section class="page-container">
       <div class="mapWrap">
-        <!-- <iframe
-          class="mapWrap__frame"
-          :src="mapEmbedUrl"
-          :title="`Amap page for ${mapAddress}`"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        /> -->
-        <a
+        <MapContainer />
+        <!-- <a
           class="mapWrap__link"
           href="https://www.amap.com/ssr/place/B0JAC7QR0J?id=B0JAC7QR0J&source=main&name=%E4%B8%8A%E6%B5%B7%E9%93%A0%E7%A6%8F%E9%98%B2%E6%8A%A4%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8"
           target="_blank"
         >
           <img class="mapWrap__img" src="@/assets/map.jpg" alt="map" />
-        </a>
+        </a> -->
       </div>
     </section>
   </div>
@@ -655,7 +647,7 @@ const handleSubmit = () => {
 .mapWrap {
   margin-top: clamp(28px, 4vw, 40px);
   overflow: hidden;
-  max-height: 400px;
+  height: 400px;
   border: 1px solid var(--contact-border);
   border-radius: clamp(18px, 4vw, 30px);
   background: var(--contact-card);
@@ -678,12 +670,6 @@ const handleSubmit = () => {
     margin: auto;
     object-fit: cover;
   }
-}
-
-.mapWrap__frame {
-  width: 100%;
-  height: 100%;
-  border: 0;
 }
 
 .feedback-form {
@@ -978,6 +964,7 @@ const handleSubmit = () => {
   }
 
   .mapWrap {
+    height: 360px;
     border-radius: 24px;
   }
 }
